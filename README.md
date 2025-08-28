@@ -27,8 +27,8 @@ Put the application anywhere you want and launch.
 ## Configuration
 - **Presets**: Define quality levels for quick selection. 100 — losless, 85 — 85% quality, -1 — custom.
 - **Extensions**: Specify file types to include in the context menu. Supports anything [supported by ImageMagick library](https://imagemagick.com/script/formats.php) and allows "folder" value to add a conversion entry to the context menu for folders.
-- **Compression**: Adjust compression levels for balancing quality and performance.
-- **Delete Original**: Optionally delete original files after conversion.
+- **Compression**: Adjust compression levels for balancing quality and performance. 0 — worst and fastest, 6 — best and slowest. 
+- **Delete Original**: Optionally delete original file(-s) after conversion.
 
 ## Limitations
 - **WebP format**: All WebP file format limitations, like maximum width or height of 16383 pixels.
