@@ -1,0 +1,1 @@
+﻿<ExcludeFromPackageFiles Include="bin\Microsoft.Windows.SDK.NET.dll" />

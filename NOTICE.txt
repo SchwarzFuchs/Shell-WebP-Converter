@@ -1,0 +1,4 @@
+Used libraries:
+https://github.com/dlemstra/Magick.NET
+https://github.com/commandlineparser/commandline
+https://github.com/mathnet/mathnet-numerics

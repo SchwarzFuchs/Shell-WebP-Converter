@@ -1,0 +1,54 @@
+﻿<Window x:Class="Shell_WebP_Converter.CustomSettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shell_WebP_Converter"
+        xmlns:properties="clr-namespace:Shell_WebP_Converter.Resources"
+        mc:Ignorable="d"
+        Title="{x:Static properties:Resources.CustomSettings}" Height="Auto" MinHeight="100" Width="Auto"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Normal" SizeToContent="WidthAndHeight" Style="{DynamicResource WindowStyle}" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Grid HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Vertical" Margin="0,0,4,2">
+            <RadioButton x:Name="CustomSettingsRadioButton"  Content="{x:Static properties:Resources.CustomConversionSettings}" Checked="CustomSettingsRadioButtonChecked" Margin="2,2,0,2"/>
+            <RadioButton x:Name="CompressToThresholdRadioButton" Content="{x:Static properties:Resources.CompressToThreshold}" Checked="CompressToThresholdRadioButtonChecked" Margin="2,2,0,0"/>
+            <StackPanel  x:Name="CustomSettingsPanel" Margin="0,2,0,2">
+                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                    <Label Content="{x:Static properties:Resources.Quality}" Margin="0,-4,0,-4"/>
+                    <TextBox x:Name="QualityTextBox" Text="80" Width="40" VerticalContentAlignment="Center" PreviewTextInput="QualityTextBox_PreviewTextInput" PreviewKeyDown="QualityTextBox_PreviewKeyDown" MaxLength="3"/>
+                    <Label Content="%" Margin="0,-3,0,-3"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
+                    <Label Content="{x:Static properties:Resources.CompressionLevel}" Margin="0,0,0,-3"></Label>
+                    <ComboBox x:Name="CompressionValueComboBox" Margin="0,2,0,0" HorizontalAlignment="Left" Width="35" SelectedIndex="4" SelectionChanged="CompressionValueComboBoxSelectionChanged">
+                        <ComboBoxItem Content="0"/>
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="0,0,2,0">
+                <StackPanel x:Name="CompressionThresholdPanel" Orientation="Vertical" Visibility="Visible" Margin="0,2,0,2">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{x:Static properties:Resources.CompressTo}" Margin="0,-2,0,-3"></Label>
+                        <TextBox x:Name="CompressionSizeThresholdTextBox" VerticalContentAlignment="Center" Margin="0,0,3,0" Width="48" Text="2" MaxLength="7" PreviewTextInput="CompressionThresholdTextBox_PreviewTextInput" PreviewKeyDown="CompressionThresholdTextBox_PreviewKeyDown"/>
+                        <ComboBox x:Name="SizeMeasurmentUnitComboBox" Margin="0,0,0,0" HorizontalAlignment="Left" Width="Auto" SelectedIndex="1" SelectionChanged="SizeMeasurmentUnitComboBoxSelectionChanged">
+                            <ComboBoxItem Content="{x:Static properties:Resources.KiB}"/>
+                            <ComboBoxItem Content="{x:Static properties:Resources.MiB}" />
+                        </ComboBox>
+                    </StackPanel>
+                    <CheckBox x:Name="LowerTheResolutionWhenNecessaryCheckbox" Content="{x:Static properties:Resources.LowerTheResolutionWhenNecessary}" Margin="1,2,0,0"/>
+                </StackPanel>
+                <CheckBox x:Name="DeleteOriginalFileCheckbox" Content="{x:Static properties:Resources.DeleteOriginalFile}" Margin="1,2,0,0"></CheckBox>
+            </StackPanel>
+            <Separator Opacity="0.75" Margin="2,2,2,2" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                <Button x:Name="OKButton" Content="Ok" MinWidth="40" Margin="0,0,4,0" Click="OKButton_Click"/>
+                <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

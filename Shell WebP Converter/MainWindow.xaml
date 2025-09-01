@@ -1,0 +1,36 @@
+﻿<Window x:Class="Shell_WebP_Converter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shell_WebP_Converter"
+        xmlns:properties="clr-namespace:Shell_WebP_Converter.Resources"
+        mc:Ignorable="d"
+        Title="{x:Static properties:Resources.MainWindowTitle}" Height="Auto" MinHeight="126" Width="400" MinWidth="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Normal" SizeToContent="Height" Style="{DynamicResource WindowStyle}" Closing="Window_Closing">
+    <Grid VerticalAlignment="Top">
+        <StackPanel Height="Auto">
+            <Label Content="{x:Static properties:Resources.Presets}" Margin="0,0,0,-3" ToolTip="{x:Static properties:Resources.PresetsTooltip}"></Label>
+            <TextBox x:Name="PresetsTextBox" ToolTip="{x:Static properties:Resources.PresetsTooltip}" Margin="2,0,2,0" Text="100; 99; 90; 75; 60; 50; 25, -1" MaxLength="2048" TextWrapping="NoWrap" AcceptsReturn="False" PreviewTextInput="PresetsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
+            <Label Content="{x:Static properties:Resources.FileExtensions}" Margin="0,0,0,-3"></Label>
+            <TextBox x:Name="ExtensionsTextBox" Margin="2,0,2,0" Text="jpeg; jpg; png" MaxLength="2048" PreviewTextInput="ExtensionsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,3,0,0">
+                <Label Content="{x:Static properties:Resources.CompressionLevel}" Margin="0,0,0,-3"></Label>
+                <ComboBox x:Name="CompressionValueComboBox" Margin="0,2,2,0" HorizontalAlignment="Left" Width="35" SelectedIndex="4" SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBoxItem Content="0"/>
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                </ComboBox>
+            </StackPanel>
+            <CheckBox x:Name="DeleteOriginalFileCheckbox" Content="{x:Static properties:Resources.DeleteOriginalFile}" Margin="1,3,0,0" Click="DeleteOriginalFileCheckbox_Click"></CheckBox>
+            <Separator Opacity="0.75" Margin="2,2,2,2"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                <Button x:Name="UpdateMenuButton" Content="{x:Static properties:Resources.UpdateContextMenu}" Margin="2,0,2,2" HorizontalAlignment="Center" Click="UpdateMenuButton_Click"></Button>
+                <Button x:Name="ClearMenuButton" Content="{x:Static properties:Resources.ClearContextMenu}" Margin="2,0,2,2" HorizontalAlignment="Center" Click="ClearMenuButton_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
