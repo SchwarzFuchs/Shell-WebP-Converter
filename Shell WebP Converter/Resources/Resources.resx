@@ -210,4 +210,7 @@
   <data name="WrongArgumentsHelp" xml:space="preserve">
     <value>Wrong arguments. Use --help for help</value>
   </data>
+  <data name="AddConversionEntryForFolders" xml:space="preserve">
+    <value>Add a conversion menu entry for folders</value>
+  </data>
 </root>

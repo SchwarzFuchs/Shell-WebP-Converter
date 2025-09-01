@@ -210,4 +210,7 @@
   <data name="WrongArgumentsHelp" xml:space="preserve">
     <value>引数が間違っています。--helpでヘルプを表示します</value>
   </data>
+  <data name="AddConversionEntryForFolders" xml:space="preserve">
+    <value>フォルダーの変換エントリを追加</value>
+  </data>
 </root>

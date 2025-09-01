@@ -210,4 +210,7 @@
   <data name="WrongArgumentsHelp" xml:space="preserve">
     <value>Argumentos errados. Use --help para ajuda</value>
   </data>
+  <data name="AddConversionEntryForFolders" xml:space="preserve">
+    <value>Adicionar uma entrada de conversão para pastas</value>
+  </data>
 </root>

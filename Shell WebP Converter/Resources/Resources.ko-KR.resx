@@ -210,4 +210,7 @@
   <data name="WrongArgumentsHelp" xml:space="preserve">
     <value>잘못된 인수입니다. --help로 도움말을 확인하세요</value>
   </data>
+  <data name="AddConversionEntryForFolders" xml:space="preserve">
+    <value>폴더에 대한 변환 항목 추가</value>
+  </data>
 </root>

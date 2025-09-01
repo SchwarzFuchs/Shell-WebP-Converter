@@ -210,4 +210,7 @@
   <data name="WrongArgumentsHelp" xml:space="preserve">
     <value>Mauvais arguments. Utilisez --help pour obtenir de l'aide</value>
   </data>
+  <data name="AddConversionEntryForFolders" xml:space="preserve">
+    <value>Ajouter une entrée de conversion pour les dossiers</value>
+  </data>
 </root>

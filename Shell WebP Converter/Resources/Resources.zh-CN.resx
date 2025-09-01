@@ -210,4 +210,7 @@
   <data name="WrongArgumentsHelp" xml:space="preserve">
     <value>参数错误。使用 --help 获取帮助</value>
   </data>
+  <data name="AddConversionEntryForFolders" xml:space="preserve">
+    <value>为文件夹添加转换条目</value>
+  </data>
 </root>

@@ -54,6 +54,7 @@ namespace Shell_WebP_Converter
                         ExtensionsTextBox.Text = value;
                     }
                     DeleteOriginalFileCheckbox.IsChecked = bool.Parse((key.GetValue("deleteOriginal") ?? "false").ToString() ?? "false");
+                    AddConversionEntryForFoldersCheckbox.IsChecked = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "false").ToString() ?? "false");
                     CompressionValueComboBox.SelectedIndex = byte.Parse((key.GetValue("compression") ?? "4").ToString() ?? "4");
                 }
             }
@@ -86,7 +87,7 @@ namespace Shell_WebP_Converter
             try
             {
                 var presets = RegistryHelper.ParsePresets(PresetsTextBox.Text);
-                var extensions = RegistryHelper.ParseExtensions(ExtensionsTextBox.Text);
+                var extensions = RegistryHelper.ParseExtensions(ExtensionsTextBox.Text, AddConversionEntryForFoldersCheckbox.IsChecked.GetValueOrDefault(false));
                 RegistryHelper.RemoveWebPConversionContextMenu(extensions);
                 RegistryHelper.AddWebPConversionContextMenu(extensions, presets, (byte)CompressionValueComboBox.SelectedIndex, DeleteOriginalFileCheckbox.IsChecked ?? false, converterPath);
                 using (RegistryKey key = Registry.CurrentUser.CreateSubKey(App.regKeyPath))
@@ -95,6 +96,7 @@ namespace Shell_WebP_Converter
                     key.SetValue("extensions", ExtensionsTextBox.Text);
                     key.SetValue("compression", CompressionValueComboBox.SelectedIndex);
                     key.SetValue("deleteOriginal", DeleteOriginalFileCheckbox.IsChecked ?? false);
+                    key.SetValue("addMenuEntryForFolders", AddConversionEntryForFoldersCheckbox.IsChecked ?? false);
                 }
                 MessageBox.Show(Shell_WebP_Converter.Resources.Resources.MenuUpdateSuccess);
             }

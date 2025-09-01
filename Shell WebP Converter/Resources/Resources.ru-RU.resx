@@ -210,4 +210,7 @@
   <data name="WrongArgumentsHelp" xml:space="preserve">
     <value>Неверные аргументы. Используйте --help для получения справки</value>
   </data>
+  <data name="AddConversionEntryForFolders" xml:space="preserve">
+    <value>Добавить пункт конвертации в меню для папок</value>
+  </data>
 </root>

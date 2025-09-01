@@ -52,7 +52,7 @@ namespace Shell_WebP_Converter
             return presets;
         }
 
-        public static List<string> ParseExtensions(string extensionsString)
+        public static List<string> ParseExtensions(string extensionsString, bool addMenuEntryForFolders = false)
         {
             List<string> extensions = new List<string>();
             if (string.IsNullOrWhiteSpace(extensionsString))
@@ -70,6 +70,10 @@ namespace Shell_WebP_Converter
                 {
                     throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.UnsupportedExtension}: '{str}'");
                 }
+            }
+            if (addMenuEntryForFolders == true && !extensions.Contains("folder"))
+            {
+                extensions.Add("folder");
             }
             if (extensions.Count == 0)
             {
