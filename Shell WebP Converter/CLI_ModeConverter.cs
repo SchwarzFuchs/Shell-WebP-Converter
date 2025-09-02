@@ -34,12 +34,12 @@ namespace Shell_WebP_Converter.CLI
         public int Quality { get; set; }
 
         [Option('d', "deleteOriginal", Required = false, HelpText = "Delete original files, True/False")]
-        public bool DeleteOriginal { get; set; }
+        public bool DeleteOriginal { get; set; } = false;
 
-        [Option('c', "compression", Required = true, HelpText = "Compression, 0-6. Higher value decreases file size, impoves quality and increases conversion time")]
-        public byte Compression { get; set; } = 5;
+        [Option('c', "compression", Required = true, HelpText = "Compression, 0-6. Higher value decreases file size, impoves quality and increases conversion time. When set to 255, used as signal to use custom size threshold mode")]
+        public byte Compression { get; set; }
 
-        [Option("custom", Required = false, HelpText = "Opens window to choose custom conversion settings")]
+        [Option("custom", Required = false, HelpText = "Opens GUI window to choose custom conversion settings")]
         public bool Custom { get; set; } = false;
 
         [Option("useDownscaling", Required = false, HelpText = "Use downscaling when it's not possible to achive designated size threshold in custom mode")]
@@ -64,7 +64,7 @@ namespace Shell_WebP_Converter.CLI
                 }
                 try
                 {
-                    if (options.Custom && options.Compression == 255)
+                    if (options.Compression == 255)
                     {
                         File.WriteAllBytes(options.Output, CompressToThreshold(options.Quality, options.Input, options.useDownscaling));
                     }
@@ -105,7 +105,7 @@ namespace Shell_WebP_Converter.CLI
                     }
                     try
                     {
-                        if (options.Custom && options.Compression == 255)
+                        if (options.Compression == 255)
                         {
                             File.WriteAllBytes(outputFile, CompressToThreshold(options.Quality, file, options.useDownscaling));
                         }
