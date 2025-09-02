@@ -115,7 +115,7 @@ namespace Shell_WebP_Converter.CLI
                         }
                         if (options.DeleteOriginal == true && file != outputFile)
                         {
-                            File.Delete(options.Input);
+                            File.Delete(file);
                         }
                     }
                     catch (Exception ex)
