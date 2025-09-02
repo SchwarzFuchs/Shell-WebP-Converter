@@ -24,6 +24,8 @@ Put the application anywhere you want and launch.
 2. Select "Convert to WebP" from the context menu.
 3. Choose a preset or custom quality option.
 
+### CLI
+Conversion module can be used from CLI. Type ***"Shell WebP Converter.exe" --help*** in CMD to see the required arguments.
 ## Configuration
 - **Presets**: Define quality levels for quick selection. 100 — losless, 85 — 85% quality, -1 — custom.
 - **Extensions**: Specify file types to include in the context menu. Supports anything [supported by ImageMagick library](https://imagemagick.com/script/formats.php).
