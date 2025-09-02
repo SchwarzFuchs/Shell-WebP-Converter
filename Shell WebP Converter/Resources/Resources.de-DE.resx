@@ -213,4 +213,7 @@
   <data name="AddConversionEntryForFolders" xml:space="preserve">
     <value>Fügen Sie einen Konvertierungseintrag für Ordner hinzu</value>
   </data>
+  <data name="ConvertToWebP" xml:space="preserve">
+    <value>In WebP konvertieren</value>
+  </data>
 </root>

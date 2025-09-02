@@ -213,4 +213,7 @@
   <data name="AddConversionEntryForFolders" xml:space="preserve">
     <value>폴더에 대한 변환 항목 추가</value>
   </data>
+  <data name="ConvertToWebP" xml:space="preserve">
+    <value>WebP로 변환</value>
+  </data>
 </root>

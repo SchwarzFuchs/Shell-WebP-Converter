@@ -213,4 +213,7 @@
   <data name="AddConversionEntryForFolders" xml:space="preserve">
     <value>Add a conversion menu entry for folders</value>
   </data>
+  <data name="ConvertToWebP" xml:space="preserve">
+    <value>Convert to WebP</value>
+  </data>
 </root>

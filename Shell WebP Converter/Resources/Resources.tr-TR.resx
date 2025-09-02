@@ -213,4 +213,7 @@
   <data name="AddConversionEntryForFolders" xml:space="preserve">
     <value>Klasörler için bir dönüştürme girişi ekleyin</value>
   </data>
+  <data name="ConvertToWebP" xml:space="preserve">
+    <value>WebP'ye Dönüştür</value>
+  </data>
 </root>

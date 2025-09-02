@@ -133,6 +133,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Convert to WebP.
+        /// </summary>
+        public static string ConvertToWebP {
+            get {
+                return ResourceManager.GetString("ConvertToWebP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom conversion settings.
         /// </summary>
         public static string CustomConversionSettings {

@@ -213,4 +213,7 @@
   <data name="AddConversionEntryForFolders" xml:space="preserve">
     <value>フォルダーの変換エントリを追加</value>
   </data>
+  <data name="ConvertToWebP" xml:space="preserve">
+    <value>変換してWebPにする</value>
+  </data>
 </root>

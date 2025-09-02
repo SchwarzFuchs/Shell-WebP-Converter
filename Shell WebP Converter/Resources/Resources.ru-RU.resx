@@ -213,4 +213,7 @@
   <data name="AddConversionEntryForFolders" xml:space="preserve">
     <value>Добавить пункт конвертации в меню для папок</value>
   </data>
+  <data name="ConvertToWebP" xml:space="preserve">
+    <value>Конвертировать в WebP</value>
+  </data>
 </root>

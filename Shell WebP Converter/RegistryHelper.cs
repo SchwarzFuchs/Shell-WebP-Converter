@@ -10,7 +10,6 @@ namespace Shell_WebP_Converter
     public static class RegistryHelper
     {
         private const string menuName = "ConvertToWebP";
-        private const string menuText = "Convert to WebP";
         private const string iconPath = "imageres.dll,-68";
         private const string allowedFileExtensions = ".folder.png.bmp.aai.ai.apng.art.arw.avi.avif.avs.bayer.bpg.bmp.bmp2.bmp3.brf.cals.cin.cip.cmyk.cmyka.cr2.crw.cube.cur.cut.dcm.dcr.dcx.dds.debug.dib.djvu.dmr.dng.dot.dpx.emf.epdf.epi.eps.eps2.eps3.epsf.epsi.ept.exr.farbfeld.fax.fits.fl32.flif.fpx.ftxt.gif.gplt.gray.graya.group4.hdr.heic.hpgl.hrz.html.ico.info.isobrl.isobrl6.jbig.jng.jp2.jpt.j2c.j2k.jpeg.jpg.json.jxl.jxr.kernel.man.mat.miff.mono.mng.m2v.mpeg.mpc.mpo.mpr.mrw.msl.mtv.mvg.nef.orf.ora.otb.p7.palm.pam.clipboard.pbm.pcd.pcds.pcl.pcx.pdb.pdf.pef.pes.pfa.pfb.pfm.pgm.phm.picon.pict.pix.png.png8.png00.png24.png32.png48.png64.pnm.pocketmod.ppm.ps.ps2.ps3.psb.psd.ptif.pwp.qoi.rad.raf.raw.rgb.rgb565.rgba.rgf.rla.rle.sct.sfw.sgi.shtml.sid.sparse-color.strimg.sun.svg.text.tga.tiff.tim.ttf.txt.ubrl.ubrl6.uhdr.uil.uyvy.vicar.video.viff.wbmp.wdp.webp.wmf.wpg.x.xbm.xcf.xpm.xwd.x3f.yaml.ycbcr.ycbcra.yuv.";
         private const string centralKeyPath = @"Software\Classes\WebPConverter\ContextMenu";
@@ -99,11 +98,11 @@ namespace Shell_WebP_Converter
                         {
                             if (preset == 100)
                             {
-                                qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.Quality}: {Shell_WebP_Converter.Resources.Resources.Lossless}");
+                                qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.Quality} {Shell_WebP_Converter.Resources.Resources.Lossless}");
                             }
                             else
                             {
-                                qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.Quality}: {preset}%");
+                                qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.Quality} {preset}%");
                             }
                             qualityKey.SetValue("Icon", iconPath);
                             using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
@@ -137,8 +136,8 @@ namespace Shell_WebP_Converter
                 {
                     using (RegistryKey folderKey = Registry.CurrentUser.CreateSubKey(folderKeyPath))
                     {
-                        folderKey.SetValue("", menuText);
-                        folderKey.SetValue("MUIVerb", menuText);
+                        folderKey.SetValue("", Resources.Resources.ConvertToWebP);
+                        folderKey.SetValue("MUIVerb", Resources.Resources.ConvertToWebP);
                         folderKey.SetValue("Icon", iconPath);
                         folderKey.SetValue("ExtendedSubCommandsKey", @"WebPConverter\ContextMenu");
                         folderKey.SetValue("SubCommands", "");
@@ -149,8 +148,8 @@ namespace Shell_WebP_Converter
                     string extKeyPath = $@"Software\Classes\SystemFileAssociations\.{ext}\shell\{menuName}";
                     using (RegistryKey extKey = Registry.CurrentUser.CreateSubKey(extKeyPath))
                     {
-                        extKey.SetValue("", menuText);
-                        extKey.SetValue("MUIVerb", menuText);
+                        extKey.SetValue("", Resources.Resources.ConvertToWebP);
+                        extKey.SetValue("MUIVerb", Resources.Resources.ConvertToWebP);
                         extKey.SetValue("Icon", iconPath);
                         extKey.SetValue("ExtendedSubCommandsKey", @"WebPConverter\ContextMenu");
                         extKey.SetValue("SubCommands", "");
