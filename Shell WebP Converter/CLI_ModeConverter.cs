@@ -45,6 +45,10 @@ namespace Shell_WebP_Converter.CLI
         [Option("useDownscaling", Required = false, HelpText = "Use downscaling when it's not possible to achive designated size threshold in custom mode")]
         public bool useDownscaling { get; set; } = false;
 
+        [Option('s', "suffix", Required = false, HelpText = "String added after the original file name")]
+        public string Suffix { get; set; } = "";
+
+
     }
     internal class CLI_Mode
     {
@@ -60,17 +64,26 @@ namespace Shell_WebP_Converter.CLI
             {
                 if (options.Output.Length == 0)
                 {
-                    options.Output = Path.Combine(options.Output, Path.ChangeExtension(options.Input, "webp"));
+                    string fileName = Path.GetFileNameWithoutExtension(options.Input) + options.Suffix;
+                    options.Output = Path.Combine(Path.GetDirectoryName(options.Input) ?? "", fileName + ".webp");
                 }
                 try
                 {
                     if (options.Compression == 255)
                     {
-                        File.WriteAllBytes(options.Output, CompressToThreshold(options.Quality, options.Input, options.useDownscaling));
+                        using (var ms = CompressToThreshold(options.Quality, options.Input, options.useDownscaling))
+                        using (var fs = File.OpenWrite(options.Output))
+                        {
+                            ms.CopyTo(fs);
+                        }
                     }
                     else
                     {
-                        ConvertSingleFile(options.Input, options.Output, options.Quality, options.Compression);
+                        using (var ms = ConvertSingleFile(options.Input, options.Quality, options.Compression))
+                        using (var fs = File.OpenWrite(options.Output))
+                        {
+                            ms.CopyTo(fs);
+                        }
                     }
                     if (options.DeleteOriginal == true && options.Input != options.Output)
                     {
@@ -82,7 +95,6 @@ namespace Shell_WebP_Converter.CLI
                     App.Log(options.Input + " | " + ex.Message);        
                     throw new Exception();
                 }
-
             }
             else if (Directory.Exists(options.Input)) //input is folder
             {
@@ -96,8 +108,8 @@ namespace Shell_WebP_Converter.CLI
                 Parallel.ForEach(filesToConvert, file =>
                 {
                     string relativePath = file.Substring(options.Input.Length).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-                    string outputFile = Path.Combine(options.Output, relativePath, file);
-                    outputFile = Path.ChangeExtension(outputFile, "webp");
+                    string fileName = Path.GetFileNameWithoutExtension(file) + options.Suffix;
+                    string outputFile = Path.Combine(options.Output, Path.GetDirectoryName(relativePath) ?? "", fileName + ".webp");
                     string outputDir = Path.GetDirectoryName(outputFile) ?? throw new Exception($"Null path to output dir. File was: {outputFile}");
                     if (!Directory.Exists(outputDir))
                     {
@@ -107,11 +119,19 @@ namespace Shell_WebP_Converter.CLI
                     {
                         if (options.Compression == 255)
                         {
-                            File.WriteAllBytes(outputFile, CompressToThreshold(options.Quality, file, options.useDownscaling));
+                            using (var ms = CompressToThreshold(options.Quality, file, options.useDownscaling))
+                            using (var fs = File.OpenWrite(outputFile))
+                            {
+                                ms.CopyTo(fs);
+                            }
                         }
                         else
                         {
-                            ConvertSingleFile(file, outputFile, options.Quality, options.Compression);
+                            using (var ms = ConvertSingleFile(file, options.Quality, options.Compression))
+                            using (var fs = File.OpenWrite(outputFile))
+                            {
+                                ms.CopyTo(fs);
+                            }
                         }
                         if (options.DeleteOriginal == true && file != outputFile)
                         {
@@ -123,14 +143,12 @@ namespace Shell_WebP_Converter.CLI
                         App.Log(file + " | " + ex.Message + "\n");
                         throw new Exception();
                     }
-
                 });
             }
             else
             {
                 throw new Exception("Input does not exist");
             }
-
         }
         List<string> GetFilesRecursively(string directory, string[] extensions)
         {
@@ -151,7 +169,7 @@ namespace Shell_WebP_Converter.CLI
                 return value.Split(';').Select(ext => "." + ext.Trim().ToLowerInvariant()).ToArray();
             }
         }
-        void ConvertSingleFile(string inputFile, string outputFile, int quality, int compression)
+        MemoryStream ConvertSingleFile(string inputFile, int quality, int compression)
         {
             using (var image = new MagickImage(inputFile))
             {
@@ -175,11 +193,13 @@ namespace Shell_WebP_Converter.CLI
                     image.Quality = (uint)quality;
                 }
                 image.Settings.SetDefine("webp:method", compression.ToString());
-                image.Write(outputFile);
+                MemoryStream ms = new MemoryStream();
+                image.Write(ms);
+                return (ms);
             }
         }
 
-        byte[] CompressToThreshold(int threshold, string inputFile, bool useDownscaling)
+        MemoryStream CompressToThreshold(int threshold, string inputFile, bool useDownscaling)
         {
             using (var image = new MagickImage(inputFile))
             {
@@ -198,14 +218,14 @@ namespace Shell_WebP_Converter.CLI
                     image.Settings.SetDefine("webp:lossless", "true");
                     image.Quality = 100;
                     image.Settings.SetDefine("webp:method", "5");
-                    using (var ms = new MemoryStream())
+                    var resultMs = new MemoryStream();
+                    image.Write(resultMs);
+                    if (resultMs.Length < threshold)
                     {
-                        image.Write(ms);
-                        if (ms.Length < threshold)
-                        {
-                            return ms.ToArray();
-                        }
+                        resultMs.Position = 0;
+                        return resultMs;
                     }
+                    resultMs.Dispose();
                     image.Settings.RemoveDefine("webp:lossless");
                     image.Settings.SetDefine("webp:method", compression.ToString());
                 }
@@ -250,24 +270,35 @@ namespace Shell_WebP_Converter.CLI
                             }
                             if (ms.Length <= threshold || i == 15)
                             {
-                                ms.SetLength(0);
                                 image.Settings.SetDefine("webp:method", "5");
-                                image.Write(ms);
-                                if (ms.Length <= threshold)
+                                var resultMs = new MemoryStream();
+                                image.Write(resultMs);
+                                if (resultMs.Length <= threshold)
                                 {
-                                    byte[] previous = ms.ToArray();
+                                    MemoryStream previous = new MemoryStream();
+                                    resultMs.Position = 0;
+                                    resultMs.CopyTo(previous);
+                                    previous.Position = 0;
+
                                     for (int j = i + 1; j <= 99; j++)
                                     {
-                                        ms.SetLength(0);
+                                        resultMs.SetLength(0);
                                         image.Quality = (uint)(j);
-                                        image.Write(ms);
-                                        if (ms.Length >= threshold)
+                                        image.Write(resultMs);
+                                        if (resultMs.Length >= threshold)
                                         {
+                                            resultMs.Dispose();
                                             return previous;
                                         }
-                                        previous = ms.ToArray();
+                                        previous.SetLength(0);
+                                        resultMs.Position = 0;
+                                        resultMs.CopyTo(previous);
+                                        previous.Position = 0;
                                     }
+                                    resultMs.Dispose();
+                                    return previous;
                                 }
+                                resultMs.Dispose();
                             }
                         }
                     }
