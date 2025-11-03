@@ -4,34 +4,66 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shell_WebP_Converter"
+        xmlns:localCustom="clr-namespace:Shell_WebP_Converter.CustomElements" 
         xmlns:properties="clr-namespace:Shell_WebP_Converter.Resources"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.MainWindowTitle}" Height="Auto" MinHeight="126" Width="400" MinWidth="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Normal" SizeToContent="Height" Style="{DynamicResource WindowStyle}" Closing="Window_Closing">
-    <Grid VerticalAlignment="Top">
-        <StackPanel Height="Auto">
-            <Label Content="{x:Static properties:Resources.Presets}" Margin="0,0,0,-3" ToolTip="{x:Static properties:Resources.PresetsTooltip}"></Label>
-            <TextBox x:Name="PresetsTextBox" ToolTip="{x:Static properties:Resources.PresetsTooltip}" Margin="2,0,2,0" Text="100; 99; 90; 75; 60; 50; 25, -1" MaxLength="2048" TextWrapping="NoWrap" AcceptsReturn="False" PreviewTextInput="PresetsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
-            <Label Content="{x:Static properties:Resources.FileExtensions}" Margin="0,0,0,-3"></Label>
-            <TextBox x:Name="ExtensionsTextBox" Margin="2,0,2,0" Text="jpeg; jpg; png" MaxLength="2048" PreviewTextInput="ExtensionsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
-            <CheckBox x:Name="AddConversionEntryForFoldersCheckbox" Content="{x:Static properties:Resources.AddConversionEntryForFolders}" Margin="1,5,0,0"> </CheckBox>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,3,0,0">
-                <Label Content="{x:Static properties:Resources.CompressionLevel}" Margin="0,0,0,-3"></Label>
-                <ComboBox x:Name="CompressionValueComboBox" Margin="0,2,2,0" HorizontalAlignment="Left" Width="35" SelectedIndex="4" SelectionChanged="ComboBox_SelectionChanged">
-                    <ComboBoxItem Content="0"/>
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="2"/>
-                    <ComboBoxItem Content="3"/>
-                    <ComboBoxItem Content="4"/>
-                    <ComboBoxItem Content="5"/>
-                    <ComboBoxItem Content="6"/>
-                </ComboBox>
-            </StackPanel>
-            <CheckBox x:Name="DeleteOriginalFileCheckbox" Content="{x:Static properties:Resources.DeleteOriginalFile}" Margin="1,3,0,0" Click="DeleteOriginalFileCheckbox_Click"></CheckBox>
-            <Separator Opacity="0.75" Margin="2,2,2,2"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                <Button x:Name="UpdateMenuButton" Content="{x:Static properties:Resources.UpdateContextMenu}" Margin="2,0,2,2" HorizontalAlignment="Center" Click="UpdateMenuButton_Click"></Button>
-                <Button x:Name="ClearMenuButton" Content="{x:Static properties:Resources.ClearContextMenu}" Margin="2,0,2,2" HorizontalAlignment="Center" Click="ClearMenuButton_Click"></Button>
-            </StackPanel>
+        Title="{x:Static properties:Resources.MainWindowTitle}" Height="Auto" Width="400" MinWidth="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" WindowState="Normal" Style="{DynamicResource WindowStyle}" Closing="Window_Closing">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <localCustom:ToggleSwitch x:Name="ModeTabToggleSwitch" Height="15" Width="26" IsThreePosition="False" LeftColor="#FF3C3C3C" CornerRadius="8" RightColor="#FF009B1A" MouseLeftButtonDown="ToggleSwitch_MouseLeftButtonDown" HorizontalAlignment="Left" Margin="5,4,0,0"></localCustom:ToggleSwitch>
+            <Label Content="{x:Static properties:Resources.AdvancedMode}" Margin="0,0,0,-3"></Label>
         </StackPanel>
-    </Grid>
+        <TabControl x:Name="MainTabControl" Margin="4,4,4,0" SelectedIndex="0" >
+            <TabControl.Template>
+                <ControlTemplate TargetType="TabControl">
+                    <ContentPresenter ContentSource="SelectedContent" />
+                </ControlTemplate>
+            </TabControl.Template>
+            <TabItem>
+                <StackPanel>
+                    <Label Content="{x:Static properties:Resources.Presets}" Margin="0,-2,0,-3" ToolTip="{x:Static properties:Resources.PresetsTooltip}"></Label>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Disabled">
+                        <TextBox x:Name="PresetsTextBox" ToolTip="{x:Static properties:Resources.PresetsTooltip}" Margin="2,0,2,0" Width="388" Text="100; 99; 90; 75; 60; 50; 25, -1" MaxLength="2048" TextWrapping="NoWrap"  AcceptsReturn="False" PreviewTextInput="PresetsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
+                    </ScrollViewer>
+                    <Label Content="{x:Static properties:Resources.FileExtensions}" Margin="0,0,0,-3"></Label>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Disabled">
+                        <TextBox x:Name="ExtensionsTextBox" Margin="2,0,2,0" Text="{Binding Extensions, UpdateSourceTrigger=PropertyChanged}" MaxLength="2048" TextWrapping="NoWrap" PreviewTextInput="ExtensionsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
+                    </ScrollViewer>
+                    <CheckBox x:Name="AddConversionEntryForFoldersCheckbox" IsChecked="{Binding addConversionEntryForFolders, Mode=TwoWay}" Content="{x:Static properties:Resources.AddConversionEntryForFolders}" Margin="1,6,0,0"></CheckBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,3,0,0">
+                        <Label Content="{x:Static properties:Resources.CompressionLevel}" Margin="0,0,0,-3"></Label>
+                        <ComboBox x:Name="CompressionValueComboBox" Margin="0,2,2,0" HorizontalAlignment="Left" Width="35" SelectedIndex="4" SelectionChanged="ComboBox_SelectionChanged">
+                            <ComboBoxItem Content="0"/>
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="3"/>
+                            <ComboBoxItem Content="4"/>
+                            <ComboBoxItem Content="5"/>
+                            <ComboBoxItem Content="6"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <CheckBox x:Name="DeleteOriginalFileCheckbox" Content="{x:Static properties:Resources.DeleteOriginalFile}" Margin="1,3,0,0" Click="DeleteOriginalFileCheckbox_Click"></CheckBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="{x:Static properties:Resources.FileExtensions}" Margin="0,0,0,-3"></Label>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Disabled">
+                        <TextBox x:Name="ExtensionsTextBoxAdvanced" Margin="2,0,2,0" Text="{Binding Extensions, UpdateSourceTrigger=PropertyChanged}" MaxLength="2048" TextWrapping="NoWrap" PreviewTextInput="ExtensionsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
+                    </ScrollViewer>
+                    <CheckBox x:Name="AddConversionEntryForFoldersAdvancedTabCheckbox" IsChecked="{Binding addConversionEntryForFolders, Mode=TwoWay}" Content="{x:Static properties:Resources.AddConversionEntryForFolders}" Margin="1,6,0,0"></CheckBox>
+                    <Label Content="{x:Static properties:Resources.SetOfPresets}" Margin="0,0,0,-3"></Label>
+                    <localCustom:AdvancedPresetsTable x:Name="AdvancedPresetsTable"></localCustom:AdvancedPresetsTable>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <Separator Opacity="0.75" Margin="2,2,2,2"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+            <Button x:Name="UpdateMenuButton" Content="{x:Static properties:Resources.UpdateContextMenu}" Margin="2,0,2,2" HorizontalAlignment="Center" Click="UpdateMenuButton_Click"></Button>
+            <Button x:Name="ClearMenuButton" Content="{x:Static properties:Resources.ClearContextMenu}" Margin="2,0,2,2" HorizontalAlignment="Center" Click="ClearMenuButton_Click"></Button>
+        </StackPanel>
+    </StackPanel>
 </Window>
