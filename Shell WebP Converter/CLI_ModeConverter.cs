@@ -1,24 +1,8 @@
 ﻿using CommandLine;
-using CommandLine.Text;
 using ImageMagick;
 using Microsoft.Win32;
-using Shell_WebP_Converter.Resources;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using MathNet.Numerics.Interpolation;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
-using System.Windows.Navigation;
-using System.Windows;
 
 namespace Shell_WebP_Converter.CLI
 {
@@ -45,8 +29,8 @@ namespace Shell_WebP_Converter.CLI
         [Option("useDownscaling", Required = false, HelpText = "Use downscaling when it's not possible to achive designated size threshold in custom mode")]
         public bool useDownscaling { get; set; } = false;
 
-        [Option('s', "suffix", Required = false, HelpText = "String added after the original file name")]
-        public string Suffix { get; set; } = "";
+        [Option('p', "Postfix", Required = false, HelpText = "String added after the original file name")]
+        public string Postfix { get; set; } = "";
 
 
     }
@@ -64,7 +48,7 @@ namespace Shell_WebP_Converter.CLI
             {
                 if (options.Output.Length == 0)
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(options.Input) + options.Suffix;
+                    string fileName = Path.GetFileNameWithoutExtension(options.Input) + options.Postfix;
                     options.Output = Path.Combine(Path.GetDirectoryName(options.Input) ?? "", fileName + ".webp");
                 }
                 try
@@ -72,17 +56,19 @@ namespace Shell_WebP_Converter.CLI
                     if (options.Compression == 255)
                     {
                         using (var ms = CompressToThreshold(options.Quality, options.Input, options.useDownscaling))
-                        using (var fs = File.OpenWrite(options.Output))
+                        using (var fs = File.Create(options.Output))
                         {
                             ms.CopyTo(fs);
+                            fs.Close();
                         }
                     }
                     else
                     {
                         using (var ms = ConvertSingleFile(options.Input, options.Quality, options.Compression))
-                        using (var fs = File.OpenWrite(options.Output))
+                        using (var fs = File.Create(options.Output))
                         {
                             ms.CopyTo(fs);
+                            fs.Close();
                         }
                     }
                     if (options.DeleteOriginal == true && options.Input != options.Output)
@@ -92,13 +78,13 @@ namespace Shell_WebP_Converter.CLI
                 }
                 catch (Exception ex)
                 {
-                    App.Log(options.Input + " | " + ex.Message);        
+                    App.Log(options.Input + " | " + ex.Message);
                     throw new Exception();
                 }
             }
             else if (Directory.Exists(options.Input)) //input is folder
             {
-                if (!Directory.Exists(options.Output) || options.Output.Length == 0)
+                if (options.Output.Length == 0 || !Directory.Exists(options.Output))
                 {
                     options.Output = options.Input;
                 }
@@ -107,10 +93,10 @@ namespace Shell_WebP_Converter.CLI
 
                 Parallel.ForEach(filesToConvert, file =>
                 {
-                    string relativePath = file.Substring(options.Input.Length).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-                    string fileName = Path.GetFileNameWithoutExtension(file) + options.Suffix;
-                    string outputFile = Path.Combine(options.Output, Path.GetDirectoryName(relativePath) ?? "", fileName + ".webp");
-                    string outputDir = Path.GetDirectoryName(outputFile) ?? throw new Exception($"Null path to output dir. File was: {outputFile}");
+                    string relativePath = Path.GetRelativePath(options.Input, file);
+                    string fileName = Path.GetFileNameWithoutExtension(file) + options.Postfix;
+                    string outputDir = Path.Combine(options.Output, Path.GetDirectoryName(relativePath) ?? "");
+                    string outputFile = Path.Combine(outputDir, fileName + ".webp");
                     if (!Directory.Exists(outputDir))
                     {
                         Directory.CreateDirectory(outputDir);
@@ -120,30 +106,33 @@ namespace Shell_WebP_Converter.CLI
                         if (options.Compression == 255)
                         {
                             using (var ms = CompressToThreshold(options.Quality, file, options.useDownscaling))
-                            using (var fs = File.OpenWrite(outputFile))
+                            using (var fs = File.Create(outputFile))
                             {
                                 ms.CopyTo(fs);
+                                fs.Close();
                             }
                         }
                         else
                         {
                             using (var ms = ConvertSingleFile(file, options.Quality, options.Compression))
-                            using (var fs = File.OpenWrite(outputFile))
+                            using (var fs = File.Create(outputFile))
                             {
                                 ms.CopyTo(fs);
+                                fs.Close();
                             }
                         }
                         if (options.DeleteOriginal == true && file != outputFile)
                         {
                             File.Delete(file);
                         }
+                        GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
                     }
                     catch (Exception ex)
                     {
                         App.Log(file + " | " + ex.Message + "\n");
                         throw new Exception();
                     }
-                });
+                    });
             }
             else
             {
@@ -164,7 +153,7 @@ namespace Shell_WebP_Converter.CLI
                 string value = key?.GetValue("extensions")?.ToString() ?? "";
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new Exception("No allowed extensions were found in the registry");
+                    throw new Exception("No files with allowed extensions were found");
                 }
                 return value.Split(';').Select(ext => "." + ext.Trim().ToLowerInvariant()).ToArray();
             }
@@ -195,6 +184,7 @@ namespace Shell_WebP_Converter.CLI
                 image.Settings.SetDefine("webp:method", compression.ToString());
                 MemoryStream ms = new MemoryStream();
                 image.Write(ms);
+                ms.Position = 0;
                 return (ms);
             }
         }
@@ -208,6 +198,7 @@ namespace Shell_WebP_Converter.CLI
                     throw new Exception($"Image {inputFile} is too big");
                 }
                 byte compression = GetMinimumPossibleCompression(image);
+                if (compression == 0) compression = 1;
                 image.Format = MagickFormat.WebP;
                 image.Settings.SetDefine("webp:method", compression.ToString());
                 byte resizesThreshold = 15;
@@ -217,7 +208,7 @@ namespace Shell_WebP_Converter.CLI
                 {
                     image.Settings.SetDefine("webp:lossless", "true");
                     image.Quality = 100;
-                    image.Settings.SetDefine("webp:method", "5");
+                    image.Settings.SetDefine("webp:method", "6");
                     var resultMs = new MemoryStream();
                     image.Write(resultMs);
                     if (resultMs.Length < threshold)
@@ -229,10 +220,10 @@ namespace Shell_WebP_Converter.CLI
                     image.Settings.RemoveDefine("webp:lossless");
                     image.Settings.SetDefine("webp:method", compression.ToString());
                 }
-                MagickImage originalImage = new MagickImage();
+                MagickImage originalImage = null;
                 if (useDownscaling)
                 {
-                    originalImage.Dispose();
+                    if (originalImage != null) originalImage.Dispose();
                     originalImage = new MagickImage(image);
                 }
                 while (resizesCount <= resizesThreshold)
@@ -296,6 +287,7 @@ namespace Shell_WebP_Converter.CLI
                                         previous.Position = 0;
                                     }
                                     resultMs.Dispose();
+                                    previous.Position = 0;
                                     return previous;
                                 }
                                 resultMs.Dispose();
@@ -308,6 +300,7 @@ namespace Shell_WebP_Converter.CLI
                         image.CopyPixels(originalImage);
                         image.InterpolativeResize(new Percentage(Math.Pow(0.9, resizesCount + 1) * 100), PixelInterpolateMethod.Spline);
                         image.Settings.SetDefine("webp:method", compression.ToString());
+                        spline = GetSizePredictor(image);
                         resizesCount++;
                     }
                     else
@@ -315,6 +308,7 @@ namespace Shell_WebP_Converter.CLI
                         break;
                     }
                 }
+                if (originalImage != null) originalImage.Dispose();
                 throw new Exception("Failed to compress image to designated size");
             }
         }
@@ -354,6 +348,7 @@ namespace Shell_WebP_Converter.CLI
                     }
                 }
             });
+            GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
             return CubicSpline.InterpolatePchipSorted(quality, size);
         }
     }
