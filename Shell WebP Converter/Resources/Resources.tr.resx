@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>Clear context menu</value>
+    <value>Bağlam menüsünü temizle</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>File extensions:</value>
+    <value>Dosya uzantıları:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>Presets:</value>
+    <value>Ön ayarlar:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>Represents which conversion presets will be shown in the context menu. 100 — lossless, -1 — customizable quality, 85 — 85% quality, etc.</value>
+    <value>Bağlam menüsünde hangi dönüştürme ön ayarlarının gösterileceğini belirtir. 100 — kayıpsız, -1 — özelleştirilebilir kalite, 85 — %85 kalite, vb.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ayarlar</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>Update context menu</value>
+    <value>Bağlam menüsünü güncelle</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>Delete original file</value>
+    <value>Orijinal dosyayı sil</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>Compression level:</value>
+    <value>Sıkıştırma seviyesi:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>Path to the input file</value>
+    <value>Girdi dosyasının yolu</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>Invalid value</value>
+    <value>Geçersiz değer</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>Context menu has been successfully updated</value>
+    <value>Bağlam menüsü başarıyla güncellendi</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>Context menu has been cleared</value>
+    <value>Bağlam menüsü temizlendi</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>Unsupported extension </value>
+    <value>Desteklenmeyen uzantı</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>List</value>
+    <value>Liste</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>Custom settings </value>
+    <value>Özel ayarlar</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>Quality:</value>
+    <value>Kalite:</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Tamam</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>İptal</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>Compress to a specific file size</value>
+    <value>Belirli bir dosya boyutuna sıkıştır</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>Compress to</value>
+    <value>Sıkıştır</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>Lower resolution if necessary</value>
+    <value>Gerektiğinde çözünürlüğü düşür</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,94 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>Custom conversion settings</value>
+    <value>Özel dönüştürme ayarları</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>Extension list cannot be empty</value>
+    <value>Uzantı listesi boş olamaz</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>Preset list cannot be empty</value>
+    <value>Ön ayar listesi boş olamaz</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>lossless</value>
+    <value>kayıpsız</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>Customizable quality</value>
+    <value>Özelleştirilebilir kalite</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>One or more conversion failed. See logs for details</value>
+    <value>Bir veya daha fazla dönüştürme başarısız oldu. Ayrıntılar için günlükleri kontrol edin</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>Wrong arguments. Use --help for help</value>
+    <value>Yanlış argümanlar. Yardım için --help kullanın</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>Add a conversion menu entry for folders</value>
+    <value>Klasörler için dönüştürme menü girişi ekle</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>Convert to WebP</value>
+    <value>WebP'ye dönüştür</value>
   </data>
   <data name="LowerResolution" xml:space="preserve">
-    <value>Lower resolution</value>
+    <value>Çözünürlüğü düşür</value>
   </data>
   <data name="DeleteOriginal" xml:space="preserve">
-    <value>Delete original</value>
+    <value>Orijinali sil</value>
   </data>
   <data name="ToNQuality" xml:space="preserve">
-    <value>To N% quality</value>
+    <value>N% kaliteye</value>
   </data>
   <data name="ToNSize" xml:space="preserve">
-    <value>To N size</value>
+    <value>N boyutuna</value>
   </data>
   <data name="Mode" xml:space="preserve">
-    <value>Mode</value>
+    <value>Mod</value>
   </data>
   <data name="Customizable" xml:space="preserve">
-    <value>Customizable</value>
+    <value>Özelleştirilebilir</value>
   </data>
   <data name="PresetName" xml:space="preserve">
-    <value>Preset name</value>
+    <value>Ön ayar adı</value>
   </data>
   <data name="Move_Delete" xml:space="preserve">
-    <value>Move ⇵
-Delete ╳</value>
+    <value>Taşı ⇵
+Sil ╳</value>
   </data>
   <data name="QualityTooltip" xml:space="preserve">
-    <value>Quality as a percentage</value>
+    <value>Yüzde olarak kalite</value>
   </data>
   <data name="CompressionTooltip" xml:space="preserve">
-    <value>Compression, from 0 to 6, a higher value leads to a reduction in size or an increase in quality at the same size, also leads to a decrease in the conversion rate</value>
+    <value>Sıkıştırma, 0'dan 6'ya kadar, daha yüksek bir değer boyutu azaltır veya aynı boyutta kaliteyi artırır, ayrıca dönüştürme hızını azaltır</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
-    <value>Desired file size</value>
+    <value>İstenen dosya boyutu</value>
   </data>
   <data name="CustomizableAlreadyExists" xml:space="preserve">
-    <value>There can be only one preset with the "customizable" mode in the set</value>
+    <value>Sette "özelleştirilebilir" modda yalnızca bir ön ayar olabilir</value>
   </data>
   <data name="SetOfPresets" xml:space="preserve">
-    <value>Set of presets:</value>
+    <value>Ön ayar seti:</value>
   </data>
   <data name="Preset" xml:space="preserve">
-    <value>Preset</value>
+    <value>Ön ayar</value>
   </data>
   <data name="ValueParsingFailed" xml:space="preserve">
-    <value>Value parsing failed</value>
+    <value>Değer ayrıştırılamadı</value>
   </data>
   <data name="ForbiddenWindowsSymbols" xml:space="preserve">
-    <value>Windows forbids using the next characters in the file path: \ / : * ? "" &lt; &gt; |</value>
+    <value>Windows, dosya yolunda aşağıdaki karakterlerin kullanılmasını yasaklar: \ / : * ? "" &lt; &gt; |</value>
   </data>
   <data name="Postfix" xml:space="preserve">
-    <value>Postfix</value>
+    <value>Sonek</value>
   </data>
   <data name="PostfixLengthOver128" xml:space="preserve">
-    <value>Postfix length shouldn't exceed 128 symbols</value>
+    <value>Sonek uzunluğu 128 sembolü geçmemelidir</value>
   </data>
   <data name="PostfixColon" xml:space="preserve">
-    <value>Postfix:</value>
+    <value>Sonek:</value>
   </data>
   <data name="AdvancedMode" xml:space="preserve">
-    <value>Advanced mode</value>
+    <value>Gelişmiş mod</value>
   </data>
   <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
-    <value>The next task can be started only after the current one is completed.</value>
+    <value>Bir sonraki görev yalnızca mevcut görev tamamlandıktan sonra başlatılabilir</value>
   </data>
 </root>

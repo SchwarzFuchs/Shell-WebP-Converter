@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>컨텍스트 메뉴 지우기</value>
+    <value>Vymazať kontextovú ponuku</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>파일 확장자:</value>
+    <value>Prípony súborov:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>프리셋:</value>
+    <value>Predvoľby:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>어떤 변환 프리셋이 컨텍스트 메뉴에 표시될지 나타냅니다. 100 — 무손실, -1 — 사용자 지정 품질, 85 — 85% 품질 등.</value>
+    <value>Určuje, ktoré predvoľby konverzie sa zobrazia v kontextovej ponuke. 100 — bez straty, -1 — prispôsobiteľná kvalita, 85 — 85% kvalita atď.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>설정</value>
+    <value>Nastavenia</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>컨텍스트 메뉴 업데이트</value>
+    <value>Aktualizovať kontextovú ponuku</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>원본 파일 삭제</value>
+    <value>Odstrániť pôvodný súbor</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>압축 수준:</value>
+    <value>Úroveň kompresie:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>입력 파일 경로</value>
+    <value>Cesta k vstupnému súboru</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>잘못된 값</value>
+    <value>Neplatná hodnota</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>컨텍스트 메뉴가 성공적으로 업데이트되었습니다</value>
+    <value>Kontextová ponuka bola úspešne aktualizovaná</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>컨텍스트 메뉴가 지워졌습니다</value>
+    <value>Kontextová ponuka bola vymazaná</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>지원되지 않는 확장자</value>
+    <value>Nepodporovaná prípona</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>목록</value>
+    <value>Zoznam</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>사용자 지정 설정</value>
+    <value>Vlastné nastavenia</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>품질:</value>
+    <value>Kvalita:</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>확인</value>
+    <value>OK</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>취소</value>
+    <value>Zrušiť</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>특정 파일 크기로 압축</value>
+    <value>Komprimovať na konkrétnu veľkosť súboru</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>압축하기</value>
+    <value>Komprimovať na</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>필요시 해상도 낮추기</value>
+    <value>Znížiť rozlíšenie, ak je to potrebné</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,30 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>사용자 지정 변환 설정</value>
+    <value>Vlastné nastavenia konverzie</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>확장자 목록은 비워둘 수 없습니다</value>
+    <value>Zoznam prípon nemôže byť prázdny</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>프리셋 목록은 비워둘 수 없습니다</value>
+    <value>Zoznam predvolieb nemôže byť prázdny</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>무손실</value>
+    <value>bez straty</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>사용자 지정 품질</value>
+    <value>Prispôsobiteľná kvalita</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>하나 이상의 변환이 실패했습니다. 자세한 내용은 로그를 참조하세요</value>
+    <value>Jedna alebo viac konverzií zlyhala. Podrobnosti nájdete v protokoloch</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>잘못된 인수입니다. --help로 도움말을 확인하세요</value>
+    <value>Nesprávne argumenty. Použite --help pre pomoc</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>폴더에 대한 변환 항목 추가</value>
+    <value>Pridať položku konverzie pre priečinky</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>WebP로 변환</value>
+    <value>Konvertovať na WebP</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>Znížiť rozlíšenie</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>Odstrániť pôvodný</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>Na N% kvality</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>Na veľkosť N</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Režim</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>Prispôsobiteľné</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Názov predvoľby</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>Presunúť ⇵
+Odstrániť ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>Kvalita v percentách</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>Kompresia, od 0 do 6, vyššia hodnota znižuje veľkosť alebo zvyšuje kvalitu pri rovnakej veľkosti, tiež znižuje rýchlosť konverzie</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>Požadovaná veľkosť súboru</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>V sade môže byť iba jedna predvoľba s režimom "prispôsobiteľné"</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>Sada predvolieb:</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Predvoľba</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>Nepodarilo sa analyzovať hodnotu</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>Windows zakazuje používanie nasledujúcich znakov v ceste k súboru: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>Postfix</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>Dĺžka postfixu nesmie presiahnuť 128 znakov</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>Postfix:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Rozšírený režim</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>Nasledujúcu úlohu je možné spustiť iba po dokončení aktuálnej</value>
   </data>
 </root>

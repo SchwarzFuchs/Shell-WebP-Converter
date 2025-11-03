@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>Bağlam menüsünü temizle</value>
+    <value>清除上下文菜单</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>Dosya uzantıları:</value>
+    <value>文件扩展名：</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>Ön ayarlar:</value>
+    <value>预设：</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>Bağlam menüsünde hangi dönüştürme ön ayarlarının gösterileceğini belirtir. 100 — kayıpsız, -1 — özelleştirilebilir kalite, 85 — %85 kalite vb.</value>
+    <value>显示上下文菜单中将显示哪些转换预设。100 — 无损，-1 — 可自定义质量，85 — 85% 质量等。</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Ayarlar</value>
+    <value>设置</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>Bağlam menüsünü güncelle</value>
+    <value>更新上下文菜单</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>Orijinal dosyayı sil</value>
+    <value>删除原始文件</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>Sıkıştırma seviyesi:</value>
+    <value>压缩级别：</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>Girdi dosyasının yolu</value>
+    <value>输入文件路径</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>Geçersiz değer</value>
+    <value>无效值</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>Bağlam menüsü başarıyla güncellendi</value>
+    <value>上下文菜单已成功更新</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>Bağlam menüsü temizlendi</value>
+    <value>上下文菜单已清除</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>Desteklenmeyen uzantı</value>
+    <value>不支持的扩展名</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>Liste</value>
+    <value>列表</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>Özel ayarlar</value>
+    <value>自定义设置</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>Kalite:</value>
+    <value>质量：</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Tamam</value>
+    <value>确定</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>İptal</value>
+    <value>取消</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>Belirli bir dosya boyutuna sıkıştır</value>
+    <value>压缩到指定文件大小</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>Sıkıştır</value>
+    <value>压缩到</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>Gerekirse çözünürlüğü düşür</value>
+    <value>必要时降低分辨率</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,30 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>Özel dönüştürme ayarları</value>
+    <value>自定义转换设置</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>Uzantı listesi boş olamaz</value>
+    <value>扩展名列表不能为空</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>Ön ayar listesi boş olamaz</value>
+    <value>预设列表不能为空</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>kayıpsız</value>
+    <value>无损</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>Özelleştirilebilir kalite</value>
+    <value>可自定义质量</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>Bir veya daha fazla dönüştürme başarısız oldu. Ayrıntılar için günlükleri inceleyin</value>
+    <value>无法执行一个或多个转换。请查看日志中的详细信息</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>Yanlış argümanlar. Yardım için --help kullanın</value>
+    <value>参数错误。使用 --help 获取帮助</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>Klasörler için bir dönüştürme girişi ekleyin</value>
+    <value>为文件夹添加转换菜单项</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>WebP'ye Dönüştür</value>
+    <value>转换为 WebP</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>降低分辨率</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>删除原始文件</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>到 N% 质量</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>到 N 大小</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>可自定义</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>预设名称</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>移动 ⇵
+删除 ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>质量百分比</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>压缩，从 0 到 6，更高的值会导致文件大小减小或在相同大小下质量提高，同时也会降低转换速度。</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>期望的文件大小</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>套件中只能有一个模式为“可自定义”的预设</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>预设集：</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>预设</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>无法读取值</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>Windows 禁止在文件路径和名称中使用以下字符：\ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>后缀</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>后缀长度不得超过 128 个字符</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>后缀：</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>高级模式</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>只有在当前任务完成后才能开始下一项任务。</value>
   </data>
 </root>

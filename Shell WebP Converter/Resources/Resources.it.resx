@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>Clear context menu</value>
+    <value>Pulisci menu contestuale</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>File extensions:</value>
+    <value>Estensioni file:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>Presets:</value>
+    <value>Preimpostazioni:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>Represents which conversion presets will be shown in the context menu. 100 — lossless, -1 — customizable quality, 85 — 85% quality, etc.</value>
+    <value>Rappresenta quali preimpostazioni di conversione verranno mostrate nel menu contestuale. 100 — senza perdita, -1 — qualità personalizzabile, 85 — qualità 85%, ecc.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Impostazioni</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>Update context menu</value>
+    <value>Aggiorna menu contestuale</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>Delete original file</value>
+    <value>Elimina file originale</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>Compression level:</value>
+    <value>Livello di compressione:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>Path to the input file</value>
+    <value>Percorso del file di input</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>Invalid value</value>
+    <value>Valore non valido</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>Context menu has been successfully updated</value>
+    <value>Il menu contestuale è stato aggiornato con successo</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>Context menu has been cleared</value>
+    <value>Il menu contestuale è stato cancellato</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>Unsupported extension </value>
+    <value>Estensione non supportata</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>List</value>
+    <value>Elenco</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>Custom settings </value>
+    <value>Impostazioni personalizzate</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>Quality:</value>
+    <value>Qualità:</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annulla</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>Compress to a specific file size</value>
+    <value>Comprimi a una dimensione di file specifica</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>Compress to</value>
+    <value>Comprimi a</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>Lower resolution if necessary</value>
+    <value>Riduci la risoluzione se necessario</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,94 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>Custom conversion settings</value>
+    <value>Impostazioni di conversione personalizzate</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>Extension list cannot be empty</value>
+    <value>L'elenco delle estensioni non può essere vuoto</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>Preset list cannot be empty</value>
+    <value>L'elenco delle preimpostazioni non può essere vuoto</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>lossless</value>
+    <value>senza perdita</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>Customizable quality</value>
+    <value>Qualità personalizzabile</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>One or more conversion failed. See logs for details</value>
+    <value>Una o più conversioni non sono riuscite. Vedi i log per i dettagli</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>Wrong arguments. Use --help for help</value>
+    <value>Argomenti errati. Usa --help per aiuto</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>Add a conversion menu entry for folders</value>
+    <value>Aggiungi voce di conversione per le cartelle</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>Convert to WebP</value>
+    <value>Converti in WebP</value>
   </data>
   <data name="LowerResolution" xml:space="preserve">
-    <value>Lower resolution</value>
+    <value>Riduci risoluzione</value>
   </data>
   <data name="DeleteOriginal" xml:space="preserve">
-    <value>Delete original</value>
+    <value>Elimina originale</value>
   </data>
   <data name="ToNQuality" xml:space="preserve">
-    <value>To N% quality</value>
+    <value>A qualità N%</value>
   </data>
   <data name="ToNSize" xml:space="preserve">
-    <value>To N size</value>
+    <value>A dimensione N</value>
   </data>
   <data name="Mode" xml:space="preserve">
-    <value>Mode</value>
+    <value>Modalità</value>
   </data>
   <data name="Customizable" xml:space="preserve">
-    <value>Customizable</value>
+    <value>Personalizzabile</value>
   </data>
   <data name="PresetName" xml:space="preserve">
-    <value>Preset name</value>
+    <value>Nome preimpostazione</value>
   </data>
   <data name="Move_Delete" xml:space="preserve">
-    <value>Move ⇵
-Delete ╳</value>
+    <value>Sposta ⇵
+Elimina ╳</value>
   </data>
   <data name="QualityTooltip" xml:space="preserve">
-    <value>Quality as a percentage</value>
+    <value>Qualità come percentuale</value>
   </data>
   <data name="CompressionTooltip" xml:space="preserve">
-    <value>Compression, from 0 to 6, a higher value leads to a reduction in size or an increase in quality at the same size, also leads to a decrease in the conversion rate</value>
+    <value>Compressione, da 0 a 6, un valore più alto riduce la dimensione o aumenta la qualità a parità di dimensione, riduce anche la velocità di conversione</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
-    <value>Desired file size</value>
+    <value>Dimensione file desiderata</value>
   </data>
   <data name="CustomizableAlreadyExists" xml:space="preserve">
-    <value>There can be only one preset with the "customizable" mode in the set</value>
+    <value>Può esserci solo una preimpostazione con la modalità "personalizzabile" nel set</value>
   </data>
   <data name="SetOfPresets" xml:space="preserve">
-    <value>Set of presets:</value>
+    <value>Set di preimpostazioni:</value>
   </data>
   <data name="Preset" xml:space="preserve">
-    <value>Preset</value>
+    <value>Preimpostazione</value>
   </data>
   <data name="ValueParsingFailed" xml:space="preserve">
-    <value>Value parsing failed</value>
+    <value>Analisi del valore non riuscita</value>
   </data>
   <data name="ForbiddenWindowsSymbols" xml:space="preserve">
-    <value>Windows forbids using the next characters in the file path: \ / : * ? "" &lt; &gt; |</value>
+    <value>Windows vieta l'uso dei seguenti caratteri nel percorso del file: \ / : * ? "" &lt; &gt; |</value>
   </data>
   <data name="Postfix" xml:space="preserve">
-    <value>Postfix</value>
+    <value>Postfisso</value>
   </data>
   <data name="PostfixLengthOver128" xml:space="preserve">
-    <value>Postfix length shouldn't exceed 128 symbols</value>
+    <value>La lunghezza del postfisso non deve superare i 128 simboli</value>
   </data>
   <data name="PostfixColon" xml:space="preserve">
-    <value>Postfix:</value>
+    <value>Postfisso:</value>
   </data>
   <data name="AdvancedMode" xml:space="preserve">
-    <value>Advanced mode</value>
+    <value>Modalità avanzata</value>
   </data>
   <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
-    <value>The next task can be started only after the current one is completed.</value>
+    <value>Il compito successivo può essere avviato solo dopo il completamento di quello attuale</value>
   </data>
 </root>

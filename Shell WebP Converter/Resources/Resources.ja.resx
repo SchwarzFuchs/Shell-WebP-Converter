@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>Effacer le menu contextuel</value>
+    <value>コンテキストメニューをクリア</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>Extensions de fichier :</value>
+    <value>ファイル拡張子:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>Préréglages :</value>
+    <value>プリセット:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>Indique quels préréglages de conversion seront affichés dans le menu contextuel. 100 — sans perte, -1 — qualité personnalisable, 85 — qualité 85 %, etc.</value>
+    <value>どの変換プリセットがコンテキストメニューに表示されるかを示します。100 — ロスレス、-1 — カスタマイズ可能な品質、85 — 85%品質など。</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Paramètres</value>
+    <value>設定</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>Mettre à jour le menu contextuel</value>
+    <value>コンテキストメニューを更新</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>Supprimer le fichier original</value>
+    <value>元のファイルを削除</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>Niveau de compression :</value>
+    <value>圧縮レベル:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>Chemin du fichier d'entrée</value>
+    <value>入力ファイルへのパス</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>Valeur invalide</value>
+    <value>無効な値</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>Le menu contextuel a été mis à jour avec succès</value>
+    <value>コンテキストメニューが正常に更新されました</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>Le menu contextuel a été effacé</value>
+    <value>コンテキストメニューがクリアされました</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>Extension non prise en charge</value>
+    <value>サポートされていない拡張子</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>Liste</value>
+    <value>リスト</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>Paramètres personnalisés</value>
+    <value>カスタム設定</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>Qualité :</value>
+    <value>品質:</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
+    <value>キャンセル</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>Compresser à une taille de fichier spécifique</value>
+    <value>特定のファイルサイズに圧縮</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>Compresser en</value>
+    <value>圧縮する</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>Réduire la résolution si nécessaire</value>
+    <value>必要に応じて解像度を下げる</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,30 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>Paramètres de conversion personnalisés</value>
+    <value>カスタム変換設定</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>La liste des extensions ne peut pas être vide</value>
+    <value>拡張子リストは空にできません</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>La liste des préréglages ne peut pas être vide</value>
+    <value>プリセットリストは空にできません</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>sans perte</value>
+    <value>ロスレス</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>Qualité personnalisable</value>
+    <value>カスタマイズ可能な品質</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>Une ou plusieurs conversions ont échoué. Voir les journaux pour plus de détails</value>
+    <value>1つ以上の変換に失敗しました。詳細はログを参照してください</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>Mauvais arguments. Utilisez --help pour obtenir de l'aide</value>
+    <value>間違った引数です。--helpでヘルプを表示します</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>Ajouter une entrée de conversion pour les dossiers</value>
+    <value>フォルダー用の変換メニュー項目を追加</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>Convertir en WebP</value>
+    <value>WebPに変換</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>解像度を下げる</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>元を削除</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>N%品質へ</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>Nサイズへ</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>モード</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>カスタマイズ可能</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>プリセット名</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>移動 ⇵
+削除 ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>パーセンテージとしての品質</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>圧縮は0から6までで、値が大きいほどサイズが小さくなり、同じサイズで品質が向上し、変換速度が低下します</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>希望ファイルサイズ</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>セット内に「カスタマイズ可能」モードのプリセットは1つだけです</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>プリセットのセット:</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>プリセット</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>値の解析に失敗しました</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>Windowsでは次の文字のファイルパスでの使用は禁止されています: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>接尾辞</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>ポストフィックスの長さは128文字を超えてはいけません</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>接尾辞:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>拡張モード</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>次のタスクは、現在のタスクが完了してからでなければ開始できません</value>
   </data>
 </root>

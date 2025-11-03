@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>Limpiar menú contextual</value>
+    <value>مسح قائمة السياق</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>Extensiones de archivo:</value>
+    <value>امتدادات الملفات:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>Preajustes:</value>
+    <value>الإعدادات المسبقة:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>Representa qué preajustes de conversión se mostrarán en el menú contextual. 100 — sin pérdida, -1 — calidad personalizable, 85 — 85% de calidad, etc.</value>
+    <value>يمثل الإعدادات المسبقة للتحويل التي ستظهر في قائمة السياق. 100 — بدون فقدان، -1 — جودة قابلة للتخصيص، 85 — 85% جودة، إلخ.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Configuración</value>
+    <value>الإعدادات</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>Actualizar menú contextual</value>
+    <value>تحديث قائمة السياق</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>Eliminar archivo original</value>
+    <value>حذف الملف الأصلي</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>Nivel de compresión:</value>
+    <value>مستوى الضغط:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>Ruta al archivo de entrada</value>
+    <value>مسار الملف المدخل</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>Valor inválido</value>
+    <value>قيمة غير صالحة</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>El menú contextual se ha actualizado correctamente</value>
+    <value>تم تحديث قائمة السياق بنجاح</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>El menú contextual ha sido limpiado</value>
+    <value>تم مسح قائمة السياق</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>Extensión no soportada</value>
+    <value>امتداد غير مدعوم</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>Lista</value>
+    <value>قائمة</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>Configuración personalizada</value>
+    <value>إعدادات مخصصة</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>Calidad:</value>
+    <value>الجودة:</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Aceptar</value>
+    <value>موافق</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancelar</value>
+    <value>إلغاء</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>Comprimir a un tamaño de archivo específico</value>
+    <value>ضغط إلى حجم ملف محدد</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>Comprimir a</value>
+    <value>ضغط إلى</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>Bajar la resolución si es necesario</value>
+    <value>خفض الدقة عند الضرورة</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,30 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>Configuración de conversión personalizada</value>
+    <value>إعدادات تحويل مخصصة</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>La lista de extensiones no puede estar vacía</value>
+    <value>لا يمكن أن تكون قائمة الامتدادات فارغة</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>La lista de preajustes no puede estar vacía</value>
+    <value>لا يمكن أن تكون قائمة الإعدادات المسبقة فارغة</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>sin pérdida</value>
+    <value>بدون فقدان</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>Calidad personalizable</value>
+    <value>جودة قابلة للتخصيص</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>Una o más conversiones fallaron. Consulte los registros para más detalles</value>
+    <value>فشل تحويل واحد أو أكثر. راجع السجلات للحصول على التفاصيل</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>Argumentos incorrectos. Use --help para ayuda</value>
+    <value>معلمات خاطئة. استخدم --help للمساعدة</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>Agregar una entrada de conversión para carpetas</value>
+    <value>إضافة خيار تحويل للمجلدات</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>Convertir a WebP</value>
+    <value>تحويل إلى WebP</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>خفض الدقة</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>حذف الأصلي</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>إلى جودة N%</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>إلى حجم N</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>الوضع</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>قابل للتخصيص</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>اسم الإعداد المسبق</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>تحريك ⇵
+حذف ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>الجودة كنسبة مئوية</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>الضغط، من 0 إلى 6، قيمة أعلى تؤدي إلى تقليل الحجم أو زيادة الجودة بنفس الحجم، كما تؤدي إلى تقليل معدل التحويل</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>الحجم المطلوب للملف</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>يمكن أن يكون هناك إعداد مسبق واحد فقط بوضع "قابل للتخصيص" في المجموعة</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>مجموعة الإعدادات المسبقة:</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>إعداد مسبق</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>فشل تحليل القيمة</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>Windows يمنع استخدام الأحرف التالية في مسار الملف: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>لاحقة</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>يجب ألا يتجاوز طول اللاحقة 128 رمزًا</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>لاحقة:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>الوضع المتقدم</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>لا يمكن بدء المهمة التالية إلا بعد اكتمال المهمة الحالية</value>
   </data>
 </root>

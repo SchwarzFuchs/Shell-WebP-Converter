@@ -70,6 +70,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced mode.
+        /// </summary>
+        public static string AdvancedMode {
+            get {
+                return ResourceManager.GetString("AdvancedMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -102,6 +111,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string CompressionLevel {
             get {
                 return ResourceManager.GetString("CompressionLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compression, from 0 to 6, a higher value leads to a reduction in size or an increase in quality at the same size, also leads to a decrease in the conversion rate.
+        /// </summary>
+        public static string CompressionTooltip {
+            get {
+                return ResourceManager.GetString("CompressionTooltip", resourceCulture);
             }
         }
         
@@ -151,6 +169,24 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customizable.
+        /// </summary>
+        public static string Customizable {
+            get {
+                return ResourceManager.GetString("Customizable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There can be only one preset with the &quot;customizable&quot; mode in the set.
+        /// </summary>
+        public static string CustomizableAlreadyExists {
+            get {
+                return ResourceManager.GetString("CustomizableAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customizable quality.
         /// </summary>
         public static string CustomizableQuality {
@@ -169,11 +205,29 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete original.
+        /// </summary>
+        public static string DeleteOriginal {
+            get {
+                return ResourceManager.GetString("DeleteOriginal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete original file.
         /// </summary>
         public static string DeleteOriginalFile {
             get {
                 return ResourceManager.GetString("DeleteOriginalFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Desired file size.
+        /// </summary>
+        public static string DesiredFileSize {
+            get {
+                return ResourceManager.GetString("DesiredFileSize", resourceCulture);
             }
         }
         
@@ -201,6 +255,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string FileExtensions {
             get {
                 return ResourceManager.GetString("FileExtensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows forbids using the next characters in the file path: \ / : * ? &quot;&quot; &lt; &gt; |.
+        /// </summary>
+        public static string ForbiddenWindowsSymbols {
+            get {
+                return ResourceManager.GetString("ForbiddenWindowsSymbols", resourceCulture);
             }
         }
         
@@ -237,6 +300,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string Lossless {
             get {
                 return ResourceManager.GetString("Lossless", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lower resolution.
+        /// </summary>
+        public static string LowerResolution {
+            get {
+                return ResourceManager.GetString("LowerResolution", resourceCulture);
             }
         }
         
@@ -286,11 +358,84 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mode.
+        /// </summary>
+        public static string Mode {
+            get {
+                return ResourceManager.GetString("Mode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move ⇵
+        ///Delete ╳.
+        /// </summary>
+        public static string Move_Delete {
+            get {
+                return ResourceManager.GetString("Move_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The next task can be started only after the current one is completed..
+        /// </summary>
+        public static string NextTaskStartMustWaitCurrent {
+            get {
+                return ResourceManager.GetString("NextTaskStartMustWaitCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postfix.
+        /// </summary>
+        public static string Postfix {
+            get {
+                return ResourceManager.GetString("Postfix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postfix:.
+        /// </summary>
+        public static string PostfixColon {
+            get {
+                return ResourceManager.GetString("PostfixColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postfix length shouldn&apos;t exceed 128 symbols.
+        /// </summary>
+        public static string PostfixLengthOver128 {
+            get {
+                return ResourceManager.GetString("PostfixLengthOver128", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preset.
+        /// </summary>
+        public static string Preset {
+            get {
+                return ResourceManager.GetString("Preset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preset name.
+        /// </summary>
+        public static string PresetName {
+            get {
+                return ResourceManager.GetString("PresetName", resourceCulture);
             }
         }
         
@@ -322,11 +467,47 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quality as a percentage.
+        /// </summary>
+        public static string QualityTooltip {
+            get {
+                return ResourceManager.GetString("QualityTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set of presets:.
+        /// </summary>
+        public static string SetOfPresets {
+            get {
+                return ResourceManager.GetString("SetOfPresets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To N% quality.
+        /// </summary>
+        public static string ToNQuality {
+            get {
+                return ResourceManager.GetString("ToNQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To N size.
+        /// </summary>
+        public static string ToNSize {
+            get {
+                return ResourceManager.GetString("ToNSize", resourceCulture);
             }
         }
         
@@ -345,6 +526,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string UpdateContextMenu {
             get {
                 return ResourceManager.GetString("UpdateContextMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value parsing failed.
+        /// </summary>
+        public static string ValueParsingFailed {
+            get {
+                return ResourceManager.GetString("ValueParsingFailed", resourceCulture);
             }
         }
         

@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>清除上下文菜单</value>
+    <value>Effacer le menu contextuel</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>文件扩展名：</value>
+    <value>Extensions de fichier :</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>预设：</value>
+    <value>Préréglages :</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>表示哪些转换预设会显示在上下文菜单中。100 — 无损，-1 — 可自定义质量，85 — 85%质量等。</value>
+    <value>Indique quels préréglages de conversion seront affichés dans le menu contextuel. 100 — sans perte, -1 — qualité personnalisable, 85 — 85% de qualité, etc.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>设置</value>
+    <value>Paramètres</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>更新上下文菜单</value>
+    <value>Mettre à jour le menu contextuel</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>删除原始文件</value>
+    <value>Supprimer le fichier original</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>压缩级别：</value>
+    <value>Niveau de compression :</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>输入文件路径</value>
+    <value>Chemin vers le fichier d'entrée</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>无效值</value>
+    <value>Valeur invalide</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>上下文菜单已成功更新</value>
+    <value>Le menu contextuel a été mis à jour avec succès</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>上下文菜单已清除</value>
+    <value>Le menu contextuel a été effacé</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>不支持的扩展名</value>
+    <value>Extension non prise en charge</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>列表</value>
+    <value>Liste</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>自定义设置</value>
+    <value>Paramètres personnalisés</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>质量：</value>
+    <value>Qualité :</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>确定</value>
+    <value>OK</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Annuler</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>压缩到特定文件大小</value>
+    <value>Compresser à une taille de fichier spécifique</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>压缩到</value>
+    <value>Compresser à</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>必要时降低分辨率</value>
+    <value>Réduire la résolution si nécessaire</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,30 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>自定义转换设置</value>
+    <value>Paramètres de conversion personnalisés</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>扩展名列表不能为空</value>
+    <value>La liste des extensions ne peut pas être vide</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>预设列表不能为空</value>
+    <value>La liste des préréglages ne peut pas être vide</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>无损</value>
+    <value>sans perte</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>可自定义质量</value>
+    <value>Qualité personnalisable</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>一个或多个转换失败。详情请参阅日志</value>
+    <value>Une ou plusieurs conversions ont échoué. Voir les journaux pour plus de détails</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>参数错误。使用 --help 获取帮助</value>
+    <value>Mauvais arguments. Utilisez --help pour obtenir de l'aide</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>为文件夹添加转换条目</value>
+    <value>Ajouter une entrée de conversion pour les dossiers</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>转换为 WebP</value>
+    <value>Convertir en WebP</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>Réduire la résolution</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>Supprimer l'original</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>À N% de qualité</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>À taille N</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>Personnalisable</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Nom du préréglage</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>Déplacer ⇵
+Supprimer ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>Qualité en pourcentage</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>Compression, de 0 à 6, une valeur plus élevée réduit la taille ou augmente la qualité à taille égale, réduit également la vitesse de conversion</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>Taille de fichier souhaitée</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>Il ne peut y avoir qu'un seul préréglage avec le mode "personnalisable" dans l'ensemble</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>Ensemble de préréglages :</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Préréglage</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>Échec de l'analyse de la valeur</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>Windows interdit l'utilisation des caractères suivants dans le chemin du fichier : \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>Postfixe</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>La longueur du postfixe ne doit pas dépasser 128 symboles</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>Postfixe:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Mode avancé</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>La tâche suivante ne peut être commencée qu'après l'achèvement de la tâche en cours</value>
   </data>
 </root>

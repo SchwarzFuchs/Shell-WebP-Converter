@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>مسح قائمة السياق</value>
+    <value>संदर्भ मेनू साफ़ करें</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>امتدادات الملفات:</value>
+    <value>फ़ाइल एक्सटेंशन:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>الإعدادات المسبقة:</value>
+    <value>पूर्वनिर्धारित:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>يمثل الإعدادات المسبقة للتحويل التي ستظهر في قائمة السياق. 100 — بدون فقدان، -1 — جودة قابلة للتخصيص، 85 — جودة 85%، إلخ.</value>
+    <value>यह दर्शाता है कि कौन से रूपांतरण प्रीसेट संदर्भ मेनू में दिखाए जाएंगे। 100 — बिना हानि के, -1 — अनुकूलन योग्य गुणवत्ता, 85 — 85% गुणवत्ता, आदि।</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>الإعدادات</value>
+    <value>सेटिंग्स</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>تحديث قائمة السياق</value>
+    <value>संदर्भ मेनू अपडेट करें</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>حذف الملف الأصلي</value>
+    <value>मूल फ़ाइल हटाएं</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>مستوى الضغط:</value>
+    <value>संपीड़न स्तर:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>مسار الملف المدخل</value>
+    <value>इनपुट फ़ाइल का पथ</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>قيمة غير صالحة</value>
+    <value>अमान्य मान</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>تم تحديث قائمة السياق بنجاح</value>
+    <value>संदर्भ मेनू सफलतापूर्वक अपडेट किया गया है</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>تم مسح قائمة السياق</value>
+    <value>संदर्भ मेनू साफ़ किया गया है</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>امتداد غير مدعوم</value>
+    <value>असमर्थित एक्सटेंशन</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>قائمة</value>
+    <value>सूची</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>إعدادات مخصصة</value>
+    <value>कस्टम सेटिंग्स</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>الجودة:</value>
+    <value>गुणवत्ता:</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>موافق</value>
+    <value>ठीक है</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>إلغاء</value>
+    <value>रद्द करें</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>ضغط إلى حجم ملف محدد</value>
+    <value>विशिष्ट फ़ाइल आकार में संपीड़ित करें</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>ضغط إلى</value>
+    <value>संपीड़ित करें</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>خفض الدقة عند الضرورة</value>
+    <value>आवश्यक होने पर रिज़ॉल्यूशन कम करें</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,30 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>إعدادات تحويل مخصصة</value>
+    <value>कस्टम रूपांतरण सेटिंग्स</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>لا يمكن أن تكون قائمة الامتدادات فارغة</value>
+    <value>एक्सटेंशन सूची खाली नहीं हो सकती</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>لا يمكن أن تكون قائمة الإعدادات المسبقة فارغة</value>
+    <value>प्रीसेट सूची खाली नहीं हो सकती</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>بدون فقدان</value>
+    <value>बिना हानि के</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>جودة قابلة للتخصيص</value>
+    <value>अनुकूलन योग्य गुणवत्ता</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>فشل تحويل واحد أو أكثر. راجع السجلات لمزيد من التفاصيل</value>
+    <value>एक या अधिक रूपांतरण विफल रहे। विवरण के लिए लॉग देखें</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>معلمات خاطئة. استخدم --help للمساعدة</value>
+    <value>गलत तर्क। सहायता के लिए --help का उपयोग करें</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>إضافة إدخال تحويل للمجلدات</value>
+    <value>फ़ोल्डरों के लिए रूपांतरण प्रविष्टि जोड़ें</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>تحويل إلى WebP</value>
+    <value>WebP में रूपांतरित करें</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>रिज़ॉल्यूशन कम करें</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>मूल हटाएं</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>N% गुणवत्ता तक</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>N आकार तक</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>मोड</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>अनुकूलन योग्य</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>प्रीसेट नाम</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>स्थानांतरित करें ⇵
+हटाएं ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>प्रतिशत के रूप में गुणवत्ता</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>संपीड़न, 0 से 6 तक, उच्च मान आकार को कम करता है या समान आकार में गुणवत्ता बढ़ाता है, साथ ही रूपांतरण दर को कम करता है</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>वांछित फ़ाइल आकार</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>सेट में केवल एक प्रीसेट "अनुकूलन योग्य" मोड के साथ हो सकता है</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>प्रीसेट का सेट:</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>प्रीसेट</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>मान पार्स करने में विफल</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>Windows निम्नलिखित वर्णों का फ़ाइल पथ में उपयोग निषिद्ध करता है: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>उपसर्ग</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>पोस्टफिक्स की लंबाई 128 प्रतीकों से अधिक नहीं होनी चाहिए</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>उपसर्ग:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>उन्नत मोड</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>अगला कार्य केवल तभी शुरू किया जा सकता है जब वर्तमान कार्य पूरा हो जाए</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,102 +118,166 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>Очистить контекстное меню</value>
+    <value>Limpar menu de contexto</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>Расширения файлов:</value>
+    <value>Extensões de arquivo:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>Предустановки:</value>
+    <value>Predefinições:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>Отображает, какие предустановки конвертации будут отображаться в контекстном меню. 100 — без потерь, -1 — настраиваемое качество, 85 — 85% качества и т.д.</value>
+    <value>Indica quais predefinições de conversão serão exibidas no menu de contexto. 100 — sem perdas, -1 — qualidade personalizável, 85 — 85% de qualidade, etc.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Configurações</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>Обновить контекстное меню</value>
+    <value>Atualizar menu de contexto</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>Удалять оригинал файла</value>
+    <value>Excluir arquivo original</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>Уровень сжатия:</value>
+    <value>Nível de compressão:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>Путь к входному файлу</value>
+    <value>Caminho para o arquivo de entrada</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>Недопустимое значение</value>
+    <value>Valor inválido</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>Контекстное меню успешно обновлено</value>
+    <value>O menu de contexto foi atualizado com sucesso</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>Контекстное меню очищено</value>
+    <value>O menu de contexto foi limpo</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>Неподдерживаемое расширение</value>
+    <value>Extensão não suportada</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>Список</value>
+    <value>Lista</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>Произвольные настройки</value>
+    <value>Configurações personalizadas</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>Качество:</value>
+    <value>Qualidade:</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Ок</value>
+    <value>OK</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Отмена</value>
+    <value>Cancelar</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>Сжать до определённого размера файла</value>
+    <value>Comprimir para um tamanho de arquivo específico</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>Сжать до</value>
+    <value>Comprimir para</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>Снижать разрешение при необходимости</value>
+    <value>Reduzir a resolução se necessário</value>
   </data>
   <data name="KiB" xml:space="preserve">
-    <value>КиБ</value>
+    <value>KiB</value>
   </data>
   <data name="MiB" xml:space="preserve">
-    <value>МиБ</value>
+    <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>Произвольные настройки конвертации</value>
+    <value>Configurações de conversão personalizadas</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>Список расширений не может быть пустым</value>
+    <value>A lista de extensões não pode estar vazia</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>Список предустановок не может быть пустым</value>
+    <value>A lista de predefinições não pode estar vazia</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>без потерь</value>
+    <value>sem perdas</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>Настраиваемое качество</value>
+    <value>Qualidade personalizável</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>Не удалось выполнить одну или несколько конвертаций. Смотрите подробности в логах</value>
+    <value>Uma ou mais conversões falharam. Veja os logs para detalhes</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>Неверные аргументы. Используйте --help для получения справки</value>
+    <value>Argumentos errados. Use --help para ajuda</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>Добавить пункт конвертации в меню для папок</value>
+    <value>Adicionar entrada de conversão para pastas</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>Конвертировать в WebP</value>
+    <value>Converter para WebP</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>Reduzir resolução</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>Excluir original</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>Para N% de qualidade</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>Para tamanho N</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Modo</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>Personalizável</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Nome da predefinição</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>Mover ⇵
+Excluir ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>Qualidade como porcentagem</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>Compressão, de 0 a 6, um valor mais alto reduz o tamanho ou aumenta a qualidade no mesmo tamanho, também reduz a taxa de conversão</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>Tamanho de arquivo desejado</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>Só pode haver uma predefinição com o modo "personalizável" no conjunto</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>Conjunto de predefinições:</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Predefinição</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>Falha ao analisar o valor</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>O Windows proíbe o uso dos seguintes caracteres no caminho do arquivo: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>Pós-fixo</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>O comprimento do pós-fixo não deve exceder 128 símbolos</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>Pós-fixo:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Modo avançado</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>A próxima tarefa só pode ser iniciada após a conclusão da atual</value>
   </data>
 </root>

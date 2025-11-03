@@ -142,7 +142,7 @@
     <value>Originaldatei löschen</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>Komprimierungsgrad:</value>
+    <value>Komprimierungsstufe:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
     <value>Pfad zur Eingabedatei</value>
@@ -175,13 +175,13 @@
     <value>Abbrechen</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>Auf bestimmte Dateigröße komprimieren</value>
+    <value>Auf eine bestimmte Dateigröße komprimieren</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>Komprimieren zu</value>
+    <value>Komprimieren auf</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>Bei Bedarf Auflösung verringern</value>
+    <value>Auflösung bei Bedarf verringern</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -211,9 +211,73 @@
     <value>Falsche Argumente. Verwenden Sie --help für Hilfe</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>Fügen Sie einen Konvertierungseintrag für Ordner hinzu</value>
+    <value>Konvertierungsmenüeintrag für Ordner hinzufügen</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
     <value>In WebP konvertieren</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>Auflösung verringern</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>Original löschen</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>Zu N% Qualität</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>Zu N Größe</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Modus</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>Anpassbar</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Voreinstellungsname</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>Verschieben ⇵
+Löschen ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>Qualität als Prozentsatz</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>Komprimierung, von 0 bis 6, ein höherer Wert führt zu einer Reduzierung der Größe oder einer Erhöhung der Qualität bei gleicher Größe, führt auch zu einer Verringerung der Konvertierungsrate</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>Gewünschte Dateigröße</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>Es kann nur eine Voreinstellung mit dem Modus "anpassbar" im Satz geben</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>Satz von Voreinstellungen:</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Voreinstellung</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>Wert konnte nicht analysiert werden</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>Windows verbietet die Verwendung der folgenden Zeichen im Dateipfad: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>Postfix</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>Die Länge des Postfix darf 128 Zeichen nicht überschreiten</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>Postfix:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Erweiterter Modus</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>Die nächste Aufgabe kann erst gestartet werden, nachdem die aktuelle abgeschlossen ist</value>
   </data>
 </root>

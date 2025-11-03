@@ -118,70 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearContextMenu" xml:space="preserve">
-    <value>संदर्भ मेनू साफ़ करें</value>
+    <value>Kontekstus menü törlése</value>
   </data>
   <data name="FileExtensions" xml:space="preserve">
-    <value>फ़ाइल एक्सटेंशन:</value>
+    <value>Fájl kiterjesztések:</value>
   </data>
   <data name="Presets" xml:space="preserve">
-    <value>प्रिसेट्स:</value>
+    <value>Előbeállítások:</value>
   </data>
   <data name="PresetsTooltip" xml:space="preserve">
-    <value>यह दर्शाता है कि कौन से रूपांतरण प्रिसेट्स संदर्भ मेनू में दिखाए जाएंगे। 100 — लॉसलेस, -1 — अनुकूलन योग्य गुणवत्ता, 85 — 85% गुणवत्ता आदि।</value>
+    <value>Meghatározza, hogy mely konverziós előbeállítások jelennek meg a helyi menüben. 100 — veszteségmentes, -1 — testreszabható minőség, 85 — 85% minőség, stb.</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>सेटिंग्स</value>
+    <value>Beállítások</value>
   </data>
   <data name="UpdateContextMenu" xml:space="preserve">
-    <value>संदर्भ मेनू अपडेट करें</value>
+    <value>Helyi menü frissítése</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Shell WebP Converter</value>
   </data>
   <data name="DeleteOriginalFile" xml:space="preserve">
-    <value>मूल फ़ाइल हटाएँ</value>
+    <value>Eredeti fájl törlése</value>
   </data>
   <data name="CompressionLevel" xml:space="preserve">
-    <value>संपीड़न स्तर:</value>
+    <value>Tömörítési szint:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
-    <value>इनपुट फ़ाइल का पथ</value>
+    <value>Bemeneti fájl elérési útja</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
-    <value>अमान्य मान</value>
+    <value>Érvénytelen érték</value>
   </data>
   <data name="MenuUpdateSuccess" xml:space="preserve">
-    <value>संदर्भ मेनू सफलतापूर्वक अपडेट किया गया</value>
+    <value>A helyi menü sikeresen frissítve lett</value>
   </data>
   <data name="MenuClearSuccess" xml:space="preserve">
-    <value>संदर्भ मेनू साफ़ किया गया</value>
+    <value>A helyi menü törölve lett</value>
   </data>
   <data name="UnsupportedExtension" xml:space="preserve">
-    <value>असमर्थित एक्सटेंशन</value>
+    <value>Nem támogatott kiterjesztés</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>सूची</value>
+    <value>Lista</value>
   </data>
   <data name="CustomSettings" xml:space="preserve">
-    <value>कस्टम सेटिंग्स</value>
+    <value>Egyéni beállítások</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>गुणवत्ता:</value>
+    <value>Minőség:</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>ठीक है</value>
+    <value>OK</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>रद्द करें</value>
+    <value>Mégse</value>
   </data>
   <data name="CompressToThreshold" xml:space="preserve">
-    <value>विशिष्ट फ़ाइल आकार में संपीड़ित करें</value>
+    <value>Tömörítés adott fájlméretre</value>
   </data>
   <data name="CompressTo" xml:space="preserve">
-    <value>संपीड़ित करें</value>
+    <value>Tömörítés</value>
   </data>
   <data name="LowerTheResolutionWhenNecessary" xml:space="preserve">
-    <value>आवश्यक होने पर रिज़ॉल्यूशन कम करें</value>
+    <value>Szükség esetén felbontás csökkentése</value>
   </data>
   <data name="KiB" xml:space="preserve">
     <value>KiB</value>
@@ -190,30 +190,94 @@
     <value>MiB</value>
   </data>
   <data name="CustomConversionSettings" xml:space="preserve">
-    <value>कस्टम रूपांतरण सेटिंग्स</value>
+    <value>Egyéni konverziós beállítások</value>
   </data>
   <data name="EmptyExtensionsList" xml:space="preserve">
-    <value>एक्सटेंशन सूची खाली नहीं हो सकती</value>
+    <value>A kiterjesztés lista nem lehet üres</value>
   </data>
   <data name="EmptyPresetsList" xml:space="preserve">
-    <value>प्रिसेट्स सूची खाली नहीं हो सकती</value>
+    <value>Az előbeállítás lista nem lehet üres</value>
   </data>
   <data name="Lossless" xml:space="preserve">
-    <value>लॉसलेस</value>
+    <value>veszteségmentes</value>
   </data>
   <data name="CustomizableQuality" xml:space="preserve">
-    <value>अनुकूलन योग्य गुणवत्ता</value>
+    <value>Testreszabható minőség</value>
   </data>
   <data name="ConversionFail" xml:space="preserve">
-    <value>एक या अधिक रूपांतरण विफल हो गए। विवरण के लिए लॉग देखें</value>
+    <value>Egy vagy több konverzió sikertelen volt. Részletekért lásd a naplókat</value>
   </data>
   <data name="WrongArgumentsHelp" xml:space="preserve">
-    <value>गलत तर्क। सहायता के लिए --help का उपयोग करें</value>
+    <value>Hibás argumentumok. Használja a --help parancsot segítségért</value>
   </data>
   <data name="AddConversionEntryForFolders" xml:space="preserve">
-    <value>फ़ोल्डरों के लिए एक रूपांतरण प्रविष्टि जोड़ें</value>
+    <value>Konverziós menüpont hozzáadása mappákhoz</value>
   </data>
   <data name="ConvertToWebP" xml:space="preserve">
-    <value>WebP में कनवर्ट करें</value>
+    <value>Konvertálás WebP-re</value>
+  </data>
+  <data name="LowerResolution" xml:space="preserve">
+    <value>Felbontás csökkentése</value>
+  </data>
+  <data name="DeleteOriginal" xml:space="preserve">
+    <value>Eredeti törlése</value>
+  </data>
+  <data name="ToNQuality" xml:space="preserve">
+    <value>N% minőségre</value>
+  </data>
+  <data name="ToNSize" xml:space="preserve">
+    <value>N méretre</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mód</value>
+  </data>
+  <data name="Customizable" xml:space="preserve">
+    <value>Testreszabható</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Előbeállítás neve</value>
+  </data>
+  <data name="Move_Delete" xml:space="preserve">
+    <value>Mozgatás ⇵
+Törlés ╳</value>
+  </data>
+  <data name="QualityTooltip" xml:space="preserve">
+    <value>Minőség százalékban</value>
+  </data>
+  <data name="CompressionTooltip" xml:space="preserve">
+    <value>Tömörítés, 0-tól 6-ig, a magasabb érték csökkenti a méretet vagy növeli a minőséget azonos méret mellett, csökkenti a konverziós sebességet is</value>
+  </data>
+  <data name="DesiredFileSize" xml:space="preserve">
+    <value>Kívánt fájlméret</value>
+  </data>
+  <data name="CustomizableAlreadyExists" xml:space="preserve">
+    <value>A készletben csak egy "testreszabható" módú előbeállítás lehet</value>
+  </data>
+  <data name="SetOfPresets" xml:space="preserve">
+    <value>Előbeállítások készlete:</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Előbeállítás</value>
+  </data>
+  <data name="ValueParsingFailed" xml:space="preserve">
+    <value>Érték feldolgozása sikertelen</value>
+  </data>
+  <data name="ForbiddenWindowsSymbols" xml:space="preserve">
+    <value>A Windows tiltja a következő karakterek használatát a fájl elérési útjában: \ / : * ? "" &lt; &gt; |</value>
+  </data>
+  <data name="Postfix" xml:space="preserve">
+    <value>Postfix</value>
+  </data>
+  <data name="PostfixLengthOver128" xml:space="preserve">
+    <value>A postfix hossza nem haladhatja meg a 128 karaktert</value>
+  </data>
+  <data name="PostfixColon" xml:space="preserve">
+    <value>Postfix:</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Speciális mód</value>
+  </data>
+  <data name="NextTaskStartMustWaitCurrent" xml:space="preserve">
+    <value>A következő feladat csak azután indítható el, miután a jelenlegi befejeződött</value>
   </data>
 </root>
