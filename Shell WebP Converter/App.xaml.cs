@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using Shell_WebP_Converter.CLI;
+using Shell_WebP_Converter.Resources;
 using System;
 using System.Configuration;
 using System.Data;
@@ -13,6 +14,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+
 
 
 
@@ -62,6 +64,7 @@ namespace Shell_WebP_Converter
                     {
                         if (!customSettingsSemaphore.WaitOne(0))
                         {
+                            MessageBox.Show(Shell_WebP_Converter.Resources.Resources.NextTaskStartMustWaitCurrent);
                             masterSemaphore.Release();
                             Environment.Exit(0);
                         }
@@ -151,7 +154,7 @@ namespace Shell_WebP_Converter
         public static void Log(string message)
         {
             message = DateTime.Now.ToString() + (" | ") + message;
-            string fileName = Path.Combine( Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"ExceptionLog {DateTime.Now.Date.ToShortDateString()}.txt");
+            string fileName = Path.Combine( Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"ExceptionLog {DateTime.Now.Date.ToString("yyyy-MM-dd")}.txt");
             File.AppendAllText(fileName, message);
             DeleteOldLogFiles(fileName);
         }
