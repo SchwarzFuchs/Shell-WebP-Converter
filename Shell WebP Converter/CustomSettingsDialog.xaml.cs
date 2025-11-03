@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Shell_WebP_Converter.CLI;
+using Shell_WebP_Converter.CustomElements;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -55,6 +56,7 @@ namespace Shell_WebP_Converter
                         CompressionSizeThresholdTextBox.Text = (key.GetValue("LastCustomSizeThreshold") ?? "2").ToString();
                         SizeMeasurmentUnitComboBox.SelectedIndex = (int)(key.GetValue("LastCustomSizeUnit") ?? 1);
                         DeleteOriginalFileCheckbox.IsChecked = bool.Parse((key.GetValue("LastCustomDeleteOriginal") ?? "false").ToString() ?? "false");
+                        PostfixTextBox.Text = options.Postfix;
 
                     }
                     else
@@ -98,6 +100,12 @@ namespace Shell_WebP_Converter
         private void CompressionThresholdTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !thresholdRegex.IsMatch(e.Text);
+            string textPreview = ((TextBox)sender).Text + e.Text;
+            if ((textPreview.Count(s => s == ',') + textPreview.Count(s => s == '.')) > 1)
+            {
+                e.Handled = true;
+                return;
+            }
         }
 
         private void CompressionThresholdTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -154,6 +162,12 @@ namespace Shell_WebP_Converter
                     if (options.Quality == 0) throw new Exception("Size can't be zero");
                     options.Compression = 255;
                     options.useDownscaling = LowerTheResolutionWhenNecessaryCheckbox.IsChecked.GetValueOrDefault(true);
+                }
+                options.DeleteOriginal = DeleteOriginalFileCheckbox.IsChecked.GetValueOrDefault(false);
+                options.Postfix = PostfixTextBox.Text.Trim();
+                if (AdvancedPreset.windowsPathForbiddenSymbolsRegex.IsMatch(options.Postfix))
+                {
+                    throw new Exception($"{Shell_WebP_Converter.Resources.Resources.Postfix}: {options.Postfix} — {Shell_WebP_Converter.Resources.Resources.ForbiddenWindowsSymbols}");
                 }
                 try
                 {
