@@ -31,7 +31,7 @@ namespace Shell_WebP_Converter
 
         public CustomSettingsDialog(Options options)
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; 
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             this.options = options;
             try
             {

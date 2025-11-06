@@ -1,8 +1,17 @@
 ﻿using CommandLine;
+using Hardcodet.Wpf.TaskbarNotification;
 using ImageMagick;
-using Microsoft.Win32;
-using System.IO;
 using MathNet.Numerics.Interpolation;
+using Microsoft.Win32;
+using Shell_WebP_Converter.CustomElements;
+using System.Drawing;
+using System.IO;
+using System.Reflection.Emit;
+using System.Timers;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Shell_WebP_Converter.CLI
 {
@@ -36,6 +45,8 @@ namespace Shell_WebP_Converter.CLI
     }
     internal class CLI_Mode
     {
+        ProgressCounter progressCounter;
+        TaskbarIcon tbi;
         Options options;
         public CLI_Mode(Options options)
         {
@@ -90,49 +101,60 @@ namespace Shell_WebP_Converter.CLI
                 }
                 string[] supportedExtensions = GetAllowedExtensionsFromRegistry();
                 List<string> filesToConvert = GetFilesRecursively(options.Input, supportedExtensions);
-
-                Parallel.ForEach(filesToConvert, file =>
+                progressCounter.tasksToBeDone = filesToConvert.Count;
+                progressCounter.tasksCompleted = 0;
+                object locker = 0;
+                Task t = Task.Run(() =>
                 {
-                    string relativePath = Path.GetRelativePath(options.Input, file);
-                    string fileName = Path.GetFileNameWithoutExtension(file) + options.Postfix;
-                    string outputDir = Path.Combine(options.Output, Path.GetDirectoryName(relativePath) ?? "");
-                    string outputFile = Path.Combine(outputDir, fileName + ".webp");
-                    if (!Directory.Exists(outputDir))
+                    Parallel.ForEach(filesToConvert, file =>
                     {
-                        Directory.CreateDirectory(outputDir);
-                    }
-                    try
-                    {
-                        if (options.Compression == 255)
+                        string relativePath = Path.GetRelativePath(options.Input, file);
+                        string fileName = Path.GetFileNameWithoutExtension(file) + options.Postfix;
+                        string outputDir = Path.Combine(options.Output, Path.GetDirectoryName(relativePath) ?? "");
+                        string outputFile = Path.Combine(outputDir, fileName + ".webp");
+                        if (!Directory.Exists(outputDir))
                         {
-                            using (var ms = CompressToThreshold(options.Quality, file, options.useDownscaling))
-                            using (var fs = File.Create(outputFile))
+                            Directory.CreateDirectory(outputDir);
+                        }
+                        try
+                        {
+                            if (options.Compression == 255)
                             {
-                                ms.CopyTo(fs);
-                                fs.Close();
+                                using (var ms = CompressToThreshold(options.Quality, file, options.useDownscaling))
+                                using (var fs = File.Create(outputFile))
+                                {
+                                    ms.CopyTo(fs);
+                                    fs.Close();
+                                }
+                            }
+                            else
+                            {
+                                using (var ms = ConvertSingleFile(file, options.Quality, options.Compression))
+                                using (var fs = File.Create(outputFile))
+                                {
+                                    ms.CopyTo(fs);
+                                    fs.Close();
+                                }
+                            }
+                            if (options.DeleteOriginal == true && file != outputFile)
+                            {
+                                File.Delete(file);
+                            }
+                            GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
+                            lock (locker)
+                            {
+                                progressCounter.tasksCompleted++;
                             }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            using (var ms = ConvertSingleFile(file, options.Quality, options.Compression))
-                            using (var fs = File.Create(outputFile))
-                            {
-                                ms.CopyTo(fs);
-                                fs.Close();
-                            }
+                            App.Log(file + " | " + ex.Message + "\n");
+                            throw new Exception();
                         }
-                        if (options.DeleteOriginal == true && file != outputFile)
-                        {
-                            File.Delete(file);
-                        }
-                        GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
-                    }
-                    catch (Exception ex)
-                    {
-                        App.Log(file + " | " + ex.Message + "\n");
-                        throw new Exception();
-                    }
                     });
+                });
+                AttachTrayProgressIcon();
+                t.Wait();
             }
             else
             {
@@ -333,7 +355,7 @@ namespace Shell_WebP_Converter.CLI
 
         public CubicSpline GetSizePredictor(MagickImage image)
         {
-            double[] quality = { 15, 45, 80, 93, 99};
+            double[] quality = { 15, 45, 80, 93, 99 };
             double[] size = new double[quality.Length];
 
             Parallel.For(0, quality.Length, i =>
@@ -350,6 +372,42 @@ namespace Shell_WebP_Converter.CLI
             });
             GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
             return CubicSpline.InterpolatePchipSorted(quality, size);
+        }
+
+        void AttachTrayProgressIcon()
+        {
+            tbi = new TaskbarIcon();
+            tbi.Icon = Shell_WebP_Converter.Resources.Resources.Icon;
+            tbi.ToolTipText = $"0/{progressCounter.tasksToBeDone}";
+            try
+            {               
+                while (progressCounter.tasksCompleted < progressCounter.tasksToBeDone)
+                {
+                    tbi.ToolTipText = $"{progressCounter.tasksCompleted}/{progressCounter.tasksToBeDone}, {progressCounter.progress}%";      
+                    Thread.Sleep(500);
+                }               
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                tbi.Dispose();
+            }
+        }
+
+        private struct ProgressCounter
+        {
+            public int tasksToBeDone;
+            public int tasksCompleted;
+            public float progress
+            {
+                get
+                {
+                    return MathF.Round((float)tasksCompleted / (float)tasksToBeDone * 100, 1);
+                }
+            }
         }
     }
 }
