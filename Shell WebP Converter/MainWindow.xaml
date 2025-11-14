@@ -24,7 +24,7 @@
                     <Label Content="{x:Static properties:Resources.Presets}" Margin="0,-2,0,-3" ToolTip="{x:Static properties:Resources.PresetsTooltip}"></Label>
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Disabled">
-                        <TextBox x:Name="PresetsTextBox" ToolTip="{x:Static properties:Resources.PresetsTooltip}" Margin="2,0,2,0" Width="388" Text="100; 99; 90; 75; 60; 50; 25, -1" MaxLength="2048" TextWrapping="NoWrap"  AcceptsReturn="False" PreviewTextInput="PresetsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
+                        <TextBox x:Name="PresetsTextBox" ToolTip="{x:Static properties:Resources.PresetsTooltip}" Margin="2,0,2,0" Width="388" Text="100; 99; 90; 75; 60; 50; 25; -1" MaxLength="2048" TextWrapping="NoWrap"  AcceptsReturn="False" PreviewTextInput="PresetsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
                     </ScrollViewer>
                     <Label Content="{x:Static properties:Resources.FileExtensions}" Margin="0,0,0,-3"></Label>
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled"
