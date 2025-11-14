@@ -45,7 +45,7 @@ namespace Shell_WebP_Converter.CLI
     }
     internal class CLI_Mode
     {
-        ProgressCounter progressCounter;
+        ProgressCounter progressCounter = new ProgressCounter();
         TaskbarIcon tbi;
         Options options;
         public CLI_Mode(Options options)
@@ -155,6 +155,8 @@ namespace Shell_WebP_Converter.CLI
                 });
                 AttachTrayProgressIcon();
                 t.Wait();
+                tbi.ShowBalloonTip("Shell WebP converter", String.Format(Shell_WebP_Converter.Resources.Resources.ObjectProcessingCompleted, Path.GetFileName(options.Input)), BalloonIcon.Info);
+                tbi.Dispose();
             }
             else
             {
@@ -393,7 +395,7 @@ namespace Shell_WebP_Converter.CLI
             }
             finally
             {
-                tbi.Dispose();
+
             }
         }
 

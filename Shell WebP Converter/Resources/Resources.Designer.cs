@@ -396,6 +396,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Processing of &quot;{0}&quot; is completed.
+        /// </summary>
+        public static string ObjectProcessingCompleted {
+            get {
+                return ResourceManager.GetString("ObjectProcessingCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {
