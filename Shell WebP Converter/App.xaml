@@ -6,8 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/TempDictionary.xaml"></ResourceDictionary>
-                <ResourceDictionary x:Name="CurrentTheme" Source="/Resources/DarkTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/XAML_Themes/TempDictionary.xaml"></ResourceDictionary>
+                <ResourceDictionary x:Name="CurrentTheme" Source="/Resources/XAML_Themes/DarkTheme.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
