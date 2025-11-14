@@ -70,7 +70,6 @@ namespace Shell_WebP_Converter.CLI
                         using (var fs = File.Create(options.Output))
                         {
                             ms.CopyTo(fs);
-                            fs.Close();
                         }
                     }
                     else
@@ -79,7 +78,6 @@ namespace Shell_WebP_Converter.CLI
                         using (var fs = File.Create(options.Output))
                         {
                             ms.CopyTo(fs);
-                            fs.Close();
                         }
                     }
                     if (options.DeleteOriginal == true && options.Input != options.Output)
@@ -90,7 +88,7 @@ namespace Shell_WebP_Converter.CLI
                 catch (Exception ex)
                 {
                     App.Log(options.Input + " | " + ex.Message);
-                    throw new Exception();
+                    throw;
                 }
             }
             else if (Directory.Exists(options.Input)) //input is folder
@@ -103,10 +101,10 @@ namespace Shell_WebP_Converter.CLI
                 List<string> filesToConvert = GetFilesRecursively(options.Input, supportedExtensions);
                 progressCounter.tasksToBeDone = filesToConvert.Count;
                 progressCounter.tasksCompleted = 0;
-                object locker = 0;
+                object locker = new object();
                 Task t = Task.Run(() =>
                 {
-                    Parallel.ForEach(filesToConvert, file =>
+                    Parallel.ForEach(filesToConvert, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, file =>
                     {
                         string relativePath = Path.GetRelativePath(options.Input, file);
                         string fileName = Path.GetFileNameWithoutExtension(file) + options.Postfix;
@@ -124,7 +122,6 @@ namespace Shell_WebP_Converter.CLI
                                 using (var fs = File.Create(outputFile))
                                 {
                                     ms.CopyTo(fs);
-                                    fs.Close();
                                 }
                             }
                             else
@@ -133,14 +130,12 @@ namespace Shell_WebP_Converter.CLI
                                 using (var fs = File.Create(outputFile))
                                 {
                                     ms.CopyTo(fs);
-                                    fs.Close();
                                 }
                             }
                             if (options.DeleteOriginal == true && file != outputFile)
                             {
                                 File.Delete(file);
                             }
-                            GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
                             lock (locker)
                             {
                                 progressCounter.tasksCompleted++;
@@ -149,7 +144,7 @@ namespace Shell_WebP_Converter.CLI
                         catch (Exception ex)
                         {
                             App.Log(file + " | " + ex.Message + "\n");
-                            throw new Exception();
+                            throw;
                         }
                     });
                 });
@@ -234,105 +229,137 @@ namespace Shell_WebP_Converter.CLI
                     image.Quality = 100;
                     image.Settings.SetDefine("webp:method", "6");
                     var resultMs = new MemoryStream();
-                    image.Write(resultMs);
-                    if (resultMs.Length < threshold)
+                    try
                     {
-                        resultMs.Position = 0;
-                        return resultMs;
+                        image.Write(resultMs);
+                        if (resultMs.Length < threshold)
+                        {
+                            resultMs.Position = 0;
+                            return resultMs;
+                        }
                     }
-                    resultMs.Dispose();
+                    finally
+                    {
+                        if (resultMs.Length >= threshold)
+                        {
+                            resultMs.Dispose();
+                        }
+                    }
                     image.Settings.RemoveDefine("webp:lossless");
                     image.Settings.SetDefine("webp:method", compression.ToString());
                 }
                 MagickImage originalImage = null;
-                if (useDownscaling)
+                try
                 {
-                    if (originalImage != null) originalImage.Dispose();
-                    originalImage = new MagickImage(image);
-                }
-                while (resizesCount <= resizesThreshold)
-                {
-                    int i;
-                    if (resizesCount == 0)
-                    {
-                        i = 99;
-                    }
-                    else
-                    {
-                        i = 25;
-                    }
-                    for (; i >= 15; i--)
-                    {
-                        if (spline.Interpolate(i) > threshold)
-                        {
-                            continue;
-                        }
-                        image.Quality = (uint)(i);
-                        using (var ms = new MemoryStream())
-                        {
-                            try
-                            {
-                                image.Write(ms);
-                            }
-                            catch (Exception ex)
-                            {
-                                if (ex.GetType() == typeof(MagickCorruptImageErrorException))
-                                {
-                                    compression++;
-                                    image.Settings.SetDefine("webp:method", compression.ToString());
-                                    image.Write(ms);
-                                }
-                            }
-                            if (ms.Length <= threshold || i == 15)
-                            {
-                                image.Settings.SetDefine("webp:method", "5");
-                                var resultMs = new MemoryStream();
-                                image.Write(resultMs);
-                                if (resultMs.Length <= threshold)
-                                {
-                                    MemoryStream previous = new MemoryStream();
-                                    resultMs.Position = 0;
-                                    resultMs.CopyTo(previous);
-                                    previous.Position = 0;
-
-                                    for (int j = i + 1; j <= 99; j++)
-                                    {
-                                        resultMs.SetLength(0);
-                                        image.Quality = (uint)(j);
-                                        image.Write(resultMs);
-                                        if (resultMs.Length >= threshold)
-                                        {
-                                            resultMs.Dispose();
-                                            return previous;
-                                        }
-                                        previous.SetLength(0);
-                                        resultMs.Position = 0;
-                                        resultMs.CopyTo(previous);
-                                        previous.Position = 0;
-                                    }
-                                    resultMs.Dispose();
-                                    previous.Position = 0;
-                                    return previous;
-                                }
-                                resultMs.Dispose();
-                            }
-                        }
-                    }
                     if (useDownscaling)
                     {
-                        image.Resize(originalImage.Width, originalImage.Height);
-                        image.CopyPixels(originalImage);
-                        image.InterpolativeResize(new Percentage(Math.Pow(0.9, resizesCount + 1) * 100), PixelInterpolateMethod.Spline);
-                        image.Settings.SetDefine("webp:method", compression.ToString());
-                        spline = GetSizePredictor(image);
-                        resizesCount++;
+                        originalImage = new MagickImage(image);
                     }
-                    else
+                    while (resizesCount <= resizesThreshold)
                     {
-                        break;
+                        int i;
+                        if (resizesCount == 0)
+                        {
+                            i = 99;
+                        }
+                        else
+                        {
+                            i = 25;
+                        }
+                        for (; i >= 15; i--)
+                        {
+                            if (spline.Interpolate(i) > threshold)
+                            {
+                                continue;
+                            }
+                            image.Quality = (uint)(i);
+                            using (var ms = new MemoryStream())
+                            {
+                                try
+                                {
+                                    image.Write(ms);
+                                }
+                                catch (Exception ex)
+                                {
+                                    if (ex.GetType() == typeof(MagickCorruptImageErrorException))
+                                    {
+                                        compression++;
+                                        image.Settings.SetDefine("webp:method", compression.ToString());
+                                        image.Write(ms);
+                                    }
+                                }
+                                if (ms.Length <= threshold || i == 15)
+                                {
+                                    image.Settings.SetDefine("webp:method", "5");
+                                    var resultMs = new MemoryStream();
+                                    try
+                                    {
+                                        image.Write(resultMs);
+                                        if (resultMs.Length <= threshold)
+                                        {
+                                            MemoryStream previous = new MemoryStream();
+                                            try
+                                            {
+                                                resultMs.Position = 0;
+                                                resultMs.CopyTo(previous);
+                                                previous.Position = 0;
+
+                                                for (int j = i + 1; j <= 99; j++)
+                                                {
+                                                    resultMs.SetLength(0);
+                                                    image.Quality = (uint)(j);
+                                                    image.Write(resultMs);
+                                                    if (resultMs.Length >= threshold)
+                                                    {
+                                                        resultMs.Dispose();
+                                                        previous.Position = 0;
+                                                        return previous;
+                                                    }
+                                                    previous.SetLength(0);
+                                                    resultMs.Position = 0;
+                                                    resultMs.CopyTo(previous);
+                                                    previous.Position = 0;
+                                                }
+                                                resultMs.Dispose();
+                                                previous.Position = 0;
+                                                return previous;
+                                            }
+                                            catch
+                                            {
+                                                previous.Dispose();
+                                                throw;
+                                            }
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        if (resultMs.Length > threshold)
+                                        {
+                                            resultMs.Dispose();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (useDownscaling)
+                        {
+                            image.Resize(originalImage.Width, originalImage.Height);
+                            image.CopyPixels(originalImage);
+                            image.InterpolativeResize(new Percentage(Math.Pow(0.9, resizesCount + 1) * 100), PixelInterpolateMethod.Spline);
+                            image.Settings.SetDefine("webp:method", compression.ToString());
+                            spline = GetSizePredictor(image);
+                            resizesCount++;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
-                if (originalImage != null) originalImage.Dispose();
+                finally
+                {
+                    if (originalImage != null) originalImage.Dispose();
+                }
                 throw new Exception("Failed to compress image to designated size");
             }
         }
