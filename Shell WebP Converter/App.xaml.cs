@@ -41,6 +41,7 @@ namespace Shell_WebP_Converter
                 Semaphore folderSemaphore = new Semaphore(initialCount: 1, maximumCount: 1, name: @"Local\WebPConverterFolderSemaphore");
                 Semaphore customSettingsSemaphore = new Semaphore(initialCount: 1, maximumCount: 1, name: @"Local\WebPConverterCustomSettingsSemaphore");
                 Semaphore errorMessageBoxSemaphore = new Semaphore(initialCount: 1, maximumCount: 1, name: @"Local\WebPConverterErrorMessageBoxSemaphore");
+                Semaphore waitCurrentTaskMessageSemaphore = new Semaphore(initialCount: 1, maximumCount: 1, name: @"Local\WebPConverterWaitCurrentTaskMessageSemaphore");
                 try
                 {
                     if (!masterSemaphore.WaitOne(8 * 60 * 60 * 1000))
@@ -64,7 +65,15 @@ namespace Shell_WebP_Converter
                     {
                         if (!customSettingsSemaphore.WaitOne(0))
                         {
-                            MessageBox.Show(Shell_WebP_Converter.Resources.Resources.NextTaskStartMustWaitCurrent);
+                            if (!waitCurrentTaskMessageSemaphore.WaitOne(0))
+                            {
+                                Environment.Exit(0);
+                            }
+                            else
+                            {
+                                MessageBox.Show(Shell_WebP_Converter.Resources.Resources.NextTaskStartMustWaitCurrent);
+                                waitCurrentTaskMessageSemaphore.Release();
+                            }
                             masterSemaphore.Release();
                             Environment.Exit(0);
                         }
