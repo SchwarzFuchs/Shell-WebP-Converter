@@ -20,7 +20,7 @@ namespace Shell_WebP_Converter
         [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
-        internal static void AddWebPConversionContextMenu(List<string> extensions, List<Preset> presets, string converterPath)
+        internal static void AddWebPConversionContextMenu(List<string> extensions, List<Preset> presets, string converterPath, bool notifyWhenFolderProcessingEnds)
         {
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\ShellWebPConverter\ContextMenu", false); } catch { }
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\WebPConverter", false); } catch { }
@@ -51,14 +51,13 @@ namespace Shell_WebP_Converter
                             {
                                 qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.CustomizableQuality}");
                             }
-                        }
-                            qualityKey.SetValue("Icon", iconPath);
+                        }                            
                         if (preset.PresetMode == PresetMode.ToNQuality || preset.PresetMode == PresetMode.ToNSize)
                         {
                             
                             using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
                             {
-                                string command = $"\"{converterPath}\" -i \"%1\" -q {preset.Quality} -c {preset.Compression} {((preset.DeleteOriginal == true) ? "-d" : "")} -p {preset.Postfix}";
+                                string command = $"\"{converterPath}\" -i \"%1\" -q {preset.Quality} -c {preset.Compression} {((preset.DeleteOriginal == true) ? "-d" : "")} -p {preset.Postfix}{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}";
                                 commandKey.SetValue("", command);
                             }
                         }
@@ -66,10 +65,11 @@ namespace Shell_WebP_Converter
                         {
                             using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
                             {
-                                string command = $"\"{converterPath}\" -i \"%1\" -q 0 -c 0 -p {preset.Postfix} --custom ";
+                                string command = $"\"{converterPath}\" -i \"%1\" -q 0 -c 0 -p {preset.Postfix} --custom{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}";
                                 commandKey.SetValue("", command);
                             }
                         }
+                        qualityKey.SetValue("Icon", iconPath);
                     }
                     i++;
                 }

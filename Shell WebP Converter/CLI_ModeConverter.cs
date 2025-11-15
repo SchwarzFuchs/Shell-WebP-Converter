@@ -41,6 +41,8 @@ namespace Shell_WebP_Converter.CLI
         [Option('p', "Postfix", Required = false, HelpText = "String added after the original file name")]
         public string Postfix { get; set; } = "";
 
+        [Option('n', "Notify", Required = false, HelpText = "Notify when folder processing is complete")]
+        public bool NotifyWhenFolderProcessingEnds { get; set; }
 
     }
     internal class CLI_Mode
@@ -150,7 +152,10 @@ namespace Shell_WebP_Converter.CLI
                 });
                 AttachTrayProgressIcon();
                 t.Wait();
-                tbi.ShowBalloonTip("Shell WebP converter", String.Format(Shell_WebP_Converter.Resources.Resources.ObjectProcessingCompleted, Path.GetFileName(options.Input)), BalloonIcon.Info);
+                if (options.NotifyWhenFolderProcessingEnds == true)
+                {
+                    tbi.ShowBalloonTip("Shell WebP converter", String.Format(Shell_WebP_Converter.Resources.Resources.ObjectProcessingCompleted, Path.GetFileName(options.Input)), BalloonIcon.Info);
+                }
                 tbi.Dispose();
             }
             else

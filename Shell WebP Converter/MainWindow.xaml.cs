@@ -26,7 +26,8 @@ namespace Shell_WebP_Converter
         private static readonly Regex presetsRegex = new Regex(@"^[0-9\s;-]*$");
         private static readonly Regex extensionsRegex = new Regex(@"^[a-zA-Z0-9\s;]*$");
         private string _extensions = "jpeg; jpg; png; webp;";
-        private bool _addConversionEntryForFolders;
+        private bool _addConversionEntryForFolders = true;
+        private bool _notifyWhenFolderProcessingEnds = true;
         public string Extensions
         {
             get { return _extensions; }
@@ -46,6 +47,19 @@ namespace Shell_WebP_Converter
                 if (_addConversionEntryForFolders != value)
                 {
                     _addConversionEntryForFolders = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool notifyWhenFolderProcessingEnds
+        {
+            get { return _notifyWhenFolderProcessingEnds; }
+            set
+            {
+                if (_notifyWhenFolderProcessingEnds != value)
+                {
+                    _notifyWhenFolderProcessingEnds = value;
                     OnPropertyChanged();
                 }
             }
@@ -85,7 +99,8 @@ namespace Shell_WebP_Converter
                         Extensions = value;
                     }
                     DeleteOriginalFileCheckbox.IsChecked = bool.Parse((key.GetValue("deleteOriginal") ?? "false").ToString() ?? "false");
-                    addConversionEntryForFolders = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "false").ToString() ?? "false");
+                    notifyWhenFolderProcessingEnds = bool.Parse((key.GetValue("notifyWhenFolderProcessingEnds") ?? "true").ToString() ?? "true");
+                    addConversionEntryForFolders = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "true").ToString() ?? "true");
                     CompressionValueComboBox.SelectedIndex = byte.Parse((key.GetValue("compression") ?? "4").ToString() ?? "4");
                     if ((key.GetValue("lastMode") ?? "basic").ToString() == "advanced")
                     {
@@ -141,6 +156,7 @@ namespace Shell_WebP_Converter
                     key.SetValue("extensions", Extensions);
                     key.SetValue("compression", CompressionValueComboBox.SelectedIndex);
                     key.SetValue("addMenuEntryForFolders", addConversionEntryForFolders);
+                    key.SetValue("notifyWhenFolderProcessingEnds", notifyWhenFolderProcessingEnds);
                     List<Preset> presets;
                     if (ModeTabToggleSwitch.Position == ToggleSwitch.TogglePosition.Left)
                     {
@@ -150,7 +166,7 @@ namespace Shell_WebP_Converter
                         presets = ParsePresetsBasic(PresetsTextBox.Text);
                         if (presets != null)
                         {
-                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath);
+                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds);
                         }
                         else return;
                     }
@@ -162,7 +178,7 @@ namespace Shell_WebP_Converter
                             key.SetValue("lastMode", "advanced");
                             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter"));
                             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"), JsonConvert.SerializeObject(presets));
-                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath);
+                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds);
                         }
                         else return;
                     }

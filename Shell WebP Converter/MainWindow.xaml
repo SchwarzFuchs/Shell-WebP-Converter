@@ -9,11 +9,19 @@
         mc:Ignorable="d"
         Title="{x:Static properties:Resources.MainWindowTitle}" Height="Auto" Width="400" MinWidth="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" WindowState="Normal" Style="{DynamicResource WindowStyle}" Closing="Window_Closing">
     <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <localCustom:ToggleSwitch x:Name="ModeTabToggleSwitch" Height="15" Width="26" IsThreePosition="False" LeftColor="#FF3C3C3C" CornerRadius="8" RightColor="#FF009B1A" MouseLeftButtonDown="ToggleSwitch_MouseLeftButtonDown" HorizontalAlignment="Left" Margin="5,4,0,0"></localCustom:ToggleSwitch>
-            <Label Content="{x:Static properties:Resources.AdvancedMode}" Margin="0,0,0,-3"></Label>
-        </StackPanel>
-        <TabControl x:Name="MainTabControl" Margin="4,4,4,0" SelectedIndex="0" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <localCustom:ToggleSwitch x:Name="ModeTabToggleSwitch" Height="15" Width="26" IsThreePosition="False" LeftColor="#FF3C3C3C" CornerRadius="8" RightColor="#FF009B1A" MouseLeftButtonDown="ToggleSwitch_MouseLeftButtonDown" HorizontalAlignment="Left" Margin="5,4,0,0"></localCustom:ToggleSwitch>
+                <Label Content="{x:Static properties:Resources.AdvancedMode}" Margin="0,0,0,-3"></Label>
+            </StackPanel>
+            <!--<Button x:Name="SettingsButton" Content="Настройки" Grid.Column="1" HorizontalAlignment="Right" Height="20" Margin="0,4,6,0" Padding="4,1,4,1"/>!-->
+
+        </Grid>
+        <TabControl x:Name="MainTabControl" Margin="4,0,4,0" SelectedIndex="0" >
             <TabControl.Template>
                 <ControlTemplate TargetType="TabControl">
                     <ContentPresenter ContentSource="SelectedContent" />
@@ -32,6 +40,7 @@
                         <TextBox x:Name="ExtensionsTextBox" Margin="2,0,2,0" Text="{Binding Extensions, UpdateSourceTrigger=PropertyChanged}" MaxLength="2048" TextWrapping="NoWrap" PreviewTextInput="ExtensionsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
                     </ScrollViewer>
                     <CheckBox x:Name="AddConversionEntryForFoldersCheckbox" IsChecked="{Binding addConversionEntryForFolders, Mode=TwoWay}" Content="{x:Static properties:Resources.AddConversionEntryForFolders}" Margin="1,6,0,0"></CheckBox>
+                    <CheckBox x:Name="NotifyWhenFolderProcessingEndsCheckBox" IsChecked="{Binding notifyWhenFolderProcessingEnds, Mode=TwoWay}" Content="{x:Static properties:Resources.NotifyWhenFolderProcessingEnds}" Margin="1,4,0,0"></CheckBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,3,0,0">
                         <Label Content="{x:Static properties:Resources.CompressionLevel}" Margin="0,0,0,-3"></Label>
                         <ComboBox x:Name="CompressionValueComboBox" Margin="0,2,2,0" HorizontalAlignment="Left" Width="35" SelectedIndex="4" SelectionChanged="ComboBox_SelectionChanged">
@@ -54,7 +63,8 @@
                       VerticalScrollBarVisibility="Disabled">
                         <TextBox x:Name="ExtensionsTextBoxAdvanced" Margin="2,0,2,0" Text="{Binding Extensions, UpdateSourceTrigger=PropertyChanged}" MaxLength="2048" TextWrapping="NoWrap" PreviewTextInput="ExtensionsTextBox_PreviewTextInput" PreviewKeyDown="TextBox_PreviewKeyDown"></TextBox>
                     </ScrollViewer>
-                    <CheckBox x:Name="AddConversionEntryForFoldersAdvancedTabCheckbox" IsChecked="{Binding addConversionEntryForFolders, Mode=TwoWay}" Content="{x:Static properties:Resources.AddConversionEntryForFolders}" Margin="1,6,0,0"></CheckBox>
+                    <CheckBox x:Name="AddConversionEntryForFoldersAdvTabCheckbox" IsChecked="{Binding addConversionEntryForFolders, Mode=TwoWay}" Content="{x:Static properties:Resources.AddConversionEntryForFolders}" Margin="1,6,0,0"></CheckBox>
+                    <CheckBox x:Name="NotifyWhenFolderProcessingEndsAdvTabCheckBox" IsChecked="{Binding notifyWhenFolderProcessingEnds, Mode=TwoWay}" Content="{x:Static properties:Resources.NotifyWhenFolderProcessingEnds}" Margin="1,4,0,0"></CheckBox>
                     <Label Content="{x:Static properties:Resources.SetOfPresets}" Margin="0,0,0,-3"></Label>
                     <localCustom:AdvancedPresetsTable x:Name="AdvancedPresetsTable"></localCustom:AdvancedPresetsTable>
                 </StackPanel>

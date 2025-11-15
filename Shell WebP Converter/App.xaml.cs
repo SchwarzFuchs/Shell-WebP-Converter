@@ -56,7 +56,10 @@ namespace Shell_WebP_Converter
                     {
                         AttachConsole(ATTACH_PARENT_PROCESS);
                     }
-                    foreach (var arg in e.Args) { Console.WriteLine(arg); }
+                    if (debug)
+                    {
+                        foreach (var arg in e.Args) { Console.WriteLine(arg); }
+                    }
                     ParserResult<Options> parserResult = ParseArgs(e.Args);
                     parserResult.WithNotParsed(er => { DisplayErrors(er); Environment.Exit(0); });
                     string target = "";
