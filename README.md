@@ -4,7 +4,7 @@
 Shell WEBP Converter application designed to simplify the conversion of image files to the WebP format. The program integrates with the Windows context menu for quick access and supports custom conversion settings.
 
 ### Presets example: 
-<img width="939" height="720" alt="image" src="https://github.com/user-attachments/assets/8168b9d5-dd2c-4cc6-acb7-933067df33c2" />
+<img width="937" height="719" alt="image" src="https://github.com/user-attachments/assets/b34bc416-61c1-456c-bce3-fa9f2dee3e42" />
 
 ### Supports the following languages:
 English, Russian, Arabic, German, Spanish, French, Hindi, Hungarian, Italian, Japanese, Korean, Portuguese, Slovak, Turkish, Chinese.
