@@ -68,7 +68,6 @@ namespace Shell_WebP_Converter
         public MainWindow()
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; 
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture; 
             using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
             {
                 DataContext = this;
