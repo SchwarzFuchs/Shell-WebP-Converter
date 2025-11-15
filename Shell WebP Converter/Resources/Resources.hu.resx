@@ -287,4 +287,25 @@ Törlés ╳</value>
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>A "{0}" feldolgozása befejeződött</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>Értesítés a mappák feldolgozásának befejezésekor</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>Veszteségmentes</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>Minimális veszteség, nagy tömörítés</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>Minimális veszteség, közepes tömörítés</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>Magas minőség</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>Közepes minőség</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>Kevesebb mint 8 MiB</value>
+  </data>
 </root>

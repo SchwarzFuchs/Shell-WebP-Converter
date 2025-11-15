@@ -287,4 +287,25 @@
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>"{0}" 的处理已完成</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>文件夹处理完成时通知</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>无损</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>最小损耗，高压缩</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>最小损耗，中等压缩</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>高质量</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>中等质量</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>小于 8 MiB</value>
+  </data>
 </root>

@@ -401,6 +401,15 @@ namespace Shell_WebP_Converter.CustomElements
                 }
             }         
         }
-
+        internal static List<Preset> demonstrationPresetSet = new List<Preset>
+        {
+            new Preset {Name = Shell_WebP_Converter.Resources.Resources.LosslessCapital, Postfix = "_lossless", PresetMode = PresetMode.ToNQuality, Quality = 100, Compression = 6, DeleteOriginal = false},
+            new Preset {Name = Shell_WebP_Converter.Resources.Resources.MinLossHighCompression, Postfix = "_99_6", PresetMode = PresetMode.ToNQuality, Quality = 99, Compression = 6, DeleteOriginal = false},
+            new Preset {Name = Shell_WebP_Converter.Resources.Resources.MinLossMediumCompression, Postfix = "_99_4", PresetMode = PresetMode.ToNQuality, Quality = 99, Compression = 4, DeleteOriginal = false},
+            new Preset {Name = Shell_WebP_Converter.Resources.Resources.HighQuality, Postfix = "_90", PresetMode = PresetMode.ToNQuality, Quality = 90, Compression = 4, DeleteOriginal = false},
+            new Preset {Name = Shell_WebP_Converter.Resources.Resources.MediumQuality, Postfix = "_60", PresetMode = PresetMode.ToNQuality, Quality = 60, Compression = 4, DeleteOriginal = false},
+            new Preset {Name = Shell_WebP_Converter.Resources.Resources.LessThan8MiB, Postfix = ".8MB", PresetMode = PresetMode.ToNSize, Quality = 8378122, Compression = 255, DeleteOriginal = false},
+            new Preset {Name = Shell_WebP_Converter.Resources.Resources.Customizable, Postfix = "", PresetMode = PresetMode.Custom, Quality = 0, Compression = 0, DeleteOriginal = false},
+        };
     }
 }

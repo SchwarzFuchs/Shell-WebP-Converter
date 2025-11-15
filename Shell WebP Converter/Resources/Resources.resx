@@ -287,4 +287,25 @@ Delete ╳</value>
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>Processing of "{0}" is completed</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>Notify when folder processing is complete</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>Lossless</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>Minimum loss, high compression</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>Minimum loss, medium compression</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>High quality</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>Medium quality</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>Less than 8 MiB</value>
+  </data>
 </root>

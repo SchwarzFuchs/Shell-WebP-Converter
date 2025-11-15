@@ -287,4 +287,25 @@ Odstrániť ╳</value>
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>Spracovanie "{0}" bolo dokončené</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>Upozorniť po dokončení spracovania priečinkov</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>Bez straty</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>Minimálne straty, vysoká kompresia</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>Minimálne straty, stredná kompresia</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>Vysoká kvalita</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>Stredná kvalita</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>Menej ako 8 MiB</value>
+  </data>
 </root>

@@ -287,4 +287,25 @@
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>"{0}" की प्रोसेसिंग पूरी हो गई है</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>फ़ोल्डर प्रसंस्करण पूरा होने पर सूचित करें</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>बिना हानि के</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>न्यूनतम हानि, उच्च संपीड़न</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>न्यूनतम हानि, मध्यम संपीड़न</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>उच्च गुणवत्ता</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>मध्यम गुणवत्ता</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>8 MiB से कम</value>
+  </data>
 </root>

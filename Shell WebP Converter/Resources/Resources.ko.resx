@@ -287,4 +287,25 @@
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>"{0}" 처리 완료되었습니다</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>폴더 처리가 완료되면 알림</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>무손실</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>최소 손실, 고압축</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>최소 손실, 중간 압축</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>고품질</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>중간 품질</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>8 MiB 미만</value>
+  </data>
 </root>

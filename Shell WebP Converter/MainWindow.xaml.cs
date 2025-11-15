@@ -102,21 +102,36 @@ namespace Shell_WebP_Converter
                     notifyWhenFolderProcessingEnds = bool.Parse((key.GetValue("notifyWhenFolderProcessingEnds") ?? "true").ToString() ?? "true");
                     addConversionEntryForFolders = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "true").ToString() ?? "true");
                     CompressionValueComboBox.SelectedIndex = byte.Parse((key.GetValue("compression") ?? "4").ToString() ?? "4");
-                    if ((key.GetValue("lastMode") ?? "basic").ToString() == "advanced")
+                    switch (key.GetValue("lastMode") ?? "advanced".ToString())
                     {
-                        ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Right;
-                        MainTabControl.SelectedIndex = 1;
-                    }
-                    else
-                    {
-                        ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Left;
-                        MainTabControl.SelectedIndex = 0;
+                        case "basic":
+                            {
+                                ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Left;
+                                MainTabControl.SelectedIndex = 0;
+                                break;
+                            };
+                        case "advanced":
+                            {
+                                ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Right;
+                                MainTabControl.SelectedIndex = 1;
+                                break;
+                            }
+                        default:
+                            {
+                                ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Right;
+                                MainTabControl.SelectedIndex = 1;
+                                break;
+                            }
                     }
                 }
             }
             if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json")))
             {
                 AdvancedPresetsTable.FillPresetsGridFromList((List<Preset>)(JsonConvert.DeserializeObject<List<Preset>>(File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"))) ?? new List<Preset>()));
+            }
+            else
+            {
+                AdvancedPresetsTable.FillPresetsGridFromList(AdvancedPresetsTable.demonstrationPresetSet);
             }
         }
 
@@ -177,7 +192,7 @@ namespace Shell_WebP_Converter
                         {
                             key.SetValue("lastMode", "advanced");
                             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter"));
-                            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"), JsonConvert.SerializeObject(presets));
+                            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"), JsonConvert.SerializeObject(presets, Formatting.Indented));
                             RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds);
                         }
                         else return;

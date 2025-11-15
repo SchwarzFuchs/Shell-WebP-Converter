@@ -13,8 +13,8 @@ namespace Shell_WebP_Converter.Models
         public PresetMode PresetMode { get; set; }
         public int Quality { get; set; }
         public byte Compression { get; set; }
-        public bool DeleteOriginal { get; set; }
-        public bool UseDownscaling { get; set; }
+        public bool DeleteOriginal { get; set; } = false;
+        public bool UseDownscaling { get; set; } = false;
 
     }
     internal enum PresetMode

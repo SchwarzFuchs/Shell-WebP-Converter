@@ -287,4 +287,25 @@
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>「{0}」の処理が完了しました</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>フォルダー処理が完了したら通知する</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>ロスレス</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>最小限の損失、高圧縮</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>最小限の損失、中程度の圧縮</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>高品質</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>中品質</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>8 MiB 未満</value>
+  </data>
 </root>

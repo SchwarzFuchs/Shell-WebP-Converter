@@ -287,4 +287,25 @@ Sil ╳</value>
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>"{0}" işlemi tamamlandı</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>Klasör işleme tamamlandığında bildir</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>Kayıpsız</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>Minimum kayıp, yüksek sıkıştırma</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>Minimum kayıp, orta sıkıştırma</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>Yüksek kalite</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>Orta kalite</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>8 MiB'den az</value>
+  </data>
 </root>

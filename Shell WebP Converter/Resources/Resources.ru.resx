@@ -287,4 +287,25 @@
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>Обработка "{0}" завершена</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>Уведомлять об окончании обработки папок</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>Без потерь</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>Минимум потерь, высокое сжатие</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>Минимум потерь, среднее сжатие</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>Высокое качество</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>Среднее качество</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>Меньше 8 МиБ</value>
+  </data>
 </root>

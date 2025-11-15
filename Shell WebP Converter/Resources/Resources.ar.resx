@@ -287,4 +287,25 @@
   <data name="ObjectProcessingCompleted" xml:space="preserve">
     <value>تم إنهاء معالجة "{0}</value>
   </data>
+  <data name="NotifyWhenFolderProcessingEnds" xml:space="preserve">
+    <value>إعلام عند اكتمال معالجة المجلدات</value>
+  </data>
+  <data name="LosslessCapital" xml:space="preserve">
+    <value>بدون فقدان</value>
+  </data>
+  <data name="MinLossHighCompression" xml:space="preserve">
+    <value>الحد الأدنى من الفقد، ضغط عالي</value>
+  </data>
+  <data name="MinLossMediumCompression" xml:space="preserve">
+    <value>الحد الأدنى من الفقد، ضغط متوسط</value>
+  </data>
+  <data name="HighQuality" xml:space="preserve">
+    <value>جودة عالية</value>
+  </data>
+  <data name="MediumQuality" xml:space="preserve">
+    <value>جودة متوسطة</value>
+  </data>
+  <data name="LessThan8MiB" xml:space="preserve">
+    <value>أقل من 8 ميغابايت</value>
+  </data>
 </root>

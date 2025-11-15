@@ -268,6 +268,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to High quality.
+        /// </summary>
+        public static string HighQuality {
+            get {
+                return ResourceManager.GetString("HighQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon Icon {
@@ -296,6 +305,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Less than 8 MiB.
+        /// </summary>
+        public static string LessThan8MiB {
+            get {
+                return ResourceManager.GetString("LessThan8MiB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List.
         /// </summary>
         public static string List {
@@ -310,6 +328,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string Lossless {
             get {
                 return ResourceManager.GetString("Lossless", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lossless.
+        /// </summary>
+        public static string LosslessCapital {
+            get {
+                return ResourceManager.GetString("LosslessCapital", resourceCulture);
             }
         }
         
@@ -341,6 +368,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medium quality.
+        /// </summary>
+        public static string MediumQuality {
+            get {
+                return ResourceManager.GetString("MediumQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Context menu has been cleared.
         /// </summary>
         public static string MenuClearSuccess {
@@ -364,6 +400,24 @@ namespace Shell_WebP_Converter.Resources {
         public static string MiB {
             get {
                 return ResourceManager.GetString("MiB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum loss, high compression.
+        /// </summary>
+        public static string MinLossHighCompression {
+            get {
+                return ResourceManager.GetString("MinLossHighCompression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum loss, medium compression.
+        /// </summary>
+        public static string MinLossMediumCompression {
+            get {
+                return ResourceManager.GetString("MinLossMediumCompression", resourceCulture);
             }
         }
         
@@ -392,6 +446,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string NextTaskStartMustWaitCurrent {
             get {
                 return ResourceManager.GetString("NextTaskStartMustWaitCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notify when folder processing is complete.
+        /// </summary>
+        public static string NotifyWhenFolderProcessingEnds {
+            get {
+                return ResourceManager.GetString("NotifyWhenFolderProcessingEnds", resourceCulture);
             }
         }
         
