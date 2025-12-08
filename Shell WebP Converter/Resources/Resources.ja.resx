@@ -308,4 +308,7 @@
   <data name="LessThan8MiB" xml:space="preserve">
     <value>8 MiB 未満</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>同じ名前のファイルを上書きする</value>
+  </data>
 </root>

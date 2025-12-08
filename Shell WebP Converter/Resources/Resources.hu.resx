@@ -308,4 +308,7 @@ Törlés ╳</value>
   <data name="LessThan8MiB" xml:space="preserve">
     <value>Kevesebb mint 8 MiB</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>Azonos nevű fájlok felülírása</value>
+  </data>
 </root>

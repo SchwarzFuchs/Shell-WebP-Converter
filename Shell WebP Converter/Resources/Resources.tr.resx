@@ -308,4 +308,7 @@ Sil ╳</value>
   <data name="LessThan8MiB" xml:space="preserve">
     <value>8 MiB'den az</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>Aynı isimdeki dosyaları üzerine yaz</value>
+  </data>
 </root>

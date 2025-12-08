@@ -308,4 +308,7 @@ Eliminar ╳</value>
   <data name="LessThan8MiB" xml:space="preserve">
     <value>Menos de 8 MiB</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>Sobrescribir archivos con el mismo nombre</value>
+  </data>
 </root>

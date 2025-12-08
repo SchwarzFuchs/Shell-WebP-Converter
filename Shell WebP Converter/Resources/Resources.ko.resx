@@ -308,4 +308,7 @@
   <data name="LessThan8MiB" xml:space="preserve">
     <value>8 MiB 미만</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>동일한 이름의 파일 덮어쓰기</value>
+  </data>
 </root>

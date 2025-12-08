@@ -161,7 +161,7 @@ namespace Shell_WebP_Converter
                     options.Quality = (int)(float.Parse(CompressionSizeThresholdTextBox.Text) * (float)Math.Pow(1024, SizeMeasurmentUnitComboBox.SelectedIndex + 1));
                     if (options.Quality == 0) throw new Exception("Size can't be zero");
                     options.Compression = 255;
-                    options.useDownscaling = LowerTheResolutionWhenNecessaryCheckbox.IsChecked.GetValueOrDefault(true);
+                    options.UseDownscaling = LowerTheResolutionWhenNecessaryCheckbox.IsChecked.GetValueOrDefault(true);
                 }
                 options.DeleteOriginal = DeleteOriginalFileCheckbox.IsChecked.GetValueOrDefault(false);
                 options.Postfix = PostfixTextBox.Text.Trim();

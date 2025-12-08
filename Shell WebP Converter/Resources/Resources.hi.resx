@@ -308,4 +308,7 @@
   <data name="LessThan8MiB" xml:space="preserve">
     <value>8 MiB से कम</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>समान नाम वाली फ़ाइलों को अधिलेखित करें</value>
+  </data>
 </root>

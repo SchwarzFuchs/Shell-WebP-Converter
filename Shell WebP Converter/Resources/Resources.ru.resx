@@ -308,4 +308,7 @@
   <data name="LessThan8MiB" xml:space="preserve">
     <value>Меньше 8 МиБ</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>Перезаписывать файлы с одинаковыми именами</value>
+  </data>
 </root>

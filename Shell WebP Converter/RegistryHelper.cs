@@ -20,7 +20,7 @@ namespace Shell_WebP_Converter
         [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
-        internal static void AddWebPConversionContextMenu(List<string> extensions, List<Preset> presets, string converterPath, bool notifyWhenFolderProcessingEnds)
+        internal static void AddWebPConversionContextMenu(List<string> extensions, List<Preset> presets, string converterPath, bool notifyWhenFolderProcessingEnds, bool overwiteFiles)
         {
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\ShellWebPConverter\ContextMenu", false); } catch { }
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\WebPConverter", false); } catch { }
@@ -57,7 +57,9 @@ namespace Shell_WebP_Converter
                             
                             using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
                             {
-                                string command = $"\"{converterPath}\" -i \"%1\" -q {preset.Quality} -c {preset.Compression} {((preset.DeleteOriginal == true) ? "-d" : "")} -p {preset.Postfix}{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}";
+                                string command = $"\"{converterPath}\" -i \"%1\" -q {preset.Quality} -c {preset.Compression} {((preset.DeleteOriginal == true) ? "-d" : "")} -p {preset.Postfix}" +
+                                    $"{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}" +
+                                    $"{((overwiteFiles == true) ? " --overwrite" : "")}";
                                 commandKey.SetValue("", command);
                             }
                         }
@@ -65,7 +67,9 @@ namespace Shell_WebP_Converter
                         {
                             using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
                             {
-                                string command = $"\"{converterPath}\" -i \"%1\" -q 0 -c 0 -p {preset.Postfix} --custom{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}";
+                                string command = $"\"{converterPath}\" -i \"%1\" -q 0 -c 0 -p {preset.Postfix} --custom" +
+                                    $"{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}" +
+                                    $"{((overwiteFiles == true) ? " --overwrite" : "")}";
                                 commandKey.SetValue("", command);
                             }
                         }

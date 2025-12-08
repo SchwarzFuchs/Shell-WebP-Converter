@@ -36,13 +36,16 @@ namespace Shell_WebP_Converter.CLI
         public bool Custom { get; set; } = false;
 
         [Option("useDownscaling", Required = false, HelpText = "Use downscaling when it's not possible to achive designated size threshold in custom mode")]
-        public bool useDownscaling { get; set; } = false;
+        public bool UseDownscaling { get; set; } = false;
 
         [Option('p', "Postfix", Required = false, HelpText = "String added after the original file name")]
         public string Postfix { get; set; } = "";
 
         [Option('n', "Notify", Required = false, HelpText = "Notify when folder processing is complete")]
         public bool NotifyWhenFolderProcessingEnds { get; set; }
+
+        [Option("overwrite", Required = false, HelpText = "Overwrite files with the same names")]
+        public bool OverwriteFiles { get; set; }
 
     }
     internal class CLI_Mode
@@ -64,11 +67,17 @@ namespace Shell_WebP_Converter.CLI
                     string fileName = Path.GetFileNameWithoutExtension(options.Input) + options.Postfix;
                     options.Output = Path.Combine(Path.GetDirectoryName(options.Input) ?? "", fileName + ".webp");
                 }
+                
+                if (!options.OverwriteFiles)
+                {
+                    options.Output = GetUniqueFilePath(options.Output);
+                }
+                
                 try
                 {
                     if (options.Compression == 255)
                     {
-                        using (var ms = CompressToThreshold(options.Quality, options.Input, options.useDownscaling))
+                        using (var ms = CompressToThreshold(options.Quality, options.Input, options.UseDownscaling))
                         using (var fs = File.Create(options.Output))
                         {
                             ms.CopyTo(fs);
@@ -112,6 +121,12 @@ namespace Shell_WebP_Converter.CLI
                         string fileName = Path.GetFileNameWithoutExtension(file) + options.Postfix;
                         string outputDir = Path.Combine(options.Output, Path.GetDirectoryName(relativePath) ?? "");
                         string outputFile = Path.Combine(outputDir, fileName + ".webp");
+                        
+                        if (!options.OverwriteFiles)
+                        {
+                            outputFile = GetUniqueFilePath(outputFile);
+                        }
+                        
                         if (!Directory.Exists(outputDir))
                         {
                             Directory.CreateDirectory(outputDir);
@@ -120,7 +135,7 @@ namespace Shell_WebP_Converter.CLI
                         {
                             if (options.Compression == 255)
                             {
-                                using (var ms = CompressToThreshold(options.Quality, file, options.useDownscaling))
+                                using (var ms = CompressToThreshold(options.Quality, file, options.UseDownscaling))
                                 using (var fs = File.Create(outputFile))
                                 {
                                     ms.CopyTo(fs);
@@ -163,6 +178,30 @@ namespace Shell_WebP_Converter.CLI
                 throw new Exception("Input does not exist");
             }
         }
+        
+        string GetUniqueFilePath(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                return filePath;
+            }
+
+            string directory = Path.GetDirectoryName(filePath) ?? "";
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath);
+            string extension = Path.GetExtension(filePath);
+
+            int counter = 2;
+            string newFilePath;
+
+            do
+            {
+                newFilePath = Path.Combine(directory, $"{fileNameWithoutExtension} ({counter}){extension}");
+                counter++;
+            } while (File.Exists(newFilePath));
+
+            return newFilePath;
+        }
+
         List<string> GetFilesRecursively(string directory, string[] extensions)
         {
             return Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)

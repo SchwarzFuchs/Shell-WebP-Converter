@@ -28,6 +28,7 @@ namespace Shell_WebP_Converter
         private string _extensions = "jpeg; jpg; png; webp;";
         private bool _addConversionEntryForFolders = true;
         private bool _notifyWhenFolderProcessingEnds = true;
+        private bool _overwriteFiles = true;
         public string Extensions
         {
             get { return _extensions; }
@@ -60,6 +61,18 @@ namespace Shell_WebP_Converter
                 if (_notifyWhenFolderProcessingEnds != value)
                 {
                     _notifyWhenFolderProcessingEnds = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool overwriteFiles
+        {
+            get { return _overwriteFiles; }
+            set
+            {
+                if (_overwriteFiles != value)
+                {
+                    _overwriteFiles = value;
                     OnPropertyChanged();
                 }
             }
@@ -100,6 +113,7 @@ namespace Shell_WebP_Converter
                     }
                     DeleteOriginalFileCheckbox.IsChecked = bool.Parse((key.GetValue("deleteOriginal") ?? "false").ToString() ?? "false");
                     notifyWhenFolderProcessingEnds = bool.Parse((key.GetValue("notifyWhenFolderProcessingEnds") ?? "true").ToString() ?? "true");
+                    overwriteFiles = bool.Parse((key.GetValue("overwriteFiles") ?? "true").ToString() ?? "true");
                     addConversionEntryForFolders = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "true").ToString() ?? "true");
                     CompressionValueComboBox.SelectedIndex = byte.Parse((key.GetValue("compression") ?? "4").ToString() ?? "4");
                     switch (key.GetValue("lastMode") ?? "advanced".ToString())
@@ -169,19 +183,20 @@ namespace Shell_WebP_Converter
                 using (RegistryKey key = Registry.CurrentUser.CreateSubKey(App.regKeyPath))
                 {
                     key.SetValue("extensions", Extensions);
-                    key.SetValue("compression", CompressionValueComboBox.SelectedIndex);
                     key.SetValue("addMenuEntryForFolders", addConversionEntryForFolders);
                     key.SetValue("notifyWhenFolderProcessingEnds", notifyWhenFolderProcessingEnds);
+                    key.SetValue("overwriteFiles", overwriteFiles);
                     List<Preset> presets;
                     if (ModeTabToggleSwitch.Position == ToggleSwitch.TogglePosition.Left)
                     {
                         key.SetValue("presets", PresetsTextBox.Text);
+                        key.SetValue("compression", CompressionValueComboBox.SelectedIndex);
                         key.SetValue("deleteOriginal", DeleteOriginalFileCheckbox.IsChecked ?? false);
                         key.SetValue("lastMode", "basic");
                         presets = ParsePresetsBasic(PresetsTextBox.Text);
                         if (presets != null)
                         {
-                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds);
+                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds, overwriteFiles);
                         }
                         else return;
                     }
@@ -193,7 +208,7 @@ namespace Shell_WebP_Converter
                             key.SetValue("lastMode", "advanced");
                             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter"));
                             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"), JsonConvert.SerializeObject(presets, Formatting.Indented));
-                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds);
+                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds, overwriteFiles);
                         }
                         else return;
                     }

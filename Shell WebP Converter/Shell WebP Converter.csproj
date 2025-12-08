@@ -8,9 +8,10 @@
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>Resources\icon.ico</ApplicationIcon>
 		<Platforms>x64</Platforms>
-		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 		<SignAssembly>False</SignAssembly>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<Version>$(VersionPrefix)2.1.1</Version>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <DebugType>none</DebugType>

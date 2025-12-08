@@ -308,4 +308,7 @@ Odstrániť ╳</value>
   <data name="LessThan8MiB" xml:space="preserve">
     <value>Menej ako 8 MiB</value>
   </data>
+  <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
+    <value>Prepísať súbory s rovnakými názvami</value>
+  </data>
 </root>

@@ -477,6 +477,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overwrite files with the same names.
+        /// </summary>
+        public static string OverwriteFilesWithTheSameNames {
+            get {
+                return ResourceManager.GetString("OverwriteFilesWithTheSameNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Postfix.
         /// </summary>
         public static string Postfix {
