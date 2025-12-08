@@ -12,6 +12,9 @@
 		<SignAssembly>False</SignAssembly>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<Version>$(VersionPrefix)2.1.1</Version>
+		<Title>Shell WebP Converter</Title>
+		<FileVersion>2.1.1</FileVersion>
+		<AssemblyVersion></AssemblyVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <DebugType>none</DebugType>
