@@ -55,7 +55,7 @@ Conversion module can be used from CLI. Type ***"Shell WebP Converter.exe" --hel
 - Logs older than 7 days are automatically deleted when new logs are created.
 
 ## Requirements
-- .NET 9.0 Runtime
+- .NET 10.0 Runtime
 
 ## License
 This project is licensed under the Apache 2.0 License. See the `LICENSE.txt` file for details.
