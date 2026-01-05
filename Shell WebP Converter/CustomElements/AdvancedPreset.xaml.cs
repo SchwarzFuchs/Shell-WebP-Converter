@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shell_WebP_Converter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace Shell_WebP_Converter.CustomElements
         private static readonly Regex onlyDigitsRegex = new Regex(@"^[0-9]+$");
         private static readonly Regex thresholdRegex = new Regex(@"^[0-9.,]+$");
         internal static readonly Regex windowsPathForbiddenSymbolsRegex = new Regex(@"[\\\/:*?""<>|]");
+        
+        private record UniquePresetModeConfig(PresetMode Mode, string MessageResourceGetter);
+        
+        private static readonly List<UniquePresetModeConfig> UniquePresetModes = new()
+        {
+            new UniquePresetModeConfig(PresetMode.Custom, Shell_WebP_Converter.Resources.Resources.CustomizableAlreadyExists)
+        };
+        
         private int _previousSelectedMode;
         private bool _isChangingMode = false;
 
@@ -30,45 +39,60 @@ namespace Shell_WebP_Converter.CustomElements
         {
             InitializeComponent();
             DeleteButton.Click += (s, e) => DeleteClicked?.Invoke(this, EventArgs.Empty);
-            SettingsTabControl.SelectionChanged += SettingsTabControl_SelectionChanged;
+            
+            this.Loaded += (s, e) =>
+            {
+                UpdateTextBoxMaxWidths();
+            };
+            
+            this.SizeChanged += (s, e) =>
+            {
+                UpdateTextBoxMaxWidths();
+            };
+        }
+
+        private void UpdateTextBoxMaxWidths()
+        {
+            var parent = this.Parent as Grid;
+            if (parent == null) return;
+
+            if (parent.ColumnDefinitions.Count > 3 && parent.ColumnDefinitions.Count > 4)
+            {
+                double col3Width = parent.ColumnDefinitions[3].ActualWidth;
+                double col4Width = parent.ColumnDefinitions[4].ActualWidth;
+
+                if (col3Width > 0)
+                    PresetNameTextBox.MaxWidth = Math.Max(120, col3Width - 10);
+                
+                if (col4Width > 0)
+                    PostfixNameTextBox.MaxWidth = Math.Max(60, col4Width - 8);
+            }
         }
 
         public event EventHandler? DeleteClicked;
 
-        private bool IsCustomizableModeAlreadyUsed()
+        private bool IsModeAlreadyUsed(PresetMode mode)
         {
             var parent = this.Parent as Grid;
             if (parent == null) return false;
 
             var presets = parent.Children.OfType<AdvancedPreset>();
-            return presets.Any(p => p != this && p.SettingsTabControl.SelectedIndex == 2);
+            return presets.Any(p => p != this && p.ModSelectorComboBox.SelectedIndex == (int)mode);
         }
 
-        private void SettingsTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (!_isChangingMode && SettingsTabControl.SelectedIndex == 2 && IsCustomizableModeAlreadyUsed())
-            {
-                MessageBox.Show(Shell_WebP_Converter.Resources.Resources.CustomizableAlreadyExists ?? "Customizable mode is already in use!", 
-                              "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                
-                _isChangingMode = true;
-                SettingsTabControl.SelectedIndex = _previousSelectedMode;
-                ModSelectorComboBox.SelectedIndex = _previousSelectedMode;
-                _isChangingMode = false;
-                e.Handled = true;
-                return;
-            }
-        }
 
         private void ModSelectorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!((ComboBox)sender).IsInitialized || !SettingsTabControl.IsInitialized || _isChangingMode) return;
 
             var newIndex = ((ComboBox)sender).SelectedIndex;
-            if (newIndex == 2 && IsCustomizableModeAlreadyUsed())
+            var newMode = (PresetMode)newIndex;
+            
+            var uniqueModeConfig = UniquePresetModes.FirstOrDefault(config => config.Mode == newMode);
+            if (uniqueModeConfig != null && IsModeAlreadyUsed(newMode))
             {
-                MessageBox.Show(Shell_WebP_Converter.Resources.Resources.CustomizableAlreadyExists ?? "Customizable mode is already in use!", 
-                              "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                var message = uniqueModeConfig.MessageResourceGetter;
+                MessageBox.Show(message, "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 
                 _isChangingMode = true;
                 ((ComboBox)sender).SelectedIndex = _previousSelectedMode;
@@ -77,8 +101,17 @@ namespace Shell_WebP_Converter.CustomElements
                 e.Handled = true;
                 return;
             }
-
-            SettingsTabControl.SelectedIndex = newIndex;
+            if (newIndex != 3)
+            {
+                QualitySettingTextBox.IsReadOnly = false;
+                SettingsTabControl.SelectedIndex = newIndex;
+            }
+            else
+            {
+                SettingsTabControl.SelectedIndex = 0;
+                QualitySettingTextBox.Text = "100";
+                QualitySettingTextBox.IsReadOnly = true;
+            }
             if (newIndex == 2)
             {
                 PresetNameTextBox.IsReadOnly = true;
@@ -87,7 +120,7 @@ namespace Shell_WebP_Converter.CustomElements
             else
             {
                 PresetNameTextBox.IsReadOnly = false;
-                if (_previousSelectedMode == 2)
+                if (_previousSelectedMode == 2 || _previousSelectedMode == 3)
                 {
                     PresetNameTextBox.Clear();
                 }

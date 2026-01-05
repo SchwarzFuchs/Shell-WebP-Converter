@@ -320,6 +320,11 @@ namespace Shell_WebP_Converter.CustomElements
                         newPreset.Quality = size;
                         newPreset.Compression = 255;
                     }
+                    else if (newPreset.PresetMode == PresetMode.ToSameQuality)
+                    {
+                        newPreset.Quality = -2;
+                        newPreset.Compression = (byte)presetUIElement.CompressionComboBox.SelectedIndex;
+                    }
                     else
                     {
                         newPreset.Quality = 0;
