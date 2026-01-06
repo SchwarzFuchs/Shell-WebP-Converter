@@ -322,7 +322,7 @@ namespace Shell_WebP_Converter.CustomElements
                     }
                     else if (newPreset.PresetMode == PresetMode.ToSameQuality)
                     {
-                        newPreset.Quality = -2;
+                        newPreset.Quality = 0;
                         newPreset.Compression = (byte)presetUIElement.CompressionComboBox.SelectedIndex;
                     }
                     else

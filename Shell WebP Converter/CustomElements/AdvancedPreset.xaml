@@ -28,8 +28,8 @@
             </TabControl.Template>
             <TabItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Name="QualitySettingTextBox" ToolTip="{x:Static properties:Resources.QualityTooltip}" PreviewTextInput="QualitySettingTextBox_PreviewTextInput" Margin="0,0,2,0" MinWidth="48" Height="20"></TextBox>
-                    <ComboBox Name="CompressionComboBox" ToolTip="{x:Static properties:Resources.CompressionTooltip}" Margin="0,0,2,0" SelectedIndex="4" Width="36" Height="20" Padding="6,2,5,3" >
+                    <TextBox Name="QualitySettingTextBox" ToolTip="{x:Static properties:Resources.QualityTooltip}" PreviewTextInput="QualitySettingTextBox_PreviewTextInput" Margin="0,0,2,0" MinWidth="38" Height="20"></TextBox>
+                    <ComboBox Name="CompressionComboBox" ToolTip="{x:Static properties:Resources.CompressionTooltip}" Margin="0,0,2,0" SelectedIndex="4" Width="40" Height="20" Padding="4,2,5,3">
                         <ComboBoxItem Content="0"/>
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
@@ -42,8 +42,8 @@
             </TabItem>
             <TabItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="CompressionSizeThresholdTextBox" ToolTip="{x:Static properties:Resources.DesiredFileSize}" MaxLength="7" PreviewTextInput="CompressionThresholdTextBox_PreviewTextInput" Margin="0,0,2,0" VerticalContentAlignment="Center" Height="20" Width="48" Text="" PreviewKeyDown="CompressionThresholdTextBox_PreviewKeyDown"/>
-                    <ComboBox x:Name="SizeMeasurmentUnitComboBox" HorizontalAlignment="Left" Width="53" Margin="0,0,2,0" SelectedIndex="1" Height="20" Padding="6,2,5,3">
+                    <TextBox x:Name="CompressionSizeThresholdTextBox" ToolTip="{x:Static properties:Resources.DesiredFileSize}" MaxLength="7" PreviewTextInput="CompressionThresholdTextBox_PreviewTextInput" Margin="0,0,2,0" VerticalContentAlignment="Center" Height="20" Width="38" Text="" PreviewKeyDown="CompressionThresholdTextBox_PreviewKeyDown"/>
+                    <ComboBox x:Name="SizeMeasurmentUnitComboBox" HorizontalAlignment="Left" Width="50" Margin="0,0,2,0" SelectedIndex="1" Height="20" Padding="3,2,5,3">
                         <ComboBoxItem Content="{x:Static properties:Resources.KiB}"/>
                         <ComboBoxItem Content="{x:Static properties:Resources.MiB}" />
                     </ComboBox>
@@ -54,7 +54,7 @@
             </TabItem>
         </TabControl>
         <CheckBox Name="DeleteOriginalFileCheckBox" Grid.Column="2" Margin="0,0,1,0" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBox Name="PresetNameTextBox" Height="20" MaxLength="100" TextWrapping="NoWrap" Grid.Column="3" MinWidth="120" AcceptsReturn="False" HorizontalContentAlignment="Left" Margin="2,0,3,0"></TextBox>
+        <TextBox Name="PresetNameTextBox" Height="20" MaxLength="100" TextWrapping="NoWrap" Grid.Column="3" MinWidth="200" AcceptsReturn="False" HorizontalContentAlignment="Left" Margin="2,0,3,0"></TextBox>
         <TextBox Name="PostfixNameTextBox" MinWidth="60" Grid.Column="4" Height="20" MaxLength="50" PreviewTextInput="PostfixNameTextBox_PreviewTextInput" TextWrapping="NoWrap" HorizontalContentAlignment="Left" Margin="1,0,2,0"></TextBox>
         <Popup Name="WarningPopup"
            PlacementTarget="{Binding ElementName=PostfixNameTextBox}"

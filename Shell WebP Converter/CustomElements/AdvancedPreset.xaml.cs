@@ -62,7 +62,7 @@ namespace Shell_WebP_Converter.CustomElements
                 double col4Width = parent.ColumnDefinitions[4].ActualWidth;
 
                 if (col3Width > 0)
-                    PresetNameTextBox.MaxWidth = Math.Max(120, col3Width - 10);
+                    PresetNameTextBox.MaxWidth = Math.Max(200, col3Width - 10);
                 
                 if (col4Width > 0)
                     PostfixNameTextBox.MaxWidth = Math.Max(60, col4Width - 8);
