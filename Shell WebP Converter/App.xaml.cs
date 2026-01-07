@@ -63,7 +63,7 @@ namespace Shell_WebP_Converter
                     ParserResult<Options> parserResult = ParseArgs(e.Args);
                     parserResult.WithNotParsed(er => { DisplayErrors(er); Environment.Exit(0); });
                     string target = "";
-                    parserResult.WithParsed(opts => { target = opts.Input; custom = opts.Custom; });
+                    parserResult.WithParsed(opts => { target = opts.Input; custom = opts.Mode == Models.PresetMode.Custom ? true : false; });
                     if (custom)
                     {
                         if (!customSettingsSemaphore.WaitOne(0))
@@ -126,6 +126,7 @@ namespace Shell_WebP_Converter
                     {
                         MessageBox.Show($"{Shell_WebP_Converter.Resources.Resources.ConversionFail}");
                         errorMessageBoxSemaphore.Release();
+                        Environment.Exit(0);
                     }
                 }
                 finally

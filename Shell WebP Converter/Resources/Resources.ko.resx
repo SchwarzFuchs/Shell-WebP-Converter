@@ -311,4 +311,10 @@
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>동일한 이름의 파일 덮어쓰기</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value>SSIM은 유사도 수준을 퍼센트로 나타낸 것입니다. 100은 완전히 동일한 이미지, 95는 최대 5%만 다른 이미지를 의미합니다.</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>SSIM을 N 이상으로</value>
+  </data>
 </root>

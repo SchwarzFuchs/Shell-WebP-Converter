@@ -43,7 +43,7 @@ namespace Shell_WebP_Converter
                             {
                                 qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.Quality} {Shell_WebP_Converter.Resources.Resources.Lossless}");
                             }
-                            else if (preset.Quality > 0 && preset.Quality < 100)
+                            else if (preset.Quality >= 0 && preset.Quality < 100)
                             {
                                 qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.Quality} {preset.Quality}%");
                             }
@@ -51,27 +51,17 @@ namespace Shell_WebP_Converter
                             {
                                 qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.CustomizableQuality}");
                             }
-                        }                            
-                        if (preset.PresetMode == PresetMode.ToNQuality || preset.PresetMode == PresetMode.ToNSize)
-                        {
-                            
-                            using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
+                            else if (preset.Quality == 100 && preset.PresetMode == PresetMode.ToN_SSIM)
                             {
-                                string command = $"\"{converterPath}\" -i \"%1\" -q {preset.Quality} -c {preset.Compression} {((preset.DeleteOriginal == true) ? "-d" : "")} -p {preset.Postfix}" +
-                                    $"{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}" +
-                                    $"{((overwiteFiles == true) ? " --overwrite" : "")}";
-                                commandKey.SetValue("", command);
+                                qualityKey.SetValue("MUIVerb", $"ToSameQuality");
                             }
                         }
-                        else if (preset.PresetMode == PresetMode.Custom)
+                        using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
                         {
-                            using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
-                            {
-                                string command = $"\"{converterPath}\" -i \"%1\" -q 0 -c 0 -p {preset.Postfix} --custom" +
-                                    $"{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}" +
-                                    $"{((overwiteFiles == true) ? " --overwrite" : "")}";
-                                commandKey.SetValue("", command);
-                            }
+                            string command = $"\"{converterPath}\" -i \"%1\" -q {preset.Quality} -c {preset.Compression} -m {(int)preset.PresetMode} {((preset.DeleteOriginal == true) ? "-d" : "")} -p {preset.Postfix}" +
+                                $"{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}" +
+                                $"{((overwiteFiles == true) ? " --overwrite" : "")}";
+                            commandKey.SetValue("", command);
                         }
                         qualityKey.SetValue("Icon", iconPath);
                     }

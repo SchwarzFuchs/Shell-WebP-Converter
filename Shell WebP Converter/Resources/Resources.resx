@@ -311,4 +311,10 @@ Delete ╳</value>
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>Overwrite files with the same names</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value>SSIM is the similarity level, in percent. 100 means an absolutely identical image, 95 means it differs by no more than 5%.</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>To SSIM of N</value>
+  </data>
 </root>

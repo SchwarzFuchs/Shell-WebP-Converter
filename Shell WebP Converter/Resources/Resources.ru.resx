@@ -311,4 +311,10 @@
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>Перезаписывать файлы с одинаковыми именами</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value>SSIM — степень схожести, в процентах. 100 — абсолютно идентичное изображение, 95 — отличающееся не более чем на 5%.</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>До SSIM в N</value>
+  </data>
 </root>

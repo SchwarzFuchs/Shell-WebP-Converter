@@ -311,4 +311,10 @@ Sil ╳</value>
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>Aynı isimdeki dosyaları üzerine yaz</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value>SSIM, benzerlik derecesidir ve yüzde olarak ifade edilir. 100 tamamen özdeş görüntü demektir, 95 ise en fazla %5 farklılık olduğunu gösterir.</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>SSIM değeri N olana kadar</value>
+  </data>
 </root>

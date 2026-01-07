@@ -311,4 +311,10 @@
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>覆盖同名文件</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value>SSIM 表示相似度，以百分比计。100 表示完全相同的图像，95 表示差异不超过 5%。</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>SSIM 至 N</value>
+  </data>
 </root>

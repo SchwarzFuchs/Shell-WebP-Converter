@@ -311,4 +311,10 @@
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>同じ名前のファイルを上書きする</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value>SSIM は類似度を示す指標で、百分率です。100 は完全に同一の画像、95 は最大でも 5% の違いを意味します。</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>SSIM を N 以上に</value>
+  </data>
 </root>

@@ -9,7 +9,7 @@
         Title="{x:Static properties:Resources.CustomSettings}" Height="Auto" MinHeight="100" Width="Auto"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Normal" SizeToContent="WidthAndHeight" Style="{DynamicResource WindowStyle}" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid HorizontalAlignment="Stretch">
         <StackPanel Orientation="Vertical" Margin="0,0,4,2">
-            <RadioButton x:Name="CustomSettingsRadioButton"  Content="{x:Static properties:Resources.CustomConversionSettings}" Checked="CustomSettingsRadioButtonChecked" Margin="2,2,0,2"/>
+            <RadioButton x:Name="CustomQualitySettingsRadioButton"  Content="{x:Static properties:Resources.CustomConversionSettings}" Checked="CustomSettingsRadioButtonChecked" Margin="2,2,0,2"/>
             <RadioButton x:Name="CompressToThresholdRadioButton" Content="{x:Static properties:Resources.CompressToThreshold}" Checked="CompressToThresholdRadioButtonChecked" Margin="2,2,0,0"/>
             <StackPanel  x:Name="CustomSettingsPanel" Margin="0,2,0,2">
                 <StackPanel Orientation="Horizontal" Margin="0,2,0,0">

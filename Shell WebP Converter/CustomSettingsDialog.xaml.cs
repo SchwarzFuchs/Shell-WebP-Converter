@@ -44,7 +44,7 @@ namespace Shell_WebP_Converter
                     {
                         if (bool.Parse((key.GetValue("LastCustomRadio") ?? false).ToString() ?? "false"))
                         {
-                            CustomSettingsRadioButton.IsChecked = true;
+                            CustomQualitySettingsRadioButton.IsChecked = true;
                         }
                         else
                         {
@@ -61,7 +61,7 @@ namespace Shell_WebP_Converter
                     }
                     else
                     {
-                        CustomSettingsRadioButton.IsChecked = true;
+                        CustomQualitySettingsRadioButton.IsChecked = true;
                     }
                 }
             }
@@ -151,13 +151,15 @@ namespace Shell_WebP_Converter
         {
             try
             {
-                if (CustomSettingsRadioButton.IsChecked.GetValueOrDefault())
+                if (CustomQualitySettingsRadioButton.IsChecked.GetValueOrDefault())
                 {
+                    options.Mode = Models.PresetMode.ToNQuality;
                     options.Quality = int.Parse(QualityTextBox.Text);
                     options.Compression = (byte)CompressionValueComboBox.SelectedIndex;
                 }
                 else
                 {
+                    options.Mode = Models.PresetMode.ToNSize;
                     options.Quality = (int)(float.Parse(CompressionSizeThresholdTextBox.Text) * (float)Math.Pow(1024, SizeMeasurmentUnitComboBox.SelectedIndex + 1));
                     if (options.Quality == 0) throw new Exception("Size can't be zero");
                     options.Compression = 255;
@@ -175,7 +177,7 @@ namespace Shell_WebP_Converter
                     {
                         if (key != null)
                         {
-                            key.SetValue("LastCustomRadio", CustomSettingsRadioButton.IsChecked.GetValueOrDefault(false));
+                            key.SetValue("LastCustomRadio", CustomQualitySettingsRadioButton.IsChecked.GetValueOrDefault(false));
                             key.SetValue("LastCustomQualitty", QualityTextBox.Text);
                             key.SetValue("LastCustomCompressionValue", CompressionValueComboBox.SelectedIndex);
                             key.SetValue("LastCustomSizeThreshold", CompressionSizeThresholdTextBox.Text);

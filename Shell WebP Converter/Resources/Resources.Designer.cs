@@ -585,6 +585,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SSIM is the similarity level, in percent. 100 means an absolutely identical image, 95 means it differs by no more than 5%..
+        /// </summary>
+        public static string SSIM_Tooltip {
+            get {
+                return ResourceManager.GetString("SSIM_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To N% quality.
         /// </summary>
         public static string ToNQuality {
@@ -599,6 +608,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string ToNSize {
             get {
                 return ResourceManager.GetString("ToNSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To SSIM of N.
+        /// </summary>
+        public static string ToSSIM_OfN {
+            get {
+                return ResourceManager.GetString("ToSSIM_OfN", resourceCulture);
             }
         }
         

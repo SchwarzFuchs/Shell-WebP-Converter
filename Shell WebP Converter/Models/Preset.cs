@@ -17,10 +17,11 @@ namespace Shell_WebP_Converter.Models
         public bool UseDownscaling { get; set; } = false;
 
     }
-    internal enum PresetMode
+    public enum PresetMode
     {
         ToNQuality,
         ToNSize,
-        Custom
+        Custom,
+        ToN_SSIM
     }
 }

@@ -311,4 +311,10 @@
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>समान नाम वाली फ़ाइलों को अधिलेखित करें</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value>SSIM समानता की डिग्री है, प्रतिशत में। 100 का अर्थ है बिल्कुल समान छवि, 95 का अर्थ है कि यह 5% से अधिक भिन्न नहीं है।</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>SSIM को N तक</value>
+  </data>
 </root>

@@ -101,17 +101,7 @@ namespace Shell_WebP_Converter.CustomElements
                 e.Handled = true;
                 return;
             }
-            if (newIndex != 3)
-            {
-                QualitySettingTextBox.IsReadOnly = false;
-                SettingsTabControl.SelectedIndex = newIndex;
-            }
-            else
-            {
-                SettingsTabControl.SelectedIndex = 0;
-                QualitySettingTextBox.Text = "100";
-                QualitySettingTextBox.IsReadOnly = true;
-            }
+            SettingsTabControl.SelectedIndex = newIndex;
             if (newIndex == 2)
             {
                 PresetNameTextBox.IsReadOnly = true;
@@ -120,7 +110,7 @@ namespace Shell_WebP_Converter.CustomElements
             else
             {
                 PresetNameTextBox.IsReadOnly = false;
-                if (_previousSelectedMode == 2 || _previousSelectedMode == 3)
+                if (_previousSelectedMode == 2)
                 {
                     PresetNameTextBox.Clear();
                 }

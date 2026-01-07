@@ -320,10 +320,20 @@ namespace Shell_WebP_Converter.CustomElements
                         newPreset.Quality = size;
                         newPreset.Compression = 255;
                     }
-                    else if (newPreset.PresetMode == PresetMode.ToSameQuality)
+                    else if (newPreset.PresetMode == PresetMode.ToN_SSIM)
                     {
-                        newPreset.Quality = 0;
-                        newPreset.Compression = (byte)presetUIElement.CompressionComboBox.SelectedIndex;
+                        double SSIM;
+                        if (!double.TryParse(presetUIElement.SSIM_SettingTextBox.Text, out SSIM))
+                        {
+                            errors.AppendLine($"{Shell_WebP_Converter.Resources.Resources.Preset} #{i + 1} — {Shell_WebP_Converter.Resources.Resources.InvalidValue} — {Shell_WebP_Converter.Resources.Resources.Quality} {Shell_WebP_Converter.Resources.Resources.ValueParsingFailed}");
+                            SSIM = 0.0;
+                        }
+                        else if (SSIM < 0.0 || SSIM > 100.0)
+                        {
+                            errors.AppendLine($"{Shell_WebP_Converter.Resources.Resources.Preset} #{i + 1} — {Shell_WebP_Converter.Resources.Resources.InvalidValue} — {Shell_WebP_Converter.Resources.Resources.Quality} {SSIM}");
+                        }
+                        newPreset.Quality = (int)(double.Parse(presetUIElement.SSIM_SettingTextBox.Text)*10000);
+                        newPreset.Compression = (byte)presetUIElement.SSIM_CompressionComboBox.SelectedIndex;
                     }
                     else
                     {
@@ -389,6 +399,11 @@ namespace Shell_WebP_Converter.CustomElements
                             }
                             presetUIElement.CompressionSizeThresholdTextBox.Text = size.ToString();
                             presetUIElement.SizeMeasurmentUnitComboBox.SelectedIndex = unitIndex;
+                        }
+                        else if (preset.PresetMode == PresetMode.ToN_SSIM)
+                        {
+                            presetUIElement.SSIM_SettingTextBox.Text = ((double)preset.Quality / 10000.0).ToString();
+                            presetUIElement.SSIM_CompressionComboBox.SelectedIndex = (int)preset.Compression;
                         }
                         presetUIElement.DeleteOriginalFileCheckBox.IsChecked = preset.DeleteOriginal;
                         presetUIElement.PresetNameTextBox.Text = preset.Name ?? string.Empty;

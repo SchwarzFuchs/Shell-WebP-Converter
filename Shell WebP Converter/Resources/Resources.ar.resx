@@ -311,4 +311,10 @@
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>إعادة كتابة الملفات ذات الأسماء نفسها</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value> ‏SSIM هي درجة التشابه بالنسبة المئوية. 100 تعني صورة متطابقة تمامًا، و95 تعني أنها تختلف بما لا يزيد عن 5%.</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>إلى SSIM بقيمة N</value>
+  </data>
 </root>

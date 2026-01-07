@@ -311,4 +311,10 @@ Törlés ╳</value>
   <data name="OverwriteFilesWithTheSameNames" xml:space="preserve">
     <value>Azonos nevű fájlok felülírása</value>
   </data>
+  <data name="SSIM_Tooltip" xml:space="preserve">
+    <value> Az SSIM a hasonlóság mértéke százalékban. A 100 teljesen azonos képet jelent, a 95 legfeljebb 5%-os eltérést.</value>
+  </data>
+  <data name="ToSSIM_OfN" xml:space="preserve">
+    <value>SSIM értéke N-ig</value>
+  </data>
 </root>
