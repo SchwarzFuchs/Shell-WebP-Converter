@@ -166,7 +166,7 @@ namespace Shell_WebP_Converter
 
         public static void Log(string message)
         {
-            message = DateTime.Now.ToString() + (" | ") + message;
+            message = DateTime.Now.ToString() + (" | ") + message + (" | ");
             string fileName = Path.Combine( Path.GetDirectoryName(Environment.ProcessPath) ?? "", $"ExceptionLog {DateTime.Now.Date.ToString("yyyy-MM-dd")}.txt");
             File.AppendAllText(fileName, message);
             DeleteOldLogFiles(fileName);
