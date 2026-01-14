@@ -1,7 +1,7 @@
 # Shell WebP Converter
 
 ## Overview
-Shell WEBP Converter application designed to simplify the conversion of image files to the WebP format. The program integrates with the Windows context menu for quick access and supports custom conversion settings.
+Shell WEBP Converter application designed to simplify the conversion of image files to the WebP format. It integrates with the Windows Explorer context menu for quick access and supports custom conversion settings.
 
 ### Presets example: 
 <img width="937" height="719" alt="image" src="https://github.com/user-attachments/assets/b34bc416-61c1-456c-bce3-fa9f2dee3e42" />
@@ -49,6 +49,7 @@ Conversion module can be used from CLI. Type ***"Shell WebP Converter.exe" --hel
 -  **Silmultaneous processing**: Due to the limitations of adding entries to Windows Explorer context menu via registry editing, only one conversion with custom setting GUI dialog at the time allowed. Same for the folder processing. If you need to apply the same setting trough a custom dialog to a lot of files, put them in a same folder and call conversion for the folder itself. Conversion queue of single files trough presets in unlimited.
 -  **Huge processing batches**: If task waits its queue for 8 hours, it automatically gets cancelled.
 -  **Compression level for large images (>15 megapixels)**: Depending on the amount of pixels, application may ignore the compresion level you set and automatically increase it to prevent "partition 0 overflow" error (WebP format limitation).
+-  **Animated files**: Supported only by "To N Quality" and "To N Size" modes.
 
 ## Error Handling
 - Errors are logged to `ExceptionLog [date].txt` in the application directory.
