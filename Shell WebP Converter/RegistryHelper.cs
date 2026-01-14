@@ -13,7 +13,8 @@ namespace Shell_WebP_Converter
     {
         private const string menuName = "ConvertToWebP";
         private const string iconPath = "imageres.dll,-68";
-        internal const string allowedFileExtensions = ".folder.png.bmp.aai.ai.apng.art.arw.avi.avif.avs.bayer.bpg.bmp.bmp2.bmp3.brf.cals.cin.cip.cmyk.cmyka.cr2.crw.cube.cur.cut.dcm.dcr.dcx.dds.debug.dib.djvu.dmr.dng.dot.dpx.emf.epdf.epi.eps.eps2.eps3.epsf.epsi.ept.exr.farbfeld.fax.fits.fl32.flif.fpx.ftxt.gif.gplt.gray.graya.group4.hdr.heic.hpgl.hrz.html.ico.info.isobrl.isobrl6.jbig.jng.jp2.jpt.j2c.j2k.jpeg.jpg.json.jxl.jxr.kernel.man.mat.miff.mono.mng.m2v.mpeg.mpc.mpo.mpr.mrw.msl.mtv.mvg.nef.orf.ora.otb.p7.palm.pam.clipboard.pbm.pcd.pcds.pcl.pcx.pdb.pdf.pef.pes.pfa.pfb.pfm.pgm.phm.picon.pict.pix.png.png8.png00.png24.png32.png48.png64.pnm.pocketmod.ppm.ps.ps2.ps3.psb.psd.ptif.pwp.qoi.rad.raf.raw.rgb.rgb565.rgba.rgf.rla.rle.sct.sfw.sgi.shtml.sid.sparse-color.strimg.sun.svg.text.tga.tiff.tim.ttf.txt.ubrl.ubrl6.uhdr.uil.uyvy.vicar.video.viff.wbmp.wdp.webp.wmf.wpg.x.xbm.xcf.xpm.xwd.x3f.yaml.ycbcr.ycbcra.yuv.";
+        internal const string allowedFileExtensions = "folder.png.bmp.aai.ai.apng.art.arw.avi.avif.avs.bayer.bpg.bmp.bmp2.bmp3.brf.cals.cin.cip.cmyk.cmyka.cr2.crw.cube.cur.cut.dcm.dcr.dcx.dds.debug.dib.djvu.dmr.dng.dot.dpx.emf.epdf.epi.eps.eps2.eps3.epsf.epsi.ept.exr.farbfeld.fax.fits.fl32.flif.fpx.ftxt.gif.gplt.gray.graya.group4.hdr.heic.hpgl.hrz.html.ico.info.isobrl.isobrl6.jbig.jng.jp2.jpt.j2c.j2k.jpeg.jpg.json.jxl.jxr.kernel.man.mat.miff.mono.mng.m2v.mpeg.mpc.mpo.mpr.mrw.msl.mtv.mvg.nef.orf.ora.otb.p7.palm.pam.clipboard.pbm.pcd.pcds.pcl.pcx.pdb.pdf.pef.pes.pfa.pfb.pfm.pgm.phm.picon.pict.pix.png.png8.png00.png24.png32.png48.png64.pnm.pocketmod.ppm.ps.ps2.ps3.psb.psd.ptif.pwp.qoi.rad.raf.raw.rgb.rgb565.rgba.rgf.rla.rle.sct.sfw.sgi.shtml.sid.sparse-color.strimg.sun.svg.text.tga.tiff.tim.ttf.txt.ubrl.ubrl6.uhdr.uil.uyvy.vicar.video.viff.wbmp.wdp.webp.wmf.wpg.x.xbm.xcf.xpm.xwd.x3f.yaml.ycbcr.ycbcra.yuv.webm.mp4.";
+        internal const string potentiallyAnimatedFileExtensions = ".apng.avi.avif.gif.heic.jng.jxl.miff.mng.mpc.msl.m2v.mpeg.pdf.tiff.video.webp.ico.";
         private const string centralKeyPath = @"Software\Classes\WebPConverter\ContextMenu";
         private const string folderKeyPath = $@"Software\Classes\Directory\shell\{menuName}";
 
@@ -28,7 +29,7 @@ namespace Shell_WebP_Converter
             using (RegistryKey shellKey = Registry.CurrentUser.CreateSubKey($"{centralKeyPath}\\shell"))
             {
                 int i = 0;
-                foreach (var preset in presets)
+                foreach (Preset preset in presets)
                 {
                     string qualityKeyName = $"{i:D2}_{preset.PresetMode.ToString()}_{preset.Quality}";
                     using (RegistryKey qualityKey = shellKey.CreateSubKey(qualityKeyName))
@@ -73,7 +74,7 @@ namespace Shell_WebP_Converter
 
         internal static void AddCommandToExtensions(List<string> extensions)
         {
-            foreach (var ext in extensions)
+            foreach (string ext in extensions)
             {
                 if (ext == "folder")
                 {
@@ -103,7 +104,7 @@ namespace Shell_WebP_Converter
         }
         internal static void RemoveWebPConversionContextMenu(List<string> extensions)
         {
-            foreach (var ext in extensions)
+            foreach (string ext in extensions)
             {
                 if (ext == "folder")
                 {

@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using Hardcodet.Wpf.TaskbarNotification;
 using ImageMagick;
+using ImageMagick.Formats;
 using MathNet.Numerics;
 using MathNet.Numerics.Interpolation;
 using Microsoft.Win32;
@@ -64,7 +65,7 @@ namespace Shell_WebP_Converter.CLI
         {
             if (File.Exists(options.Input)) //input is file
             {
-                if (options.Output.Length == 0) 
+                if (options.Output.Length == 0)
                 {
                     string fileName = Path.GetFileNameWithoutExtension(options.Input) + options.Postfix;
                     options.Output = Path.Combine(Path.GetDirectoryName(options.Input) ?? "", fileName + ".webp");
@@ -219,30 +220,43 @@ namespace Shell_WebP_Converter.CLI
         }
         MemoryStream ConvertSingleFile(string inputFile, int quality, int compression)
         {
-            using (var image = new MagickImage(inputFile))
+            using (MagickImageCollection images = new MagickImageCollection(inputFile))
             {
-                byte minPossibleCompression = GetMinimumPossibleCompression(image);
+                if (images[0].Format == MagickFormat.Gif || images[0].Format == MagickFormat.Gif87)
+                {
+                    images.Coalesce();
+                    images.OptimizePlus();
+                }
+                byte minPossibleCompression = GetMinimumPossibleCompression(images[0].Width * images[0].Height);
                 if (compression < minPossibleCompression)
                 {
                     compression = minPossibleCompression;
                 }
-                if (image.Width >= 16384 || image.Height >= 16384)
+                if (images[0].Width >= 16384 || images[0].Height >= 16384)
                 {
                     throw new Exception($"Image {inputFile} is too big");
                 }
-                image.Format = MagickFormat.WebP;
+                WebPWriteDefines defines = new WebPWriteDefines();
                 if (quality == 100)
                 {
-                    image.Settings.SetDefine("webp:lossless", "true");
-                    image.Quality = 100;
+                    defines.Lossless = true;
+                    foreach (IMagickImage<ushort> image in images)
+                    {
+                        image.Quality = 100;
+                    }
                 }
                 else
                 {
-                    image.Quality = (uint)quality;
+                    foreach (IMagickImage<ushort> image in images)
+                    {
+                        image.Quality = (uint)quality;
+                    }
                 }
-                image.Settings.SetDefine("webp:method", compression.ToString());
+                defines.Method = compression;
+                defines.AutoFilter = true;
+                defines.FilterStrength = 75;
                 MemoryStream ms = new MemoryStream();
-                image.Write(ms);
+                images.Write(ms, defines);
                 ms.Position = 0;
                 return (ms);
             }
@@ -250,28 +264,38 @@ namespace Shell_WebP_Converter.CLI
 
         MemoryStream CompressToThreshold(int threshold, string inputFile, bool useDownscaling)
         {
-            using (var image = new MagickImage(inputFile))
+            using (MagickImageCollection images = new MagickImageCollection(inputFile))
             {
-                if (image.Width >= 16384 || image.Height >= 16384)
+                if (images[0].Format == MagickFormat.Gif || images[0].Format == MagickFormat.Gif87)
+                {
+                    images.Coalesce();
+                    images.OptimizePlus();
+                }
+                if (images[0].Width >= 16384 || images[0].Height >= 16384)
                 {
                     throw new Exception($"Image {inputFile} is too big");
                 }
-                byte compression = GetMinimumPossibleCompression(image);
+                byte compression = GetMinimumPossibleCompression(images[0].Width * images[0].Height);
                 if (compression == 0) compression = 1;
-                image.Format = MagickFormat.WebP;
-                image.Settings.SetDefine("webp:method", compression.ToString());
+
                 byte resizesThreshold = 15;
                 byte resizesCount = 0;
-                CubicSpline spline = GetSizePredictor(image);
-                if (spline.Interpolate(99) * 2 < threshold)
+                CubicSpline sizePredictor = GetSizePredictor(images);
+                if (sizePredictor.Interpolate(99) * 2 < threshold)
                 {
-                    image.Settings.SetDefine("webp:lossless", "true");
-                    image.Quality = 100;
-                    image.Settings.SetDefine("webp:method", "6");
-                    var resultMs = new MemoryStream();
+                    WebPWriteDefines defines = new WebPWriteDefines();
+                    defines.Lossless = true;
+                    defines.Method = 6;
+                    defines.AutoFilter = true;
+                    defines.FilterStrength = 75;
+                    foreach (IMagickImage<ushort> image in images)
+                    {
+                        image.Quality = 100;
+                    }
+                    MemoryStream resultMs = new MemoryStream();
                     try
                     {
-                        image.Write(resultMs);
+                        images.Write(resultMs, defines);
                         if (resultMs.Length < threshold)
                         {
                             resultMs.Position = 0;
@@ -285,15 +309,14 @@ namespace Shell_WebP_Converter.CLI
                             resultMs.Dispose();
                         }
                     }
-                    image.Settings.RemoveDefine("webp:lossless");
-                    image.Settings.SetDefine("webp:method", compression.ToString());
                 }
-                MagickImage originalImage = null;
+
+                MagickImageCollection originalImages = null;
                 try
                 {
                     if (useDownscaling)
                     {
-                        originalImage = new MagickImage(image);
+                        originalImages = new MagickImageCollection(images);
                     }
                     while (resizesCount <= resizesThreshold)
                     {
@@ -308,33 +331,46 @@ namespace Shell_WebP_Converter.CLI
                         }
                         for (; i >= 15; i--)
                         {
-                            if (spline.Interpolate(i) > threshold)
+                            if (sizePredictor.Interpolate(i) > threshold)
                             {
                                 continue;
                             }
-                            image.Quality = (uint)(i);
-                            using (var ms = new MemoryStream())
+                            foreach (IMagickImage<ushort> image in images)
+                            {
+                                image.Quality = (uint)i;
+                            }
+                            using (MemoryStream ms = new MemoryStream())
                             {
                                 try
                                 {
-                                    image.Write(ms);
+                                    WebPWriteDefines defines = new WebPWriteDefines();
+                                    defines.Method = compression;
+                                    defines.AutoFilter = true;
+                                    defines.FilterStrength = 75;
+                                    images.Write(ms, defines);
                                 }
                                 catch (Exception ex)
                                 {
                                     if (ex.GetType() == typeof(MagickCorruptImageErrorException))
                                     {
                                         compression++;
-                                        image.Settings.SetDefine("webp:method", compression.ToString());
-                                        image.Write(ms);
+                                        WebPWriteDefines defines = new WebPWriteDefines();
+                                        defines.Method = compression;
+                                        defines.AutoFilter = true;
+                                        defines.FilterStrength = 75;
+                                        images.Write(ms, defines);
                                     }
                                 }
                                 if (ms.Length <= threshold || i == 15)
                                 {
-                                    image.Settings.SetDefine("webp:method", "5");
-                                    var resultMs = new MemoryStream();
+                                    MemoryStream resultMs = new MemoryStream();
                                     try
                                     {
-                                        image.Write(resultMs);
+                                        WebPWriteDefines defines = new WebPWriteDefines();
+                                        defines.Method = 5;
+                                        defines.AutoFilter = true;
+                                        defines.FilterStrength = 75;
+                                        images.Write(resultMs, defines);
                                         if (resultMs.Length <= threshold)
                                         {
                                             MemoryStream previous = new MemoryStream();
@@ -347,8 +383,11 @@ namespace Shell_WebP_Converter.CLI
                                                 for (int j = i + 1; j <= 99; j++)
                                                 {
                                                     resultMs.SetLength(0);
-                                                    image.Quality = (uint)(j);
-                                                    image.Write(resultMs);
+                                                    foreach (IMagickImage<ushort> image in images)
+                                                    {
+                                                        image.Quality = (uint)j;
+                                                    }
+                                                    images.Write(resultMs, defines);
                                                     if (resultMs.Length >= threshold)
                                                     {
                                                         resultMs.Dispose();
@@ -383,11 +422,13 @@ namespace Shell_WebP_Converter.CLI
                         }
                         if (useDownscaling)
                         {
-                            image.Resize(originalImage.Width, originalImage.Height);
-                            image.CopyPixels(originalImage);
-                            image.InterpolativeResize(new Percentage(Math.Pow(0.9, resizesCount + 1) * 100), PixelInterpolateMethod.Spline);
-                            image.Settings.SetDefine("webp:method", compression.ToString());
-                            spline = GetSizePredictor(image);
+                            foreach (IMagickImage<ushort> image in images)
+                            {
+                                image.Resize(originalImages[0].Width, originalImages[0].Height);
+                                image.CopyPixels(originalImages[images.IndexOf(image)]);
+                                image.InterpolativeResize(new Percentage(Math.Pow(0.9, resizesCount + 1) * 100), PixelInterpolateMethod.Spline);
+                            }
+                            sizePredictor = GetSizePredictor(images);
                             resizesCount++;
                         }
                         else
@@ -398,7 +439,7 @@ namespace Shell_WebP_Converter.CLI
                 }
                 finally
                 {
-                    if (originalImage != null) originalImage.Dispose();
+                    if (originalImages != null) originalImages.Dispose();
                 }
                 throw new Exception("Failed to compress image to designated size");
             }
@@ -407,13 +448,13 @@ namespace Shell_WebP_Converter.CLI
         MemoryStream ConvertToSameQuality(string inputFile)
         {
             double SSIM_threshold = (double)options.Quality / 10000.0;
-            using (var image = new MagickImage(inputFile))
+            using (MagickImage image = new MagickImage(inputFile))
             {
                 if (image.Width >= 16384 || image.Height >= 16384)
                 {
                     throw new Exception($"Image {inputFile} is too big");
                 }
-                byte compression = GetMinimumPossibleCompression(image);
+                byte compression = GetMinimumPossibleCompression(image.Width * image.Height);
                 if (compression == 0) compression = 1;
                 image.Format = MagickFormat.WebP;
                 image.Settings.SetDefine("webp:method", compression.ToString());
@@ -425,7 +466,7 @@ namespace Shell_WebP_Converter.CLI
                         continue;
                     }
                     image.Quality = (uint)(i);
-                    using (var ms = new MemoryStream())
+                    using (MemoryStream ms = new MemoryStream())
                     {
                         try
                         {
@@ -446,22 +487,21 @@ namespace Shell_WebP_Converter.CLI
                         if ((1 - 2 * image.Compare(newImage, ErrorMetric.StructuralSimilarity)) > SSIM_threshold)
                         {
                             image.Settings.SetDefine("webp:method", options.Compression.ToString());
-                            var resultMs = new MemoryStream();
+                            MemoryStream resultMs = new MemoryStream();
                             image.Write(resultMs);
                             ms.Dispose();
                             newImage.Dispose();
                             resultMs.Position = 0;
                             return resultMs;
                         }
-                    }   
+                    }
                 }
                 throw new Exception("Failed to convert image to the same quality");
             }
         }
 
-        byte GetMinimumPossibleCompression(MagickImage image) // prevents this https://github.com/dlemstra/Magick.NET/issues/1799 error
+        byte GetMinimumPossibleCompression(uint pixelsCount) // prevents this https://github.com/dlemstra/Magick.NET/issues/1799 error
         {
-            uint pixelsCount = image.Height * image.Width;
             if (pixelsCount < 15000000)
             {
                 return 0;
@@ -476,24 +516,36 @@ namespace Shell_WebP_Converter.CLI
             }
             else return 3;
         }
-
-        public CubicSpline GetSizePredictor(MagickImage image)
+        public CubicSpline GetSizePredictor(MagickImageCollection images)
         {
             double[] quality = { 15, 45, 80, 93, 99 };
             double[] size = new double[quality.Length];
 
             Parallel.For(0, quality.Length, i =>
             {
-                using (var localImage = (MagickImage)image.Clone())
+                using (MagickImageCollection localImages = new MagickImageCollection())
                 {
-                    localImage.Quality = (uint)quality[i];
-                    using (var ms = new MemoryStream())
+                    foreach (IMagickImage<ushort> image in images)
                     {
-                        localImage.Write(ms);
-                        size[i] = ms.Length;
+                        localImages.Add(image.Clone());
+                    }
+
+                    foreach (IMagickImage<ushort> image in localImages)
+                    {
+                        image.Quality = (uint)quality[i];
+                    }
+
+                    using (MemoryStream resultMs = new MemoryStream())
+                    {
+                        WebPWriteDefines defines = new WebPWriteDefines();
+                        defines.AutoFilter = true;
+                        defines.FilterStrength = 75;
+                        localImages.Write(resultMs, defines);
+                        size[i] = resultMs.Length;
                     }
                 }
             });
+
             GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
             return CubicSpline.InterpolatePchipSorted(quality, size);
         }
@@ -504,15 +556,15 @@ namespace Shell_WebP_Converter.CLI
 
             Parallel.For(0, quality.Length, i =>
             {
-                using (var localImage = (MagickImage)image.Clone())
+                using (MagickImage localImage = (MagickImage)image.Clone())
                 {
                     localImage.ColorSpace = ColorSpace.sRGB;
                     localImage.Quality = (uint)quality[i];
-                    using (var ms = new MemoryStream())
+                    using (MemoryStream ms = new MemoryStream())
                     {
                         localImage.Write(ms);
                         ms.Position = 0;
-                        using (var newImage = new MagickImage(ms))
+                        using (MagickImage newImage = new MagickImage(ms))
                         {
                             newImage.ColorSpace = ColorSpace.sRGB;
                             SSIM[i] = 1 - 2 * localImage.Compare(newImage, ErrorMetric.StructuralSimilarity);
