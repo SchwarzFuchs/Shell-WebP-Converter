@@ -37,6 +37,11 @@ namespace Shell_WebP_Converter
             {
                 bool inputIsFolder = false;
                 bool custom = false;
+                bool waitCurrentTaskMessageSemaphoreAcquired = false;
+                bool errorMessageBoxSemaphoreAcquired = false;
+                bool masterSemaphoreAcquired = false;
+                bool customSettingsSemaphoreAcquired = false;
+                bool folderSemaphoreAcquired = false;
                 Semaphore masterSemaphore = new Semaphore(initialCount: Environment.ProcessorCount, maximumCount: Environment.ProcessorCount, name: @"Local\WebPConverterMasterSemaphore");
                 Semaphore folderSemaphore = new Semaphore(initialCount: 1, maximumCount: 1, name: @"Local\WebPConverterFolderSemaphore");
                 Semaphore customSettingsSemaphore = new Semaphore(initialCount: 1, maximumCount: 1, name: @"Local\WebPConverterCustomSettingsSemaphore");
@@ -48,6 +53,7 @@ namespace Shell_WebP_Converter
                     {
                         throw new Exception("Timeout");
                     }
+                    masterSemaphoreAcquired = true;
                     if (debug)
                     {
                         AllocConsole();
@@ -61,7 +67,7 @@ namespace Shell_WebP_Converter
                         foreach (var arg in e.Args) { Console.WriteLine(arg); }
                     }
                     ParserResult<Options> parserResult = ParseArgs(e.Args);
-                    parserResult.WithNotParsed(er => { DisplayErrors(er); Environment.Exit(0); });
+                    parserResult.WithNotParsed(er => { DisplayErrors(er); });
                     string target = "";
                     parserResult.WithParsed(opts => { target = opts.Input; custom = opts.Mode == Models.PresetMode.Custom ? true : false; });
                     if (custom)
@@ -70,24 +76,20 @@ namespace Shell_WebP_Converter
                         {
                             if (!waitCurrentTaskMessageSemaphore.WaitOne(0))
                             {
-                                Environment.Exit(0);
+                                return;
                             }
-                            else
-                            {
-                                MessageBox.Show(Shell_WebP_Converter.Resources.Resources.NextTaskStartMustWaitCurrent);
-                                waitCurrentTaskMessageSemaphore.Release();
-                            }
-                            masterSemaphore.Release();
-                            Environment.Exit(0);
+                            waitCurrentTaskMessageSemaphoreAcquired = true;
+                            MessageBox.Show(Shell_WebP_Converter.Resources.Resources.NextTaskStartMustWaitCurrent);
+                            return;
                         }
+                        customSettingsSemaphoreAcquired = true;
                         parserResult.WithParsed(opts =>
                         {
 
                             CustomSettingsDialog customSettingsDialog = new CustomSettingsDialog(opts);
                             if (!customSettingsDialog.ShowDialog() ?? false)
                             {
-                                masterSemaphore.Release();
-                                Environment.Exit(0);
+                                return;
                             }
                         });
                     }
@@ -97,6 +99,7 @@ namespace Shell_WebP_Converter
                         {
                             throw new Exception("Timeout");
                         }
+                        folderSemaphoreAcquired = true;
                         inputIsFolder = true;
                     }
                     parserResult.WithParsed(opts => { (new CLI_Mode(opts)).Run(); });
@@ -104,11 +107,6 @@ namespace Shell_WebP_Converter
                     if (debug)
                     {
                         Console.ReadKey();
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        Environment.Exit(0);
                     }
                 }
                 catch (Exception ex)
@@ -118,33 +116,39 @@ namespace Shell_WebP_Converter
                     sb.Append(" | ");
                     sb.AppendLine(ex.ToString());
                     Log(sb.ToString());
-                    if (!errorMessageBoxSemaphore.WaitOne(0))
+                    if (errorMessageBoxSemaphore.WaitOne(0))
                     {
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
+                        errorMessageBoxSemaphoreAcquired = true;
                         MessageBox.Show($"{Shell_WebP_Converter.Resources.Resources.ConversionFail}");
-                        errorMessageBoxSemaphore.Release();
-                        Environment.Exit(0);
                     }
                 }
                 finally
                 {
-                    if (inputIsFolder)
+                    if (folderSemaphoreAcquired)
                     {
                         folderSemaphore.Release();
                     }
-                    if (custom)
+                    if (customSettingsSemaphoreAcquired)
                     {
                         customSettingsSemaphore.Release();
                     }
-                    masterSemaphore.Release();
+                    if (waitCurrentTaskMessageSemaphoreAcquired)
+                    {
+                        waitCurrentTaskMessageSemaphore.Release();
+                    }
+                    if (errorMessageBoxSemaphoreAcquired)
+                    {
+                        errorMessageBoxSemaphore.Release();
+                    }
+                    if (masterSemaphoreAcquired)
+                    {
+                        masterSemaphore.Release();
+                    }
                     if (debug)
                     {
                         Console.ReadLine();
-                        Environment.Exit(0);
                     }
+                    Environment.Exit(0);
                 }
             }
             else
