@@ -99,7 +99,7 @@ namespace Shell_WebP_Converter
                         {
                             throw new Exception("Timeout");
                         }
-                        folderSemaphoreAcquired = true;
+                        folderSemaphoreAcquired = true; 
                         inputIsFolder = true;
                     }
                     parserResult.WithParsed(opts => { (new CLI_Mode(opts)).Run(); });
