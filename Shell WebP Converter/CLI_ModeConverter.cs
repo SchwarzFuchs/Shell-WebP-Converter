@@ -142,7 +142,7 @@ namespace Shell_WebP_Converter.CLI
                             };
 
                             using (MemoryStream ms = converter())
-                            using (FileStream fs = File.Create(options.Output))
+                                    using (FileStream fs = File.Create(outputFile))
                             {
                                 ms.CopyTo(fs);
                             }
