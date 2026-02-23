@@ -160,17 +160,27 @@ namespace Shell_WebP_Converter
             
             var parserResult = ParseOptions<WebPConversionOptions>(args);
             
-            if (CheckParsingFailed(parserResult))
+            bool parseSucceeded = false;
+            WebPConversionOptions? parsedOptions = null;
+            
+            parserResult.WithParsed(opts => 
+            { 
+                parseSucceeded = true;
+                parsedOptions = opts;
+            });
+            
+            parserResult.WithNotParsed(er => 
+            { 
+                DisplayErrors(er);
+            });
+
+            if (!parseSucceeded || parsedOptions == null)
             {
                 return;
             }
 
-            string target = "";
-            bool custom = false;
-            parserResult.WithParsed(opts => { 
-                target = opts.Input; 
-                custom = opts.Mode == Models.PresetMode.Custom; 
-            });
+            string target = parsedOptions.Input;
+            bool custom = parsedOptions.Mode == Models.PresetMode.Custom;
 
             if (custom)
             {
@@ -186,17 +196,8 @@ namespace Shell_WebP_Converter
                 }
                 customSettingsSemaphoreAcquired = true;
                 
-                bool customDialogCancelled = false;
-                parserResult.WithParsed(opts =>
-                {
-                    CustomSettingsDialog customSettingsDialog = new CustomSettingsDialog(opts);
-                    if (!customSettingsDialog.ShowDialog() ?? false)
-                    {
-                        customDialogCancelled = true;
-                    }
-                });
-
-                if (customDialogCancelled)
+                CustomSettingsDialog customSettingsDialog = new CustomSettingsDialog(parsedOptions);
+                if (!customSettingsDialog.ShowDialog() ?? false)
                 {
                     return;
                 }
@@ -211,7 +212,7 @@ namespace Shell_WebP_Converter
                 folderSemaphoreAcquired = true;
             }
 
-            parserResult.WithParsed(opts => { (new CLI_ModeWebPConverter(opts)).Run(); });
+            (new CLI_ModeWebPConverter(parsedOptions)).Run();
         }
 
         private void ProcessJPGConversion(string[] args)
@@ -224,10 +225,12 @@ namespace Shell_WebP_Converter
             
             var parserResult = ParseOptions<JPGConversionOptions>(args);
             
-            if (!CheckParsingFailed(parserResult))
-            {
-                parserResult.WithParsed(opts => { (new CLI_ModeJPGConverter(opts)).Run(); });
-            }
+            parserResult.WithNotParsed(er => 
+            { 
+                DisplayErrors(er);
+            });
+            
+            parserResult.WithParsed(opts => { (new CLI_ModeJPGConverter(opts)).Run(); });
         }
 
         private void ProcessPNGConversion(string[] args)
@@ -240,10 +243,12 @@ namespace Shell_WebP_Converter
             
             var parserResult = ParseOptions<PNGConversionOptions>(args);
             
-            if (!CheckParsingFailed(parserResult))
-            {
-                parserResult.WithParsed(opts => { (new CLI_ModePNGConverter(opts)).Run(); });
-            }
+            parserResult.WithNotParsed(er => 
+            { 
+                DisplayErrors(er);
+            });
+            
+            parserResult.WithParsed(opts => { (new CLI_ModePNGConverter(opts)).Run(); });
         }
 
         private void DisplayHelpForOptions<T>(string[] args) where T : class
@@ -262,16 +267,6 @@ namespace Shell_WebP_Converter
                 p.IgnoreUnknownArguments = true;
                 p.HelpWriter = Console.Out;
             }).ParseArguments<T>(args);
-        }
-
-        private bool CheckParsingFailed<T>(ParserResult<T> parserResult) where T : class
-        {
-            bool failed = false;
-            parserResult.WithNotParsed(er => { 
-                DisplayErrors(er);
-                failed = true;
-            });
-            return failed;
         }
 
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
