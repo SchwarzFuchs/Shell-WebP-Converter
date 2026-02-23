@@ -212,7 +212,7 @@ namespace Shell_WebP_Converter.CustomElements
             }
         }
 
-        private DispatcherTimer popupTimer;
+        private DispatcherTimer? popupTimer;
         private void PostfixNameTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (windowsPathForbiddenSymbolsRegex.IsMatch(e.Text))

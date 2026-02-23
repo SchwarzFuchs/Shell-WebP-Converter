@@ -140,12 +140,12 @@ namespace Shell_WebP_Converter
                 RegistryHelper.RemoveAllConversionContextMenus(extensions);
                 using (RegistryKey key = Registry.CurrentUser.CreateSubKey(App.regKeyPath))
                 {
-                    key.SetValue("extensions", _extensions);
+                    key.SetValue("extensions", Extensions);
                     key.SetValue("addMenuEntryForFolders", AddConversionEntryForFolders);
                     key.SetValue("notifyWhenFolderProcessingEnds", NotifyWhenFolderProcessingEnds);
                     key.SetValue("overwriteFiles", OverwriteFiles);
                     key.SetValue("addConversionToJPG_PNG_Option", AddConversionToJPG_PNG_Option);
-                    List<Preset> presets;
+                    List<Preset>? presets;
                     if (ModeTabToggleSwitch.Position == ToggleSwitch.TogglePosition.Left)
                     {
                         key.SetValue("presets", PresetsTextBox.Text);

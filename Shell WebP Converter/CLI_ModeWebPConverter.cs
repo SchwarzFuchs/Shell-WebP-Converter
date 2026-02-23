@@ -55,7 +55,7 @@ namespace Shell_WebP_Converter.CLI
     internal class CLI_ModeWebPConverter
     {
         ProgressCounter FolderProcessingProgressCounter = new ProgressCounter();
-        TaskbarIcon TBI;
+        TaskbarIcon? TBI;
         WebPConversionOptions Options;
         public CLI_ModeWebPConverter(WebPConversionOptions options)
         {

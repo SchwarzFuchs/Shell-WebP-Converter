@@ -235,7 +235,7 @@ namespace Shell_WebP_Converter.CustomElements
             }
         }
 
-        private AdvancedPreset GetPresetAtPosition(Point position)
+        private AdvancedPreset? GetPresetAtPosition(Point position)
         {
             for (double xOffset = -20; xOffset <= 20; xOffset += 10)
             {
@@ -273,7 +273,7 @@ namespace Shell_WebP_Converter.CustomElements
             PresetsScrollViewer.ScrollToEnd();
         }
 
-        internal List<Preset> ParsePresets()
+        internal List<Preset>? ParsePresets()
         {
             try
             {
