@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Visibility="Collapsed">
                 <localCustom:ToggleSwitch x:Name="ModeTabToggleSwitch" Height="15" Position="Right" Width="26" IsThreePosition="False" LeftColor="#FF3C3C3C" CornerRadius="8" RightColor="#FF009B1A" MouseLeftButtonDown="ToggleSwitch_MouseLeftButtonDown" HorizontalAlignment="Left" Margin="5,4,0,0"></localCustom:ToggleSwitch>
                 <Label Content="{x:Static properties:Resources.AdvancedMode}" Margin="0,0,0,-3"></Label>
             </StackPanel>
