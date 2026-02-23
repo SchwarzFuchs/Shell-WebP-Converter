@@ -317,4 +317,19 @@
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>SSIM を N 以上に</value>
   </data>
+  <data name="AddOptionToConvertToJPG_PNG" xml:space="preserve">
+    <value>WebP ファイルを PNG/JPG に変換するオプションを追加</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>最高品質</value>
+  </data>
+  <data name="ConvertToJPG_PNG" xml:space="preserve">
+    <value>JPG/PNG に変換</value>
+  </data>
+  <data name="PNG_StandardFileSize" xml:space="preserve">
+    <value>PNG、標準的なファイルサイズ</value>
+  </data>
+  <data name="PNG_SmallerFileSize" xml:space="preserve">
+    <value>PNG、より小さいファイルサイズ</value>
+  </data>
 </root>

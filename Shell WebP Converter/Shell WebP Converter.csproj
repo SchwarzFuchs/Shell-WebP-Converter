@@ -11,9 +11,9 @@
 		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 		<SignAssembly>False</SignAssembly>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
-		<Version>$(VersionPrefix)2.3.2</Version>
+		<Version>$(VersionPrefix)2.4</Version>
 		<Title>Shell WebP Converter</Title>
-		<FileVersion>2.3.2</FileVersion>
+		<FileVersion>2.4</FileVersion>
 		<AssemblyVersion></AssemblyVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,6 +37,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
 		<PackageReference Include="Magick.NET-Q16-x64" Version="14.10.2" />
 		<PackageReference Include="Magick.NET.Core" Version="14.10.2" />

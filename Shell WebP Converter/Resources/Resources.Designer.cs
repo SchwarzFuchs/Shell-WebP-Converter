@@ -70,6 +70,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add an option to convert WebP files to PNG/JPG.
+        /// </summary>
+        public static string AddOptionToConvertToJPG_PNG {
+            get {
+                return ResourceManager.GetString("AddOptionToConvertToJPG_PNG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Advanced mode.
         /// </summary>
         public static string AdvancedMode {
@@ -147,6 +156,15 @@ namespace Shell_WebP_Converter.Resources {
         public static string ConversionFail {
             get {
                 return ResourceManager.GetString("ConversionFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert to JPG/PNG.
+        /// </summary>
+        public static string ConvertToJPG_PNG {
+            get {
+                return ResourceManager.GetString("ConvertToJPG_PNG", resourceCulture);
             }
         }
         
@@ -368,6 +386,15 @@ namespace Shell_WebP_Converter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum quality.
+        /// </summary>
+        public static string MaximumQuality {
+            get {
+                return ResourceManager.GetString("MaximumQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Medium quality.
         /// </summary>
         public static string MediumQuality {
@@ -482,6 +509,24 @@ namespace Shell_WebP_Converter.Resources {
         public static string OverwriteFilesWithTheSameNames {
             get {
                 return ResourceManager.GetString("OverwriteFilesWithTheSameNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PNG, smaller file size.
+        /// </summary>
+        public static string PNG_SmallerFileSize {
+            get {
+                return ResourceManager.GetString("PNG_SmallerFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PNG, standard file size .
+        /// </summary>
+        public static string PNG_StandardFileSize {
+            get {
+                return ResourceManager.GetString("PNG_StandardFileSize", resourceCulture);
             }
         }
         

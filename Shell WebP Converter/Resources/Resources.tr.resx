@@ -317,4 +317,19 @@ Sil ╳</value>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>SSIM değeri N olana kadar</value>
   </data>
+  <data name="AddOptionToConvertToJPG_PNG" xml:space="preserve">
+    <value>WebP dosyalarını PNG/JPG’ye dönüştürme seçeneği ekle</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Maksimum kalite</value>
+  </data>
+  <data name="ConvertToJPG_PNG" xml:space="preserve">
+    <value>JPG/PNG’ye dönüştür</value>
+  </data>
+  <data name="PNG_StandardFileSize" xml:space="preserve">
+    <value>PNG, standart dosya boyutu</value>
+  </data>
+  <data name="PNG_SmallerFileSize" xml:space="preserve">
+    <value>PNG, daha küçük dosya boyutu</value>
+  </data>
 </root>

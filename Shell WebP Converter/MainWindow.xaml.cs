@@ -14,69 +14,29 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using static System.Net.Mime.MediaTypeNames;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Shell_WebP_Converter
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    [ObservableObject]
+    public partial class MainWindow : Window
     {
-        private string converterPath;
-        private static readonly Regex presetsRegex = new Regex(@"^[0-9\s;-]*$");
-        private static readonly Regex extensionsRegex = new Regex(@"^[a-zA-Z0-9\s;]*$");
+        private string ConverterPath;
+        private static readonly Regex PresetsRegex = new Regex(@"^[0-9\s;-]*$");
+        private static readonly Regex ExtensionsRegex = new Regex(@"^[a-zA-Z0-9\s;]*$");
+        [ObservableProperty]
         private string _extensions = "jpeg; jpg; png; webp;";
+        [ObservableProperty]
         private bool _addConversionEntryForFolders = true;
+        [ObservableProperty]
         private bool _notifyWhenFolderProcessingEnds = true;
+        [ObservableProperty]
         private bool _overwriteFiles = true;
-        public string Extensions
-        {
-            get { return _extensions; }
-            set {
-                if (_extensions != value)
-                {
-                    _extensions = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public bool addConversionEntryForFolders
-        {
-            get { return _addConversionEntryForFolders; }
-            set
-            {
-                if (_addConversionEntryForFolders != value)
-                {
-                    _addConversionEntryForFolders = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public bool notifyWhenFolderProcessingEnds
-        {
-            get { return _notifyWhenFolderProcessingEnds; }
-            set
-            {
-                if (_notifyWhenFolderProcessingEnds != value)
-                {
-                    _notifyWhenFolderProcessingEnds = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public bool overwriteFiles
-        {
-            get { return _overwriteFiles; }
-            set
-            {
-                if (_overwriteFiles != value)
-                {
-                    _overwriteFiles = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        [ObservableProperty]
+        private bool _addConversionToJPG_PNG_Option = false;
 
         public MainWindow()
         {
@@ -94,7 +54,7 @@ namespace Shell_WebP_Converter
                 }
             }
             string title = $"{Shell_WebP_Converter.Resources.Resources.MainWindowTitle} — {Shell_WebP_Converter.Resources.Resources.Settings}";
-            converterPath = (Process.GetCurrentProcess().MainModule??throw new Exception("Program can't get the path of executable file")).FileName;
+            ConverterPath = (Process.GetCurrentProcess().MainModule??throw new Exception("Program can't get the path of executable file")).FileName;
             InitializeComponent();
             this.Title = title;
             using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(App.regKeyPath))
@@ -109,13 +69,14 @@ namespace Shell_WebP_Converter
                     value = key.GetValue("extensions")?.ToString();
                     if (value != null && value.Length > 0)
                     {
-                        Extensions = value;
+                        _extensions = value;
                     }
                     DeleteOriginalFileCheckbox.IsChecked = bool.Parse((key.GetValue("deleteOriginal") ?? "false").ToString() ?? "false");
-                    notifyWhenFolderProcessingEnds = bool.Parse((key.GetValue("notifyWhenFolderProcessingEnds") ?? "true").ToString() ?? "true");
-                    overwriteFiles = bool.Parse((key.GetValue("overwriteFiles") ?? "true").ToString() ?? "true");
-                    addConversionEntryForFolders = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "true").ToString() ?? "true");
+                    NotifyWhenFolderProcessingEnds = bool.Parse((key.GetValue("notifyWhenFolderProcessingEnds") ?? "true").ToString() ?? "true");
+                    OverwriteFiles = bool.Parse((key.GetValue("overwriteFiles") ?? "true").ToString() ?? "true");
+                    AddConversionEntryForFolders = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "true").ToString() ?? "true");
                     CompressionValueComboBox.SelectedIndex = byte.Parse((key.GetValue("compression") ?? "4").ToString() ?? "4");
+                    AddConversionToJPG_PNG_Option = bool.Parse((key.GetValue("addConversionToJPG_PNG_Option") ?? "false").ToString() ?? "false");
                     switch (key.GetValue("lastMode") ?? "advanced".ToString())
                     {
                         case "basic":
@@ -149,17 +110,14 @@ namespace Shell_WebP_Converter
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         private void PresetsTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !presetsRegex.IsMatch(e.Text);
+            e.Handled = !PresetsRegex.IsMatch(e.Text);
         }
 
         private void ExtensionsTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !extensionsRegex.IsMatch(e.Text);
+            e.Handled = !ExtensionsRegex.IsMatch(e.Text);
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -178,14 +136,15 @@ namespace Shell_WebP_Converter
         {
             try
             {
-                var extensions = ParseExtensions(Extensions, addConversionEntryForFolders);
-                RegistryHelper.RemoveWebPConversionContextMenu(extensions);
+                var extensions = ParseExtensions(Extensions, AddConversionEntryForFolders);
+                RegistryHelper.RemoveAllConversionContextMenus(extensions);
                 using (RegistryKey key = Registry.CurrentUser.CreateSubKey(App.regKeyPath))
                 {
-                    key.SetValue("extensions", Extensions);
-                    key.SetValue("addMenuEntryForFolders", addConversionEntryForFolders);
-                    key.SetValue("notifyWhenFolderProcessingEnds", notifyWhenFolderProcessingEnds);
-                    key.SetValue("overwriteFiles", overwriteFiles);
+                    key.SetValue("extensions", _extensions);
+                    key.SetValue("addMenuEntryForFolders", AddConversionEntryForFolders);
+                    key.SetValue("notifyWhenFolderProcessingEnds", NotifyWhenFolderProcessingEnds);
+                    key.SetValue("overwriteFiles", OverwriteFiles);
+                    key.SetValue("addConversionToJPG_PNG_Option", AddConversionToJPG_PNG_Option);
                     List<Preset> presets;
                     if (ModeTabToggleSwitch.Position == ToggleSwitch.TogglePosition.Left)
                     {
@@ -196,7 +155,7 @@ namespace Shell_WebP_Converter
                         presets = ParsePresetsBasic(PresetsTextBox.Text);
                         if (presets != null)
                         {
-                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds, overwriteFiles);
+                            RegistryHelper.AddConversionContextMenu(extensions, presets, ConverterPath, NotifyWhenFolderProcessingEnds, OverwriteFiles, AddConversionToJPG_PNG_Option);
                         }
                         else return;
                     }
@@ -208,7 +167,7 @@ namespace Shell_WebP_Converter
                             key.SetValue("lastMode", "advanced");
                             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter"));
                             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"), JsonConvert.SerializeObject(presets, Formatting.Indented));
-                            RegistryHelper.AddWebPConversionContextMenu(extensions, presets, converterPath, notifyWhenFolderProcessingEnds, overwriteFiles);
+                            RegistryHelper.AddConversionContextMenu(extensions, presets, ConverterPath, NotifyWhenFolderProcessingEnds, OverwriteFiles, AddConversionToJPG_PNG_Option);
                         }
                         else return;
                     }
@@ -233,7 +192,7 @@ namespace Shell_WebP_Converter
                         string? value = key.GetValue("extensions")?.ToString();
                         if (value != null && value.Length > 0)
                         {
-                            RegistryHelper.RemoveWebPConversionContextMenu(ParseExtensions(value));
+                            RegistryHelper.RemoveAllConversionContextMenus(ParseExtensions(value));
                         }
                     }
                 }
@@ -321,7 +280,7 @@ namespace Shell_WebP_Converter
             var stringValues = extensionsString.Replace(" ", "").Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var str in stringValues)
             {
-                if (RegistryHelper.allowedFileExtensions.Contains($".{str}."))
+                if (RegistryHelper.AllowedFileExtensions.Contains($".{str}."))
                 {
                     extensions.Add(str);
                 }

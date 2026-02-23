@@ -317,4 +317,19 @@
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>SSIM 至 N</value>
   </data>
+  <data name="AddOptionToConvertToJPG_PNG" xml:space="preserve">
+    <value>添加将 WebP 文件转换为 PNG/JPG 的选项</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>最高质量</value>
+  </data>
+  <data name="ConvertToJPG_PNG" xml:space="preserve">
+    <value>转换为 JPG/PNG</value>
+  </data>
+  <data name="PNG_StandardFileSize" xml:space="preserve">
+    <value>PNG，标准文件大小</value>
+  </data>
+  <data name="PNG_SmallerFileSize" xml:space="preserve">
+    <value>PNG，更小的文件大小</value>
+  </data>
 </root>

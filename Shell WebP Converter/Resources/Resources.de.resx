@@ -317,4 +317,19 @@ Löschen ╳</value>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>Bis zu einem SSIM von N</value>
   </data>
+  <data name="AddOptionToConvertToJPG_PNG" xml:space="preserve">
+    <value>Option hinzufügen, um WebP‑Dateien in PNG/JPG zu konvertieren</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Maximale Qualität</value>
+  </data>
+  <data name="ConvertToJPG_PNG" xml:space="preserve">
+    <value>In JPG/PNG konvertieren</value>
+  </data>
+  <data name="PNG_StandardFileSize" xml:space="preserve">
+    <value>PNG, standardmäßige Dateigröße</value>
+  </data>
+  <data name="PNG_SmallerFileSize" xml:space="preserve">
+    <value>PNG, kleinere Dateigröße</value>
+  </data>
 </root>

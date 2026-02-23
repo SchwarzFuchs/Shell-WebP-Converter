@@ -4,3 +4,4 @@ https://github.com/commandlineparser/commandline
 https://github.com/mathnet/mathnet-numerics
 https://github.com/hardcodet/wpf-notifyicon
 https://www.newtonsoft.com/json
+https://github.com/CommunityToolkit/dotnet

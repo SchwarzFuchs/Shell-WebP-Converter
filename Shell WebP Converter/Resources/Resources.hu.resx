@@ -317,4 +317,19 @@ Törlés ╳</value>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>SSIM értéke N-ig</value>
   </data>
+  <data name="AddOptionToConvertToJPG_PNG" xml:space="preserve">
+    <value>Opcion hozzáadása WebP fájlok PNG/JPG formátumba konvertálásához</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Maximális minőség</value>
+  </data>
+  <data name="ConvertToJPG_PNG" xml:space="preserve">
+    <value>Konvertálás JPG/PNG formátumba</value>
+  </data>
+  <data name="PNG_StandardFileSize" xml:space="preserve">
+    <value>PNG, szabványos fájlméret</value>
+  </data>
+  <data name="PNG_SmallerFileSize" xml:space="preserve">
+    <value>PNG, kisebb fájlméret</value>
+  </data>
 </root>

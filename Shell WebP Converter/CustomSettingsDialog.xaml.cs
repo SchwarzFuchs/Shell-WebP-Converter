@@ -25,14 +25,14 @@ namespace Shell_WebP_Converter
     /// </summary>
     public partial class CustomSettingsDialog : Window
     {
-        private static readonly Regex onlyDigitsRegex = new Regex(@"^[0-9]+$");
-        private static readonly Regex thresholdRegex = new Regex(@"^[0-9.,]+$");
-        private Options options { get; set; }
+        private static readonly Regex OnlyDigitsRegex = new Regex(@"^[0-9]+$");
+        private static readonly Regex ThresholdRegex = new Regex(@"^[0-9.,]+$");
+        private WebPConversionOptions Options { get; set; }
 
-        public CustomSettingsDialog(Options options)
+        public CustomSettingsDialog(WebPConversionOptions options)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            this.options = options;
+            this.Options = options;
             try
             {
                 InitializeComponent();
@@ -75,7 +75,7 @@ namespace Shell_WebP_Converter
         {
             TextBox tb = (TextBox)sender;
             string newText = tb.Text.Remove(tb.SelectionStart, tb.SelectionLength).Insert(tb.SelectionStart, e.Text);
-            if (!onlyDigitsRegex.IsMatch(e.Text) || newText.Length > 3)
+            if (!OnlyDigitsRegex.IsMatch(e.Text) || newText.Length > 3)
             {
                 e.Handled = true;
                 return;
@@ -99,7 +99,7 @@ namespace Shell_WebP_Converter
 
         private void CompressionThresholdTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !thresholdRegex.IsMatch(e.Text);
+            e.Handled = !ThresholdRegex.IsMatch(e.Text);
             string textPreview = ((TextBox)sender).Text + e.Text;
             if ((textPreview.Count(s => s == ',') + textPreview.Count(s => s == '.')) > 1)
             {
@@ -153,23 +153,23 @@ namespace Shell_WebP_Converter
             {
                 if (CustomQualitySettingsRadioButton.IsChecked.GetValueOrDefault())
                 {
-                    options.Mode = Models.PresetMode.ToNQuality;
-                    options.Quality = int.Parse(QualityTextBox.Text);
-                    options.Compression = (byte)CompressionValueComboBox.SelectedIndex;
+                    Options.Mode = Models.PresetMode.ToNQuality;
+                    Options.Quality = int.Parse(QualityTextBox.Text);
+                    Options.Compression = (byte)CompressionValueComboBox.SelectedIndex;
                 }
                 else
                 {
-                    options.Mode = Models.PresetMode.ToNSize;
-                    options.Quality = (int)(float.Parse(CompressionSizeThresholdTextBox.Text) * (float)Math.Pow(1024, SizeMeasurmentUnitComboBox.SelectedIndex + 1));
-                    if (options.Quality == 0) throw new Exception("Size can't be zero");
-                    options.Compression = 255;
-                    options.UseDownscaling = LowerTheResolutionWhenNecessaryCheckbox.IsChecked.GetValueOrDefault(true);
+                    Options.Mode = Models.PresetMode.ToNSize;
+                    Options.Quality = (int)(float.Parse(CompressionSizeThresholdTextBox.Text) * (float)Math.Pow(1024, SizeMeasurmentUnitComboBox.SelectedIndex + 1));
+                    if (Options.Quality == 0) throw new Exception("Size can't be zero");
+                    Options.Compression = 255;
+                    Options.UseDownscaling = LowerTheResolutionWhenNecessaryCheckbox.IsChecked.GetValueOrDefault(true);
                 }
-                options.DeleteOriginal = DeleteOriginalFileCheckbox.IsChecked.GetValueOrDefault(false);
-                options.Postfix = PostfixTextBox.Text.Trim();
-                if (AdvancedPreset.windowsPathForbiddenSymbolsRegex.IsMatch(options.Postfix))
+                Options.DeleteOriginal = DeleteOriginalFileCheckbox.IsChecked.GetValueOrDefault(false);
+                Options.Postfix = PostfixTextBox.Text.Trim();
+                if (AdvancedPreset.windowsPathForbiddenSymbolsRegex.IsMatch(Options.Postfix))
                 {
-                    throw new Exception($"{Shell_WebP_Converter.Resources.Resources.Postfix}: {options.Postfix} — {Shell_WebP_Converter.Resources.Resources.ForbiddenWindowsSymbols}");
+                    throw new Exception($"{Shell_WebP_Converter.Resources.Resources.Postfix}: {Options.Postfix} — {Shell_WebP_Converter.Resources.Resources.ForbiddenWindowsSymbols}");
                 }
                 try
                 {

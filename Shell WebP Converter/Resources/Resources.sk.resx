@@ -317,4 +317,19 @@ Odstrániť ╳</value>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>Do hodnoty SSIM N</value>
   </data>
+  <data name="AddOptionToConvertToJPG_PNG" xml:space="preserve">
+    <value>Pridať možnosť konverzie súborov WebP na PNG/JPG</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>Maximálna kvalita</value>
+  </data>
+  <data name="ConvertToJPG_PNG" xml:space="preserve">
+    <value>Konvertovať do JPG/PNG</value>
+  </data>
+  <data name="PNG_StandardFileSize" xml:space="preserve">
+    <value>PNG, štandardná veľkosť súboru</value>
+  </data>
+  <data name="PNG_SmallerFileSize" xml:space="preserve">
+    <value>PNG, menšia veľkosť súboru</value>
+  </data>
 </root>

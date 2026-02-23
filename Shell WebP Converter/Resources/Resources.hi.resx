@@ -317,4 +317,19 @@
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>SSIM को N तक</value>
   </data>
+  <data name="AddOptionToConvertToJPG_PNG" xml:space="preserve">
+    <value>WebP फ़ाइलों को PNG/JPG में बदलने का विकल्प जोड़ें</value>
+  </data>
+  <data name="MaximumQuality" xml:space="preserve">
+    <value>अधिकतम गुणवत्ता</value>
+  </data>
+  <data name="ConvertToJPG_PNG" xml:space="preserve">
+    <value>JPG/PNG में कनवर्ट करें</value>
+  </data>
+  <data name="PNG_StandardFileSize" xml:space="preserve">
+    <value>PNG, मानक फ़ाइल आकार</value>
+  </data>
+  <data name="PNG_SmallerFileSize" xml:space="preserve">
+    <value>PNG, छोटा फ़ाइल आकार</value>
+  </data>
 </root>
