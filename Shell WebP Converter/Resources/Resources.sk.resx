@@ -141,7 +141,7 @@
   <data name="DeleteOriginalFile" xml:space="preserve">
     <value>Odstrániť pôvodný súbor</value>
   </data>
-  <data name="CompressionLevel" xml:space="preserve">
+  <data name="CompressionLevelColon" xml:space="preserve">
     <value>Úroveň kompresie:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
@@ -244,7 +244,7 @@ Odstrániť ╳</value>
   <data name="QualityTooltip" xml:space="preserve">
     <value>Kvalita v percentách</value>
   </data>
-  <data name="CompressionTooltip" xml:space="preserve">
+  <data name="CompressionTooltipForWebP" xml:space="preserve">
     <value>Kompresia, od 0 do 6, vyššia hodnota znižuje veľkosť alebo zvyšuje kvalitu pri rovnakej veľkosti, tiež znižuje rýchlosť konverzie</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
@@ -331,5 +331,47 @@ Odstrániť ╳</value>
   </data>
   <data name="PNG_SmallerFileSize" xml:space="preserve">
     <value>PNG, menšia veľkosť súboru</value>
+  </data>
+  <data name="VisuallyIdenticalQuality" xml:space="preserve">
+    <value>Vizuálne identická kvalita</value>
+  </data>
+  <data name="ToCompressionN" xml:space="preserve">
+    <value>Do kompresie N</value>
+  </data>
+  <data name="CompressionTooltipForPNG" xml:space="preserve">
+    <value>Kompresia, od 0 do 9, vyššia hodnota vedie k menšej veľkosti a nižšej rýchlosti konverzie.</value>
+  </data>
+  <data name="FilterTooltipForPNG" xml:space="preserve">
+    <value>Filter, od 0 do 5, vyššia hodnota vedie k menšej veľkosti a nižšej rýchlosti konverzie.</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Bez kompresie</value>
+  </data>
+  <data name="MediumCompression" xml:space="preserve">
+    <value>Stredná kompresia</value>
+  </data>
+  <data name="MaximumCompression" xml:space="preserve">
+    <value>Maximálna kompresia</value>
+  </data>
+  <data name="HoverOverTheSettingToSeeATooltip" xml:space="preserve">
+    <value>Nadvihnite kurzor nad nastavenie a zobrazí sa tip</value>
+  </data>
+  <data name="NoCompressionLargeFileSize" xml:space="preserve">
+    <value>Bez kompresie, veľká veľkosť súboru</value>
+  </data>
+  <data name="MediumCompressionMediumFileSize" xml:space="preserve">
+    <value>Stredná kompresia, stredná veľkosť súboru</value>
+  </data>
+  <data name="MaximumCompressionSmallestFileSize" xml:space="preserve">
+    <value>Maximálna kompresia, najmenšia veľkosť súboru</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="FilterColon" xml:space="preserve">
+    <value>Filter:</value>
+  </data>
+  <data name="AnyToWebp" xml:space="preserve">
+    <value>Akýkoľvek ➔ WebP</value>
   </data>
 </root>

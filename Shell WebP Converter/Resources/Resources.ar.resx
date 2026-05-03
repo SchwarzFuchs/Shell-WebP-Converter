@@ -141,7 +141,7 @@
   <data name="DeleteOriginalFile" xml:space="preserve">
     <value>حذف الملف الأصلي</value>
   </data>
-  <data name="CompressionLevel" xml:space="preserve">
+  <data name="CompressionLevelColon" xml:space="preserve">
     <value>مستوى الضغط:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
@@ -244,7 +244,7 @@
   <data name="QualityTooltip" xml:space="preserve">
     <value>الجودة كنسبة مئوية</value>
   </data>
-  <data name="CompressionTooltip" xml:space="preserve">
+  <data name="CompressionTooltipForWebP" xml:space="preserve">
     <value>الضغط، من 0 إلى 6، قيمة أعلى تؤدي إلى تقليل الحجم أو زيادة الجودة بنفس الحجم، كما تؤدي إلى تقليل معدل التحويل</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
@@ -331,5 +331,47 @@
   </data>
   <data name="PNG_SmallerFileSize" xml:space="preserve">
     <value>‏PNG، حجم ملف أصغر</value>
+  </data>
+  <data name="VisuallyIdenticalQuality" xml:space="preserve">
+    <value>جودة متطابقة بصريًا</value>
+  </data>
+  <data name="ToCompressionN" xml:space="preserve">
+    <value>إلى ضغط N</value>
+  </data>
+  <data name="CompressionTooltipForPNG" xml:space="preserve">
+    <value>الضغط، من 0 إلى 9، تؤدي القيمة الأعلى إلى تقليل الحجم وإبطاء سرعة التحويل.</value>
+  </data>
+  <data name="FilterTooltipForPNG" xml:space="preserve">
+    <value>مرشح، من 0 إلى 5، تؤدي القيمة الأعلى إلى تقليل الحجم وإبطاء سرعة التحويل.</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>بدون ضغط</value>
+  </data>
+  <data name="MediumCompression" xml:space="preserve">
+    <value>ضغط متوسط</value>
+  </data>
+  <data name="MaximumCompression" xml:space="preserve">
+    <value>أقصى ضغط</value>
+  </data>
+  <data name="HoverOverTheSettingToSeeATooltip" xml:space="preserve">
+    <value>مرّر المؤشر فوق الإعداد لعرض التلميح</value>
+  </data>
+  <data name="NoCompressionLargeFileSize" xml:space="preserve">
+    <value>بدون ضغط، حجم ملف كبير</value>
+  </data>
+  <data name="MediumCompressionMediumFileSize" xml:space="preserve">
+    <value>ضغط متوسط، حجم ملف متوسط</value>
+  </data>
+  <data name="MaximumCompressionSmallestFileSize" xml:space="preserve">
+    <value>أقصى ضغط، أصغر حجم للملف</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>فلتر</value>
+  </data>
+  <data name="FilterColon" xml:space="preserve">
+    <value>فلتر:</value>
+  </data>
+  <data name="AnyToWebp" xml:space="preserve">
+    <value> أيّ ➔ WebP</value>
   </data>
 </root>

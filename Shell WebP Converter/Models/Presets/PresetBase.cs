@@ -6,22 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shell_WebP_Converter.Models
 {
-    internal class Preset
+    public class PresetBase
     {
         public string Name { get; set; }
         public string Postfix { get; set; }
-        public PresetMode PresetMode { get; set; }
-        public int Quality { get; set; }
-        public byte Compression { get; set; }
         public bool DeleteOriginal { get; set; } = false;
         public bool UseDownscaling { get; set; } = false;
 
-    }
-    public enum PresetMode
-    {
-        ToNQuality,
-        ToNSize,
-        Custom,
-        ToN_SSIM
     }
 }

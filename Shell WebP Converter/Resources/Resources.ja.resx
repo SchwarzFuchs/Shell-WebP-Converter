@@ -141,7 +141,7 @@
   <data name="DeleteOriginalFile" xml:space="preserve">
     <value>元のファイルを削除</value>
   </data>
-  <data name="CompressionLevel" xml:space="preserve">
+  <data name="CompressionLevelColon" xml:space="preserve">
     <value>圧縮レベル:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
@@ -244,7 +244,7 @@
   <data name="QualityTooltip" xml:space="preserve">
     <value>パーセンテージとしての品質</value>
   </data>
-  <data name="CompressionTooltip" xml:space="preserve">
+  <data name="CompressionTooltipForWebP" xml:space="preserve">
     <value>圧縮は0から6までで、値が大きいほどサイズが小さくなり、同じサイズで品質が向上し、変換速度が低下します</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
@@ -331,5 +331,47 @@
   </data>
   <data name="PNG_SmallerFileSize" xml:space="preserve">
     <value>PNG、より小さいファイルサイズ</value>
+  </data>
+  <data name="VisuallyIdenticalQuality" xml:space="preserve">
+    <value>視覚的に同一の品質</value>
+  </data>
+  <data name="ToCompressionN" xml:space="preserve">
+    <value>圧縮 N まで</value>
+  </data>
+  <data name="CompressionTooltipForPNG" xml:space="preserve">
+    <value>圧縮、0〜9。値が高いほどサイズが小さくなり、変換速度が低下します。</value>
+  </data>
+  <data name="FilterTooltipForPNG" xml:space="preserve">
+    <value>フィルター、0〜5。値が高いほどサイズが小さくなり、変換速度が低下します。</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>非圧縮</value>
+  </data>
+  <data name="MediumCompression" xml:space="preserve">
+    <value>中程度の圧縮</value>
+  </data>
+  <data name="MaximumCompression" xml:space="preserve">
+    <value>最大圧縮</value>
+  </data>
+  <data name="HoverOverTheSettingToSeeATooltip" xml:space="preserve">
+    <value>設定にカーソルを合わせるとヒントが表示されます</value>
+  </data>
+  <data name="NoCompressionLargeFileSize" xml:space="preserve">
+    <value>非圧縮、大きなファイルサイズ</value>
+  </data>
+  <data name="MediumCompressionMediumFileSize" xml:space="preserve">
+    <value>中程度の圧縮、中程度のファイルサイズ</value>
+  </data>
+  <data name="MaximumCompressionSmallestFileSize" xml:space="preserve">
+    <value>最大圧縮、最小のファイルサイズ</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>フィルター</value>
+  </data>
+  <data name="FilterColon" xml:space="preserve">
+    <value>フィルター:</value>
+  </data>
+  <data name="AnyToWebp" xml:space="preserve">
+    <value>任意 ➔ WebP</value>
   </data>
 </root>

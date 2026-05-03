@@ -37,7 +37,7 @@ namespace Shell_WebP_Converter.CLI
         public byte Compression { get; set; }
 
         [Option('m', "mode", Required = false, HelpText = "Mode, 0-3. 0 — ToNQuality, 1 — ToNSize, 2 — Customizable, 3 — ToSameQuality")]
-        public PresetMode Mode { get; set; } = PresetMode.ToNQuality;
+        public LossyPresetModes Mode { get; set; } = LossyPresetModes.ToNQuality;
 
         [Option("useDownscaling", Required = false, HelpText = "Use downscaling when it's not possible to achive designated size threshold in custom mode")]
         public bool UseDownscaling { get; set; } = false;
@@ -52,66 +52,49 @@ namespace Shell_WebP_Converter.CLI
         public bool OverwriteFiles { get; set; }
 
     }
-    internal class CLI_ModeWebPConverter
+    internal class CLI_ModeWebPConverter : CLIConverterBase
     {
         ProgressCounter FolderProcessingProgressCounter = new ProgressCounter();
         TaskbarIcon? TBI;
         WebPConversionOptions Options;
+        
         public CLI_ModeWebPConverter(WebPConversionOptions options)
+            : base(options.Input, options.Output, options.DeleteOriginal, options.OverwriteFiles)
         {
             this.Options = options;
         }
 
-        public void Run()
+        protected override string GenerateDefaultOutputPath(string inputFile)
         {
+            string fileName = Path.GetFileNameWithoutExtension(inputFile) + Options.Postfix;
+            return Path.Combine(Path.GetDirectoryName(inputFile) ?? "", fileName + ".webp");
+        }
 
-            if (File.Exists(Options.Input)) //input is file
+        protected override MemoryStream ConvertFile(string inputFile)
+        {
+            return Options.Mode switch
             {
-                if (Options.Output.Length == 0)
-                {
-                    string fileName = Path.GetFileNameWithoutExtension(Options.Input) + Options.Postfix;
-                    Options.Output = Path.Combine(Path.GetDirectoryName(Options.Input) ?? "", fileName + ".webp");
-                }
+                LossyPresetModes.ToNSize => CompressToThreshold(Options.Quality, inputFile, Options.UseDownscaling),
+                LossyPresetModes.ToNQuality => ConvertSingleFile(inputFile, Options.Quality, Options.Compression),
+                LossyPresetModes.ToN_SSIM => ConvertToN_SSIM(inputFile, (double)Options.Quality / 10000.0),
+                _ => throw new NotSupportedException()
+            };
+        }
 
-                if (!Options.OverwriteFiles)
-                {
-                    Options.Output = ConverterCommon.GetUniqueFilePath(Options.Output);
-                }
-
-                try
-                {
-                    MemoryStream ms = Options.Mode switch
-                    {
-                        PresetMode.ToNSize => CompressToThreshold(Options.Quality, Options.Input, Options.UseDownscaling),
-                        PresetMode.ToNQuality => ConvertSingleFile(Options.Input, Options.Quality, Options.Compression),
-                        PresetMode.ToN_SSIM => ConvertToSameQuality(Options.Input),
-                        _ => throw new NotSupportedException()
-                    };
-                    using (ms)
-                    using (FileStream fs = File.Create(Options.Output))
-                    {
-                        ms.CopyTo(fs);
-                    }
-
-                    if (Options.DeleteOriginal == true && Options.Input != Options.Output)
-                    {
-                        File.Delete(Options.Input);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    App.Log(Options.Input + " | " + ex.Message);
-                    throw ex;
-                }
+        public override void Run()
+        {
+            if (File.Exists(Input)) //input is file
+            {
+                base.Run();
             }
-            else if (Directory.Exists(Options.Input)) //input is folder
+            else if (Directory.Exists(Input)) //input is folder
             {
-                if (Options.Output.Length == 0 || !Directory.Exists(Options.Output))
+                if (Output.Length == 0 || !Directory.Exists(Output))
                 {
-                    Options.Output = Options.Input;
+                    Output = Input;
                 }
                 string[] supportedExtensions = GetAllowedExtensionsFromRegistry();
-                List<string> filesToConvert = GetFilesRecursively(Options.Input, supportedExtensions);
+                List<string> filesToConvert = GetFilesRecursively(Input, supportedExtensions);
                 FolderProcessingProgressCounter.tasksToBeDone = filesToConvert.Count;
                 FolderProcessingProgressCounter.tasksCompleted = 0;
                 object locker = new object();
@@ -126,12 +109,12 @@ namespace Shell_WebP_Converter.CLI
                         {
                             Parallel.ForEach(filesToConvert, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, file =>
                             {
-                                string relativePath = Path.GetRelativePath(Options.Input, file);
+                                string relativePath = Path.GetRelativePath(Input, file);
                                 string fileName = Path.GetFileNameWithoutExtension(file) + Options.Postfix;
-                                string outputDir = Path.Combine(Options.Output, Path.GetDirectoryName(relativePath) ?? "");
+                                string outputDir = Path.Combine(Output, Path.GetDirectoryName(relativePath) ?? "");
                                 string outputFile = Path.Combine(outputDir, fileName + ".webp");
 
-                                if (!Options.OverwriteFiles)
+                                if (!OverwriteFiles)
                                 {
                                     outputFile = ConverterCommon.GetUniqueFilePath(outputFile);
                                 }
@@ -144,9 +127,9 @@ namespace Shell_WebP_Converter.CLI
                                 {
                                     Func<MemoryStream> converter = Options.Mode switch
                                     {
-                                        PresetMode.ToNSize => () => CompressToThreshold(Options.Quality, file, Options.UseDownscaling),
-                                        PresetMode.ToNQuality => () => ConvertSingleFile(file, Options.Quality, Options.Compression),
-                                        PresetMode.ToN_SSIM => () => ConvertToSameQuality(file),
+                                        LossyPresetModes.ToNSize => () => CompressToThreshold(Options.Quality, file, Options.UseDownscaling),
+                                        LossyPresetModes.ToNQuality => () => ConvertSingleFile(file, Options.Quality, Options.Compression),
+                                        LossyPresetModes.ToN_SSIM => () => ConvertToN_SSIM(file, (double)Options.Quality / 10000.0),
                                         _ => throw new NotSupportedException($"Unknown mode: {Options.Mode}")
                                     };
 
@@ -155,7 +138,7 @@ namespace Shell_WebP_Converter.CLI
                                     {
                                         ms.CopyTo(fs);
                                     }
-                                    if (Options.DeleteOriginal == true && file != outputFile)
+                                    if (DeleteOriginal && file != outputFile)
                                     {
                                         File.Delete(file);
                                     }
@@ -210,7 +193,7 @@ namespace Shell_WebP_Converter.CLI
                 {
                     if (Options.NotifyWhenFolderProcessingEnds == true)
                     {
-                        TBI.ShowBalloonTip("Shell WebP converter", String.Format(Shell_WebP_Converter.Resources.Resources.ObjectProcessingCompleted, Path.GetFileName(Options.Input)), BalloonIcon.Info);
+                        TBI.ShowBalloonTip("Shell WebP converter", String.Format(Shell_WebP_Converter.Resources.Resources.ObjectProcessingCompleted, Path.GetFileName(Input)), BalloonIcon.Info);
                     }
                     TBI.Dispose();
                 }
@@ -225,26 +208,7 @@ namespace Shell_WebP_Converter.CLI
             }
         }
 
-        List<string> GetFilesRecursively(string directory, string[] extensions)
-        {
-            return Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
-                            .Where(file => extensions.Contains(Path.GetExtension(file).ToLowerInvariant()))
-                            .ToList();
-        }
-
-        string[] GetAllowedExtensionsFromRegistry()
-        {
-            using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(App.regKeyPath))
-            {
-                string value = key?.GetValue("extensions")?.ToString() ?? "";
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("No files with allowed extensions were found");
-                }
-                return value.Split(';').Select(ext => "." + ext.Trim().ToLowerInvariant()).ToArray();
-            }
-        }
-        MemoryStream ConvertSingleFile(string inputFile, int quality, int compression)
+        private MemoryStream ConvertSingleFile(string inputFile, int quality, int compression)
         {
             using (MagickImageCollection images = new MagickImageCollection(inputFile))
             {
@@ -258,10 +222,7 @@ namespace Shell_WebP_Converter.CLI
                 {
                     compression = minPossibleCompression;
                 }
-                if (images[0].Width >= 16384 || images[0].Height >= 16384)
-                {
-                    throw new Exception($"Image {inputFile} is too big");
-                }
+                WebP_SizeCheck(images[0], inputFile);
                 WebPWriteDefines defines = new WebPWriteDefines();
                 if (quality == 100)
                 {
@@ -288,7 +249,7 @@ namespace Shell_WebP_Converter.CLI
             }
         }
 
-        MemoryStream CompressToThreshold(int threshold, string inputFile, bool useDownscaling)
+        private MemoryStream CompressToThreshold(int threshold, string inputFile, bool useDownscaling)
         {
             using (MagickImageCollection images = new MagickImageCollection(inputFile))
             {
@@ -297,10 +258,7 @@ namespace Shell_WebP_Converter.CLI
                     images.Coalesce();
                     images.OptimizePlus();
                 }
-                if (images[0].Width >= 16384 || images[0].Height >= 16384)
-                {
-                    throw new Exception($"Image {inputFile} is too big");
-                }
+                WebP_SizeCheck(images[0], inputFile);
                 byte compression = GetMinimumPossibleCompression(images[0].Width * images[0].Height);
                 if (compression == 0) compression = 1;
 
@@ -342,7 +300,7 @@ namespace Shell_WebP_Converter.CLI
                 {
                     if (useDownscaling)
                     {
-                        originalImages = new MagickImageCollection(images);
+                        originalImages = (MagickImageCollection)images.Clone();
                     }
                     while (resizesCount <= resizesThreshold)
                     {
@@ -471,15 +429,11 @@ namespace Shell_WebP_Converter.CLI
             }
         }
 
-        MemoryStream ConvertToSameQuality(string inputFile)
+        private MemoryStream ConvertToN_SSIM(string inputFile, double SSIM_Threshold)
         {
-            double SSIM_threshold = (double)Options.Quality / 10000.0;
             using (MagickImage image = new MagickImage(inputFile))
             {
-                if (image.Width >= 16384 || image.Height >= 16384)
-                {
-                    throw new Exception($"Image {inputFile} is too big");
-                }
+                WebP_SizeCheck(image, inputFile);
                 byte compression = GetMinimumPossibleCompression(image.Width * image.Height);
                 if (compression == 0) compression = 1;
                 image.Format = MagickFormat.WebP;
@@ -487,7 +441,7 @@ namespace Shell_WebP_Converter.CLI
                 CubicSpline spline = GetQualityPredictor(image);
                 for (int i = 15; i <= 99; i++)
                 {
-                    if (spline.Interpolate(i) < Math.Max(0, SSIM_threshold - 0.005))
+                    if (spline.Interpolate(i) < Math.Max(0, SSIM_Threshold - 0.005))
                     {
                         continue;
                     }
@@ -516,7 +470,7 @@ namespace Shell_WebP_Converter.CLI
                         using (MagickImage newImage = new MagickImage(ms))
                         {
                             newImage.ColorSpace = ColorSpace.sRGB;
-                            if ((1 - 2 * image.Compare(newImage, ErrorMetric.StructuralSimilarity)) > SSIM_threshold)
+                            if ((1 - 2 * image.Compare(newImage, ErrorMetric.StructuralSimilarity)) > SSIM_Threshold)
                             {
                                 image.Settings.SetDefine("webp:method", Options.Compression.ToString());
                                 MemoryStream resultMs = new MemoryStream();
@@ -547,7 +501,27 @@ namespace Shell_WebP_Converter.CLI
             }
             else return 3;
         }
-        public CubicSpline GetSizePredictor(MagickImageCollection images)
+
+        List<string> GetFilesRecursively(string directory, string[] extensions)
+        {
+            return Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories)
+                            .Where(file => extensions.Contains(Path.GetExtension(file).ToLowerInvariant()))
+                            .ToList();
+        }
+
+        string[] GetAllowedExtensionsFromRegistry()
+        {
+            using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(App.regKeyPath))
+            {
+                string value = key?.GetValue("extensions")?.ToString() ?? "";
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("No files with allowed extensions were found");
+                }
+                return value.Split(';').Select(ext => "." + ext.Trim().ToLowerInvariant()).ToArray();
+            }
+        }
+        private CubicSpline GetSizePredictor(MagickImageCollection images)
         {
             double[] quality = { 15, 45, 80, 93, 99 };
             double[] size = new double[quality.Length];
@@ -580,7 +554,7 @@ namespace Shell_WebP_Converter.CLI
             GC.Collect(int.MaxValue, GCCollectionMode.Forced, false, true);
             return CubicSpline.InterpolatePchipSorted(quality, size);
         }
-        public CubicSpline GetQualityPredictor(MagickImage image)
+        private CubicSpline GetQualityPredictor(MagickImage image)
         {
             double[] quality = { 15, 45, 80, 93, 99 };
             double[] SSIM = new double[quality.Length];
@@ -614,6 +588,13 @@ namespace Shell_WebP_Converter.CLI
             TBI.ToolTipText = $"0/{FolderProcessingProgressCounter.tasksToBeDone}";
         }
 
+        void WebP_SizeCheck(IMagickImage<ushort> image, string inputFile)
+        {
+            if (image.Width >= 16384 || image.Height >= 16384)
+            {
+                throw new Exception($"Image {inputFile} is too big");
+            }
+        }
         void UpdateProgressWhileProcessing(Func<bool> isCompleted)
         {
             try
@@ -634,19 +615,6 @@ namespace Shell_WebP_Converter.CLI
             catch (Exception ex)
             {
                 App.Log("ProgressIcon error: " + ex.Message);
-            }
-        }
-
-        private struct ProgressCounter
-        {
-            public int tasksToBeDone;
-            public int tasksCompleted;
-            public float progress
-            {
-                get
-                {
-                    return MathF.Round((float)tasksCompleted / (float)tasksToBeDone * 100, 1);
-                }
             }
         }
     }

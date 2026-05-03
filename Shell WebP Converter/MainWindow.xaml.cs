@@ -1,49 +1,35 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
-using Shell_WebP_Converter.CustomElements;
-using Shell_WebP_Converter.Models;
+﻿using Shell_WebP_Converter.ViewModels;
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
-using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Win32;
+using System.Linq;
+using Newtonsoft.Json;
+using Shell_WebP_Converter.CustomElements;
+using Shell_WebP_Converter.Models;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Shell_WebP_Converter
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    [ObservableObject]
     public partial class MainWindow : Window
     {
-        private string ConverterPath;
+        private MainWindowViewModel ViewModel { get; set; }
         private static readonly Regex PresetsRegex = new Regex(@"^[0-9\s;-]*$");
         private static readonly Regex ExtensionsRegex = new Regex(@"^[a-zA-Z0-9\s;]*$");
-        [ObservableProperty]
-        private string _extensions = "jpeg; jpg; png; webp;";
-        [ObservableProperty]
-        private bool _addConversionEntryForFolders = true;
-        [ObservableProperty]
-        private bool _notifyWhenFolderProcessingEnds = true;
-        [ObservableProperty]
-        private bool _overwriteFiles = true;
-        [ObservableProperty]
-        private bool _addConversionToJPG_PNG_Option = false;
 
         public MainWindow()
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; 
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
             {
-                DataContext = this;
                 if (key != null)
                 {
                     int value = (int)(key.GetValue("AppsUseLightTheme") ?? 1);
@@ -53,61 +39,53 @@ namespace Shell_WebP_Converter
                     }
                 }
             }
+
+            ViewModel = new MainWindowViewModel();
             string title = $"{Shell_WebP_Converter.Resources.Resources.MainWindowTitle} — {Shell_WebP_Converter.Resources.Resources.Settings}";
-            ConverterPath = (Process.GetCurrentProcess().MainModule??throw new Exception("Program can't get the path of executable file")).FileName;
             InitializeComponent();
             this.Title = title;
-            using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(App.regKeyPath))
+            DataContext = ViewModel;
+            UpdateModeTabPosition();
+            LoadAdvancedPresets();
+        }
+
+        private void LoadAdvancedPresets()
+        {
+            string appDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter");
+            Directory.CreateDirectory(appDataDir);
+            string webpFile = Path.Combine(appDataDir, "Advanced presets list.json"); //Kept the original name for backward compatibility, but it will only be used for WebP presets.
+            string jpgFile = Path.Combine(appDataDir, "Advanced presets list JPG.json");
+            string pngFile = Path.Combine(appDataDir, "Advanced presets list PNG.json");
+
+            List<WebP_Preset> webPresetsLoaded = AdvancedPresetsTableWebP.demonstrationWebP_PresetSet;
+            if (File.Exists(webpFile))
             {
-                if (key != null)
-                {
-                    string? value = key.GetValue("presets")?.ToString();
-                    if (value != null && value.Length > 0)
-                    {
-                        PresetsTextBox.Text = value;
-                    }
-                    value = key.GetValue("extensions")?.ToString();
-                    if (value != null && value.Length > 0)
-                    {
-                        _extensions = value;
-                    }
-                    DeleteOriginalFileCheckbox.IsChecked = bool.Parse((key.GetValue("deleteOriginal") ?? "false").ToString() ?? "false");
-                    NotifyWhenFolderProcessingEnds = bool.Parse((key.GetValue("notifyWhenFolderProcessingEnds") ?? "true").ToString() ?? "true");
-                    OverwriteFiles = bool.Parse((key.GetValue("overwriteFiles") ?? "true").ToString() ?? "true");
-                    AddConversionEntryForFolders = bool.Parse((key.GetValue("addMenuEntryForFolders") ?? "true").ToString() ?? "true");
-                    CompressionValueComboBox.SelectedIndex = byte.Parse((key.GetValue("compression") ?? "4").ToString() ?? "4");
-                    AddConversionToJPG_PNG_Option = bool.Parse((key.GetValue("addConversionToJPG_PNG_Option") ?? "false").ToString() ?? "false");
-                    switch (key.GetValue("lastMode") ?? "advanced".ToString())
-                    {
-                        case "basic":
-                            {
-                                ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Left;
-                                MainTabControl.SelectedIndex = 0;
-                                break;
-                            };
-                        case "advanced":
-                            {
-                                ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Right;
-                                MainTabControl.SelectedIndex = 1;
-                                break;
-                            }
-                        default:
-                            {
-                                ModeTabToggleSwitch.Position = ToggleSwitch.TogglePosition.Right;
-                                MainTabControl.SelectedIndex = 1;
-                                break;
-                            }
-                    }
-                }
+                webPresetsLoaded = JsonConvert.DeserializeObject<List<WebP_Preset>>(File.ReadAllText(webpFile)) ?? AdvancedPresetsTableWebP.demonstrationWebP_PresetSet;
             }
-            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json")))
+
+            List<JPG_Preset> jpgPresetsLoaded = AdvancedPresetsTableJPG.demonstrationJPG_PresetSet;
+            if (File.Exists(jpgFile))
             {
-                AdvancedPresetsTable.FillPresetsGridFromList((List<Preset>)(JsonConvert.DeserializeObject<List<Preset>>(File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"))) ?? new List<Preset>()));
+                jpgPresetsLoaded = JsonConvert.DeserializeObject<List<JPG_Preset>>(File.ReadAllText(jpgFile)) ?? jpgPresetsLoaded;
             }
-            else
+
+            List<PNG_Preset> pngPresetsLoaded = AdvancedPresetsTablePNG.demonstrationPNG_PresetSet;
+            if (File.Exists(pngFile))
             {
-                AdvancedPresetsTable.FillPresetsGridFromList(AdvancedPresetsTable.demonstrationPresetSet);
+                pngPresetsLoaded = JsonConvert.DeserializeObject<List<PNG_Preset>>(File.ReadAllText(pngFile)) ?? pngPresetsLoaded;
             }
+
+            AdvancedPresetsTableWebP.FillPresetsGridFromList(webPresetsLoaded);
+            AdvancedPresetsTableJPG.FillPresetsGridFromList(jpgPresetsLoaded);
+            AdvancedPresetsTablePNG.FillPresetsGridFromList(pngPresetsLoaded);
+        }
+
+        private void UpdateModeTabPosition()
+        {
+            if (ModeTabToggleSwitch == null) return;
+            ModeTabToggleSwitch.Position = ViewModel.ModeTabIndex == 0
+                ? CustomElements.ToggleSwitch.TogglePosition.Left
+                : CustomElements.ToggleSwitch.TogglePosition.Right;
         }
 
         private void PresetsTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -134,83 +112,8 @@ namespace Shell_WebP_Converter
 
         private void UpdateMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var extensions = ParseExtensions(Extensions, AddConversionEntryForFolders);
-                RegistryHelper.RemoveAllConversionContextMenus(extensions);
-                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(App.regKeyPath))
-                {
-                    key.SetValue("extensions", Extensions);
-                    key.SetValue("addMenuEntryForFolders", AddConversionEntryForFolders);
-                    key.SetValue("notifyWhenFolderProcessingEnds", NotifyWhenFolderProcessingEnds);
-                    key.SetValue("overwriteFiles", OverwriteFiles);
-                    key.SetValue("addConversionToJPG_PNG_Option", AddConversionToJPG_PNG_Option);
-                    List<Preset>? presets;
-                    if (ModeTabToggleSwitch.Position == ToggleSwitch.TogglePosition.Left)
-                    {
-                        key.SetValue("presets", PresetsTextBox.Text);
-                        key.SetValue("compression", CompressionValueComboBox.SelectedIndex);
-                        key.SetValue("deleteOriginal", DeleteOriginalFileCheckbox.IsChecked ?? false);
-                        key.SetValue("lastMode", "basic");
-                        presets = ParsePresetsBasic(PresetsTextBox.Text);
-                        if (presets != null)
-                        {
-                            RegistryHelper.AddConversionContextMenu(extensions, presets, ConverterPath, NotifyWhenFolderProcessingEnds, OverwriteFiles, AddConversionToJPG_PNG_Option);
-                        }
-                        else return;
-                    }
-                    else if (ModeTabToggleSwitch.Position == ToggleSwitch.TogglePosition.Right)
-                    {
-                        presets = AdvancedPresetsTable.ParsePresets();
-                        if (presets != null)
-                        {
-                            key.SetValue("lastMode", "advanced");
-                            Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter"));
-                            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Shell WebP Converter", "Advanced presets list.json"), JsonConvert.SerializeObject(presets, Formatting.Indented));
-                            RegistryHelper.AddConversionContextMenu(extensions, presets, ConverterPath, NotifyWhenFolderProcessingEnds, OverwriteFiles, AddConversionToJPG_PNG_Option);
-                        }
-                        else return;
-                    }
-                }
-                MessageBox.Show(Shell_WebP_Converter.Resources.Resources.MenuUpdateSuccess);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void ClearMenuButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(App.regKeyPath))
-                {
-                    if (key != null)
-                    {
-                        string? value = key.GetValue("extensions")?.ToString();
-                        if (value != null && value.Length > 0)
-                        {
-                            RegistryHelper.RemoveAllConversionContextMenus(ParseExtensions(value));
-                        }
-                    }
-                }
-                MessageBox.Show(Shell_WebP_Converter.Resources.Resources.MenuClearSuccess);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void DeleteOriginalFileCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            var presetsTablesInfo = (AdvancedPresetsTableWebP, AdvancedPresetsTableJPG, AdvancedPresetsTablePNG);
+            ViewModel.UpdateMenuCommand.Execute(presetsTablesInfo);
         }
 
         void TurnDarkThemeOff()
@@ -219,85 +122,37 @@ namespace Shell_WebP_Converter
             if (Theme != null) System.Windows.Application.Current.Resources.MergedDictionaries.Remove(Theme);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
         private void ToggleSwitch_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ToggleSwitch.TogglePosition position = ((ToggleSwitch)sender).Position;
-            if (position == ToggleSwitch.TogglePosition.Left)
+            CustomElements.ToggleSwitch.TogglePosition position = ((CustomElements.ToggleSwitch)sender).Position;
+            if (position == CustomElements.ToggleSwitch.TogglePosition.Left)
             {
                 MainTabControl.SelectedIndex = 0;
+                ViewModel.ModeTabIndex = 0;
             }
-            else if (position == ToggleSwitch.TogglePosition.Right) 
+            else if (position == CustomElements.ToggleSwitch.TogglePosition.Right) 
             { 
                 MainTabControl.SelectedIndex = 1;
+                ViewModel.ModeTabIndex = 1;
             }
         }
 
-        internal List<Preset> ParsePresetsBasic(string presetsString)
+        private void PresetsRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            List<Preset> presets = new List<Preset>();
-            if (string.IsNullOrWhiteSpace(presetsString))
-            {
-                throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.EmptyPresetsList}");
-            }
-            var stringValues = presetsString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var str in stringValues)
-            {
-                if (int.TryParse(str.Trim(), out int number))
-                {
-                    if (number >= -1 && number <= 100)
-                    {
-                        presets.Add(new Preset { PresetMode = number == -1 ? PresetMode.Custom : PresetMode.ToNQuality, Quality = number, Compression = (byte)CompressionValueComboBox.SelectedIndex, DeleteOriginal = DeleteOriginalFileCheckbox.IsChecked ?? false, Name = "" });
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.InvalidValue}: '{str}'");
-                    }
-                }
-                else
-                {
-                    throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.InvalidValue}: '{str}'");
-                }
-            }
-            if (presets.Count == 0)
-            {
-                throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.Presets}");
-            }
-            return presets;
-        }
+            if (PresetsTablesTabControl == null) return;
 
-        internal List<string> ParseExtensions(string extensionsString, bool addMenuEntryForFolders = false)
-        {
-            List<string> extensions = new List<string>();
-            if (string.IsNullOrWhiteSpace(extensionsString))
+            if (AnyToWebP_PresetsRadioButton.IsChecked == true)
             {
-                throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.EmptyExtensionsList}");
+                PresetsTablesTabControl.SelectedIndex = 0;
             }
-            var stringValues = extensionsString.Replace(" ", "").Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var str in stringValues)
+            else if (WebP_ToJPG_PresetsRadioButton.IsChecked == true)
             {
-                if (RegistryHelper.AllowedFileExtensions.Contains($".{str}."))
-                {
-                    extensions.Add(str);
-                }
-                else
-                {
-                    throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.UnsupportedExtension}: '{str}'");
-                }
+                PresetsTablesTabControl.SelectedIndex = 1;
             }
-            if (addMenuEntryForFolders == true && !extensions.Contains("folder"))
+            else if (WebP_ToPNG_PresetsRadioButton.IsChecked == true)
             {
-                extensions.Add("folder");
+                PresetsTablesTabControl.SelectedIndex = 2;
             }
-            if (extensions.Count == 0)
-            {
-                throw new ArgumentException($"{Shell_WebP_Converter.Resources.Resources.EmptyExtensionsList}");
-            }
-            return extensions;
         }
     }
 } 

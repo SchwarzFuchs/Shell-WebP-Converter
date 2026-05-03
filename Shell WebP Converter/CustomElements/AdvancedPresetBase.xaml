@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Shell_WebP_Converter.CustomElements.AdvancedPresetBase"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+         xmlns:properties="clr-namespace:Shell_WebP_Converter.Resources"
+         mc:Ignorable="d">
+<Grid Margin="0,4,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition SharedSizeGroup="Col0"/>
+            <ColumnDefinition SharedSizeGroup="Col1"/>
+            <ColumnDefinition SharedSizeGroup="Col2"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition SharedSizeGroup="Col4"/>
+            <ColumnDefinition SharedSizeGroup="Col5"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox Name="ModeSelectorComboBox" SelectedIndex="0" Grid.Column="0" MinWidth="80" SelectionChanged="ModSelectorComboBox_SelectionChanged" VerticalAlignment="Center" Height="20" Padding="6,1,5,3" Margin="0,0,2,0">
+            <ComboBoxItem Content="{x:Static properties:Resources.ToNQuality}"></ComboBoxItem>
+            <ComboBoxItem Content="{x:Static properties:Resources.ToNSize}"></ComboBoxItem>
+            <ComboBoxItem Content="{x:Static properties:Resources.Customizable}"></ComboBoxItem>
+            <ComboBoxItem ToolTip="{x:Static properties:Resources.SSIM_Tooltip}" Content="{x:Static properties:Resources.ToSSIM_OfN}"></ComboBoxItem>
+        </ComboBox>
+        <ContentControl x:Name="SettingsHost" Grid.Column="1" VerticalAlignment="Center" Width="100" Height="20" Margin="1,0,0,0"/>
+        <CheckBox Name="DeleteOriginalFileCheckBox" Grid.Column="2" Margin="0,0,1,0" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Name="PresetNameTextBox" Height="20" MaxLength="100" TextWrapping="NoWrap" Grid.Column="3" MinWidth="200" AcceptsReturn="False" HorizontalContentAlignment="Left" Margin="2,0,3,0"></TextBox>
+        <TextBox Name="PostfixNameTextBox" MinWidth="60" Grid.Column="4" Height="20" MaxLength="50" PreviewTextInput="PostfixNameTextBox_PreviewTextInput" TextWrapping="NoWrap" HorizontalContentAlignment="Left" Margin="0,0,1,0"></TextBox>
+        <Popup Name="WarningPopup"
+           PlacementTarget="{Binding ElementName=PostfixNameTextBox}"
+           Placement="Bottom"
+           StaysOpen="False"
+           AllowsTransparency="True"
+           PopupAnimation="Fade">
+            <Border Background="#404040" BorderBrush="#FF7E7E7E" BorderThickness="1" CornerRadius="10" Padding="5">
+                <TextBlock Text="{x:Static properties:Resources.ForbiddenWindowsSymbols}" Foreground="White"/>
+            </Border>
+        </Popup>
+        <StackPanel Orientation="Horizontal" Grid.Column="5" HorizontalAlignment="Center" Margin="1,0,2,0">
+            <Button x:Name="MoveButton" Width="16" Height="16" Margin="0,0,0,0" MouseDown="MoveButton_MouseDown" MouseMove="MoveButton_MouseMove" MouseUp="MoveButton_MouseUp">
+                <TextBlock Text="⇵"  FontFamily="Bold" TextAlignment="Center" Width="10" Height="10" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" FontWeight="Bold"/>
+            </Button>
+            <Button x:Name="DeleteButton" Width="16" Height="16" Margin="-2,0,0,0">
+                <TextBlock Text="╳"  FontFamily="Bold" TextAlignment="Center" Width="10" Height="10" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" FontWeight="Bold"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -19,25 +19,36 @@ using System.Windows.Threading;
 
 namespace Shell_WebP_Converter.CustomElements
 {
-    public partial class AdvancedPreset : UserControl
+    public partial class AdvancedPresetBase : UserControl
     {
         private static readonly Regex onlyDigitsRegex = new Regex(@"^[0-9]+$");
         private static readonly Regex thresholdRegex = new Regex(@"^[0-9.,]+$");
-        internal static readonly Regex windowsPathForbiddenSymbolsRegex = new Regex(@"[\\\/:*?""<>|]");
+        public static readonly Regex windowsPathForbiddenSymbolsRegex = new Regex(@"[\\\/:*?""<>|]");
         
-        private record UniquePresetModeConfig(PresetMode Mode, string MessageResourceGetter);
-        
-        private static readonly List<UniquePresetModeConfig> UniquePresetModes = new()
+        public class UniquePresetModeConfig
         {
-            new UniquePresetModeConfig(PresetMode.Custom, Shell_WebP_Converter.Resources.Resources.CustomizableAlreadyExists)
+            public int ModeIndex { get; set; }
+            public string MessageResourceGetter { get; init; }
+
+            public UniquePresetModeConfig(int modeIndex, string messageResourceGetter)
+            {
+                ModeIndex = modeIndex;
+                MessageResourceGetter = messageResourceGetter;
+            }
+        }
+
+        public static readonly List<UniquePresetModeConfig> UniquePresetModes = new()
+        {
+            new UniquePresetModeConfig((int)LossyPresetModes.Custom, Shell_WebP_Converter.Resources.Resources.CustomizableAlreadyExists)
         };
         
         private int _previousSelectedMode;
         private bool _isChangingMode = false;
 
-        public AdvancedPreset()
+        public AdvancedPresetBase()
         {
             InitializeComponent();
+            LoadDefaultModeSet();
             DeleteButton.Click += (s, e) => DeleteClicked?.Invoke(this, EventArgs.Empty);
             
             this.Loaded += (s, e) =>
@@ -49,8 +60,34 @@ namespace Shell_WebP_Converter.CustomElements
             {
                 UpdateTextBoxMaxWidths();
             };
+            
         }
+        protected void LoadDefaultModeSet()
+        {
+            if (ModeSelectorComboBox.Items.Count == 0)
+            {
+                ModeSelectorComboBox.Items.Add(new ComboBoxItem
+                {
+                    Content = Shell_WebP_Converter.Resources.Resources.ToNQuality
+                });
 
+                ModeSelectorComboBox.Items.Add(new ComboBoxItem
+                {
+                    Content = Shell_WebP_Converter.Resources.Resources.ToNSize
+                });
+
+                ModeSelectorComboBox.Items.Add(new ComboBoxItem
+                {
+                    Content = Shell_WebP_Converter.Resources.Resources.Customizable
+                });
+
+                ModeSelectorComboBox.Items.Add(new ComboBoxItem
+                {
+                    Content = Shell_WebP_Converter.Resources.Resources.ToSSIM_OfN,
+                    ToolTip = Shell_WebP_Converter.Resources.Resources.SSIM_Tooltip
+                });
+            }
+        }
         private void UpdateTextBoxMaxWidths()
         {
             var parent = this.Parent as Grid;
@@ -71,37 +108,51 @@ namespace Shell_WebP_Converter.CustomElements
 
         public event EventHandler? DeleteClicked;
 
-        private bool IsModeAlreadyUsed(PresetMode mode)
+        private bool IsModeAlreadyUsed(int modeIndex)
         {
             var parent = this.Parent as Grid;
             if (parent == null) return false;
 
-            var presets = parent.Children.OfType<AdvancedPreset>();
-            return presets.Any(p => p != this && p.ModSelectorComboBox.SelectedIndex == (int)mode);
+            var presets = parent.Children.OfType<AdvancedPresetBase>();
+            return presets.Any(p => p != this && p.ModeSelectorComboBox.SelectedIndex == modeIndex);
         }
 
 
         private void ModSelectorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!((ComboBox)sender).IsInitialized || !SettingsTabControl.IsInitialized || _isChangingMode) return;
+            if (!((ComboBox)sender).IsInitialized || SettingsHost == null || SettingsHost.Content == null || _isChangingMode) return;
 
             var newIndex = ((ComboBox)sender).SelectedIndex;
-            var newMode = (PresetMode)newIndex;
-            
-            var uniqueModeConfig = UniquePresetModes.FirstOrDefault(config => config.Mode == newMode);
-            if (uniqueModeConfig != null && IsModeAlreadyUsed(newMode))
+
+            if (!CanChangeMode(newIndex))
             {
-                var message = uniqueModeConfig.MessageResourceGetter;
-                MessageBox.Show(message, "", MessageBoxButton.OK, MessageBoxImage.Warning);
-                
                 _isChangingMode = true;
                 ((ComboBox)sender).SelectedIndex = _previousSelectedMode;
-                SettingsTabControl.SelectedIndex = _previousSelectedMode;
+                var innerTabRevert = GetInnerTabControl();
+                if (innerTabRevert != null)
+                    innerTabRevert.SelectedIndex = _previousSelectedMode;
                 _isChangingMode = false;
                 e.Handled = true;
                 return;
             }
-            SettingsTabControl.SelectedIndex = newIndex;
+
+            var uniqueModeConfig = UniquePresetModes.FirstOrDefault(config => config.ModeIndex == newIndex);
+            var innerTab = GetInnerTabControl();
+            if (uniqueModeConfig != null && IsModeAlreadyUsed(newIndex))
+            {
+                var message = uniqueModeConfig.MessageResourceGetter;
+                MessageBox.Show(message, "", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                _isChangingMode = true;
+                ((ComboBox)sender).SelectedIndex = _previousSelectedMode;
+                if (innerTab != null)
+                    innerTab.SelectedIndex = _previousSelectedMode;
+                _isChangingMode = false;
+                e.Handled = true;
+                return;
+            }
+            if (innerTab != null)
+                innerTab.SelectedIndex = newIndex;
             if (newIndex == 2)
             {
                 PresetNameTextBox.IsReadOnly = true;
@@ -212,7 +263,24 @@ namespace Shell_WebP_Converter.CustomElements
             }
         }
 
+        private TabControl? GetInnerTabControl()
+        {
+            if (SettingsHost?.Content is UserControl uc)
+            {
+                return uc.FindName("SettingsTabControl") as TabControl;
+            }
+            return null;
+        }
+
         private DispatcherTimer? popupTimer;
+
+        /// <summary>
+        /// Override in derived classes to prevent mode change. Return false to cancel the change.
+        /// </summary>
+        /// <param name="newIndex"></param>
+        /// <returns></returns>
+        protected virtual bool CanChangeMode(int newIndex) => true;
+
         private void PostfixNameTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (windowsPathForbiddenSymbolsRegex.IsMatch(e.Text))

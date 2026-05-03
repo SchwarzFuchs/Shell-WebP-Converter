@@ -1,4 +1,3 @@
-﻿using Shell_WebP_Converter.CLI;
 using Shell_WebP_Converter.ViewModels;
 using System;
 using System.Globalization;
@@ -10,19 +9,18 @@ using System.Windows.Input;
 
 namespace Shell_WebP_Converter
 {
-    public partial class CustomSettingsDialog : Window
+    public partial class CustomSettingsDialogJPG : Window
     {
-        private CustomSettingsDialogViewModel ViewModel { get; set; }
+        private CustomSettingsDialogViewModelJPG ViewModel { get; set; }
         private static readonly Regex OnlyDigitsRegex = new Regex(@"^[0-9]+$");
         private static readonly Regex ThresholdRegex = new Regex(@"^[0-9.,]+$");
 
-        public CustomSettingsDialog(WebPConversionOptions options)
+        public CustomSettingsDialogJPG(JPGConversionOptions options)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            ViewModel = new CustomSettingsDialogViewModel(options);
+            ViewModel = new CustomSettingsDialogViewModelJPG(options);
             InitializeComponent();
             DataContext = ViewModel;
-
         }
 
         private void QualityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -53,25 +51,13 @@ namespace Shell_WebP_Converter
 
         private void CompressionThresholdTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-
-            string newText = textBox.Text.Remove(textBox.SelectionStart, textBox.SelectionLength)
-                                       .Insert(textBox.SelectionStart, e.Text);
-
-            if (!ThresholdRegex.IsMatch(newText))
+            if (!ThresholdRegex.IsMatch(e.Text))
             {
                 e.Handled = true;
                 return;
             }
-
-            int separatorCount = newText.Count(c => c == '.' || c == ',');
-            if (separatorCount > 1 || textBox.Text.Length == 0)
-            {
-                e.Handled = true;
-                return;
-            }
-
-            if (newText.Contains(".") && newText.Contains(","))
+            string textPreview = ((TextBox)sender).Text + e.Text;
+            if ((textPreview.Count(s => s == ',') + textPreview.Count(s => s == '.')) > 1)
             {
                 e.Handled = true;
                 return;

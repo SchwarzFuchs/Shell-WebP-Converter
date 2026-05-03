@@ -141,7 +141,7 @@
   <data name="DeleteOriginalFile" xml:space="preserve">
     <value>Supprimer le fichier original</value>
   </data>
-  <data name="CompressionLevel" xml:space="preserve">
+  <data name="CompressionLevelColon" xml:space="preserve">
     <value>Niveau de compression :</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
@@ -244,7 +244,7 @@ Supprimer ╳</value>
   <data name="QualityTooltip" xml:space="preserve">
     <value>Qualité en pourcentage</value>
   </data>
-  <data name="CompressionTooltip" xml:space="preserve">
+  <data name="CompressionTooltipForWebP" xml:space="preserve">
     <value>Compression, de 0 à 6, une valeur plus élevée réduit la taille ou augmente la qualité à taille égale, réduit également la vitesse de conversion</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
@@ -331,5 +331,47 @@ Supprimer ╳</value>
   </data>
   <data name="PNG_SmallerFileSize" xml:space="preserve">
     <value>PNG, taille de fichier réduite</value>
+  </data>
+  <data name="VisuallyIdenticalQuality" xml:space="preserve">
+    <value>Qualité visuellement identique</value>
+  </data>
+  <data name="ToCompressionN" xml:space="preserve">
+    <value>Jusqu’à compression N</value>
+  </data>
+  <data name="CompressionTooltipForPNG" xml:space="preserve">
+    <value>Compression, de 0 à 9, une valeur plus élevée réduit la taille et ralentit la vitesse de conversion.</value>
+  </data>
+  <data name="FilterTooltipForPNG" xml:space="preserve">
+    <value>Filtre, de 0 à 5, une valeur plus élevée réduit la taille et ralentit la vitesse de conversion.</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Sans compression</value>
+  </data>
+  <data name="MediumCompression" xml:space="preserve">
+    <value>Compression moyenne</value>
+  </data>
+  <data name="MaximumCompression" xml:space="preserve">
+    <value>Compression maximale</value>
+  </data>
+  <data name="HoverOverTheSettingToSeeATooltip" xml:space="preserve">
+    <value>Survolez le paramètre pour voir l’infobulle</value>
+  </data>
+  <data name="NoCompressionLargeFileSize" xml:space="preserve">
+    <value>Sans compression, fichier volumineux</value>
+  </data>
+  <data name="MediumCompressionMediumFileSize" xml:space="preserve">
+    <value>Compression moyenne, taille de fichier moyenne</value>
+  </data>
+  <data name="MaximumCompressionSmallestFileSize" xml:space="preserve">
+    <value>Compression maximale, taille de fichier minimale</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtre</value>
+  </data>
+  <data name="FilterColon" xml:space="preserve">
+    <value>Filtre:</value>
+  </data>
+  <data name="AnyToWebp" xml:space="preserve">
+    <value>N’importe lequel ➔ WebP</value>
   </data>
 </root>

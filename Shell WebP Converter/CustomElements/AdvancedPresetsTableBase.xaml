@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Shell_WebP_Converter.CustomElements.AdvancedPresetsTable"
+﻿<UserControl x:Class="Shell_WebP_Converter.CustomElements.AdvancedPresetsTableBase"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -85,12 +85,7 @@
                             <ColumnDefinition SharedSizeGroup="Col4" Width="Auto"/>
                             <ColumnDefinition SharedSizeGroup="Col5" Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <custom:AdvancedPreset Grid.Row="0" Grid.ColumnSpan="6"></custom:AdvancedPreset>
-                        <custom:AdvancedPreset Grid.Row="1" Grid.ColumnSpan="6"></custom:AdvancedPreset>
-                        <custom:AdvancedPreset Grid.Row="2" Grid.ColumnSpan="6"></custom:AdvancedPreset>
-                        <custom:AdvancedPreset Grid.Row="3" Grid.ColumnSpan="6"></custom:AdvancedPreset>
-                        <custom:AdvancedPreset Grid.Row="4" Grid.ColumnSpan="6"></custom:AdvancedPreset>
-                        <custom:AdvancedPreset Grid.Row="5" Grid.ColumnSpan="6"></custom:AdvancedPreset>
+
                     </Grid>
                     <Button Grid.Row="1" Content="+" Grid.ColumnSpan="6" Margin="2,3,3,2" Name="AddOneMoreEmptyPresetButton" Click="AddOneEmptyPreset_Click"></Button>
                 </Grid>

@@ -8,20 +8,21 @@
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>Resources\icon.ico</ApplicationIcon>
 		<Platforms>x64</Platforms>
-		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 		<SignAssembly>False</SignAssembly>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
-		<Version>$(VersionPrefix)2.4</Version>
+		<Version>$(VersionPrefix)2.5</Version>
 		<Title>Shell WebP Converter</Title>
-		<FileVersion>2.4</FileVersion>
+		<FileVersion>2.5</FileVersion>
 		<AssemblyVersion></AssemblyVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DebugType>none</DebugType>
+	  <DebugType>full</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-	  <DebugType>full</DebugType>
+	  <DebugType>portable</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -29,7 +30,12 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-	  <DebugType>full</DebugType>
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<LangVersion>preview</LangVersion>
+		<EnablePreviewFeatures>true</EnablePreviewFeatures>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -37,10 +43,10 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
-		<PackageReference Include="Magick.NET-Q16-x64" Version="14.10.2" />
-		<PackageReference Include="Magick.NET.Core" Version="14.10.2" />
+		<PackageReference Include="Magick.NET-Q16-x64" Version="14.13.0" />
+		<PackageReference Include="Magick.NET.Core" Version="14.13.0" />
 		<PackageReference Include="MathNet.Numerics" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>

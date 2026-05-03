@@ -141,7 +141,7 @@
   <data name="DeleteOriginalFile" xml:space="preserve">
     <value>Orijinal dosyayı sil</value>
   </data>
-  <data name="CompressionLevel" xml:space="preserve">
+  <data name="CompressionLevelColon" xml:space="preserve">
     <value>Sıkıştırma seviyesi:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
@@ -244,7 +244,7 @@ Sil ╳</value>
   <data name="QualityTooltip" xml:space="preserve">
     <value>Yüzde olarak kalite</value>
   </data>
-  <data name="CompressionTooltip" xml:space="preserve">
+  <data name="CompressionTooltipForWebP" xml:space="preserve">
     <value>Sıkıştırma, 0'dan 6'ya kadar, daha yüksek bir değer boyutu azaltır veya aynı boyutta kaliteyi artırır, ayrıca dönüştürme hızını azaltır</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
@@ -331,5 +331,47 @@ Sil ╳</value>
   </data>
   <data name="PNG_SmallerFileSize" xml:space="preserve">
     <value>PNG, daha küçük dosya boyutu</value>
+  </data>
+  <data name="VisuallyIdenticalQuality" xml:space="preserve">
+    <value>Görsel olarak özdeş kalite</value>
+  </data>
+  <data name="ToCompressionN" xml:space="preserve">
+    <value>N sıkıştırmaya kadar</value>
+  </data>
+  <data name="CompressionTooltipForPNG" xml:space="preserve">
+    <value>Sıkıştırma, 0’dan 9’a kadar, daha yüksek bir değer boyutu azaltır ve dönüştürme hızını düşürür.</value>
+  </data>
+  <data name="FilterTooltipForPNG" xml:space="preserve">
+    <value>Filtre, 0’dan 5’e kadar, daha yüksek bir değer boyutu azaltır ve dönüştürme hızını düşürür.</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Sıkıştırmasız</value>
+  </data>
+  <data name="MediumCompression" xml:space="preserve">
+    <value>Orta sıkıştırma</value>
+  </data>
+  <data name="MaximumCompression" xml:space="preserve">
+    <value>Maksimum sıkıştırma</value>
+  </data>
+  <data name="HoverOverTheSettingToSeeATooltip" xml:space="preserve">
+    <value>İpucunu görmek için ayarın üzerine gelin</value>
+  </data>
+  <data name="NoCompressionLargeFileSize" xml:space="preserve">
+    <value>Sıkıştırmasız, büyük dosya boyutu</value>
+  </data>
+  <data name="MediumCompressionMediumFileSize" xml:space="preserve">
+    <value>Orta sıkıştırma, orta dosya boyutu</value>
+  </data>
+  <data name="MaximumCompressionSmallestFileSize" xml:space="preserve">
+    <value>Maksimum sıkıştırma, en küçük dosya boyutu</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtre</value>
+  </data>
+  <data name="FilterColon" xml:space="preserve">
+    <value>Filtre:</value>
+  </data>
+  <data name="AnyToWebp" xml:space="preserve">
+    <value>Herhangi biri ➔ WebP</value>
   </data>
 </root>

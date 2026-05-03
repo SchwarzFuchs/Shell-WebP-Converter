@@ -86,11 +86,13 @@ namespace Shell_WebP_Converter
                             }
                             else if (conversionDirection == ConverterCommon.ConversionDirection.AnyToJPG)
                             {
-                                ProcessJPGConversion(e.Args);
+                                ProcessJPGConversion(e.Args, customSettingsSemaphore, waitCurrentTaskMessageSemaphore,
+                                    ref customSettingsSemaphoreAcquired, ref waitCurrentTaskMessageSemaphoreAcquired);
                             }
                             else if (conversionDirection == ConverterCommon.ConversionDirection.AnyToPNG)
                             {
-                                ProcessPNGConversion(e.Args);
+                                ProcessPNGConversion(e.Args, customSettingsSemaphore, waitCurrentTaskMessageSemaphore,
+                                    ref customSettingsSemaphoreAcquired, ref waitCurrentTaskMessageSemaphoreAcquired);
                             }
                         });
                     }
@@ -180,7 +182,7 @@ namespace Shell_WebP_Converter
             }
 
             string target = parsedOptions.Input;
-            bool custom = parsedOptions.Mode == Models.PresetMode.Custom;
+            bool custom = parsedOptions.Mode == Models.LossyPresetModes.Custom;
 
             if (custom)
             {
@@ -215,40 +217,118 @@ namespace Shell_WebP_Converter
             (new CLI_ModeWebPConverter(parsedOptions)).Run();
         }
 
-        private void ProcessJPGConversion(string[] args)
+        private void ProcessJPGConversion(string[] args, Semaphore customSettingsSemaphore, 
+            Semaphore waitCurrentTaskMessageSemaphore,
+            ref bool customSettingsSemaphoreAcquired, ref bool waitCurrentTaskMessageSemaphoreAcquired)
         {
             if (args.Contains("--help"))
             {
                 DisplayHelpForOptions<JPGConversionOptions>(args);
                 return;
             }
-            
+
             var parserResult = ParseOptions<JPGConversionOptions>(args);
-            
+
+            bool parseSucceeded = false;
+            JPGConversionOptions? parsedOptions = null;
+
+            parserResult.WithParsed(opts => 
+            { 
+                parseSucceeded = true;
+                parsedOptions = opts;
+            });
+
             parserResult.WithNotParsed(er => 
             { 
                 DisplayErrors(er);
             });
-            
-            parserResult.WithParsed(opts => { (new CLI_ModeJPGConverter(opts)).Run(); });
+
+            if (!parseSucceeded || parsedOptions == null)
+            {
+                return;
+            }
+
+            bool custom = parsedOptions.Mode == Models.LossyPresetModes.Custom;
+
+            if (custom)
+            {
+                if (!customSettingsSemaphore.WaitOne(0))
+                {
+                    if (!waitCurrentTaskMessageSemaphore.WaitOne(0))
+                    {
+                        return;
+                    }
+                    waitCurrentTaskMessageSemaphoreAcquired = true;
+                    MessageBox.Show(Shell_WebP_Converter.Resources.Resources.NextTaskStartMustWaitCurrent);
+                    return;
+                }
+                customSettingsSemaphoreAcquired = true;
+
+                CustomSettingsDialogJPG customSettingsDialog = new CustomSettingsDialogJPG(parsedOptions);
+                if (!customSettingsDialog.ShowDialog() ?? false)
+                {
+                    return;
+                }
+            }
+
+            (new CLI_ModeJPGConverter(parsedOptions)).Run();
         }
 
-        private void ProcessPNGConversion(string[] args)
+        private void ProcessPNGConversion(string[] args, Semaphore customSettingsSemaphore, 
+            Semaphore waitCurrentTaskMessageSemaphore,
+            ref bool customSettingsSemaphoreAcquired, ref bool waitCurrentTaskMessageSemaphoreAcquired)
         {
             if (args.Contains("--help"))
             {
                 DisplayHelpForOptions<PNGConversionOptions>(args);
                 return;
             }
-            
+
             var parserResult = ParseOptions<PNGConversionOptions>(args);
-            
+
+            bool parseSucceeded = false;
+            PNGConversionOptions? parsedOptions = null;
+
+            parserResult.WithParsed(opts => 
+            { 
+                parseSucceeded = true;
+                parsedOptions = opts;
+            });
+
             parserResult.WithNotParsed(er => 
             { 
                 DisplayErrors(er);
             });
-            
-            parserResult.WithParsed(opts => { (new CLI_ModePNGConverter(opts)).Run(); });
+
+            if (!parseSucceeded || parsedOptions == null)
+            {
+                return;
+            }
+
+            bool custom = parsedOptions.Mode == Models.LoslessPresetModes.Custom;
+
+            if (custom)
+            {
+                if (!customSettingsSemaphore.WaitOne(0))
+                {
+                    if (!waitCurrentTaskMessageSemaphore.WaitOne(0))
+                    {
+                        return;
+                    }
+                    waitCurrentTaskMessageSemaphoreAcquired = true;
+                    MessageBox.Show(Shell_WebP_Converter.Resources.Resources.NextTaskStartMustWaitCurrent);
+                    return;
+                }
+                customSettingsSemaphoreAcquired = true;
+
+                CustomSettingsDialogPNG customSettingsDialog = new CustomSettingsDialogPNG(parsedOptions);
+                if (!customSettingsDialog.ShowDialog() ?? false)
+                {
+                    return;
+                }
+            }
+
+            (new CLI_ModePNGConverter(parsedOptions)).Run();
         }
 
         private void DisplayHelpForOptions<T>(string[] args) where T : class

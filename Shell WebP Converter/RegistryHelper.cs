@@ -23,7 +23,7 @@ namespace Shell_WebP_Converter
         [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
-        internal static void AddConversionContextMenu(List<string> extensions, List<Preset> presets, string converterPath, bool notifyWhenFolderProcessingEnds, bool overwiteFiles, bool addConversionToJPG_PNG_Option)
+        internal static void AddConversionContextMenu(List<string> extensions, List<WebP_Preset> presets, string converterPath, bool notifyWhenFolderProcessingEnds, bool overwiteFiles, bool addConversionToJPG_PNG_Option, List<JPG_Preset> jpgPresets = null, List<PNG_Preset> pngPresets = null)
         {
             try { Registry.CurrentUser.DeleteSubKeyTree(CentralWebP_KeyPath, false); } catch { }
             try { Registry.CurrentUser.DeleteSubKeyTree(CentralJPG_PNG_KeyPath, false); } catch { }
@@ -32,7 +32,7 @@ namespace Shell_WebP_Converter
             using (RegistryKey shellKey = Registry.CurrentUser.CreateSubKey($"{CentralWebP_KeyPath}\\shell"))
             {
                 int i = 0;
-                foreach (Preset preset in presets)
+                foreach (WebP_Preset preset in presets)
                 {
                     string qualityKeyName = $"{i:D2}_{preset.PresetMode.ToString()}_{preset.Quality}";
                     using (RegistryKey qualityKey = shellKey.CreateSubKey(qualityKeyName))
@@ -43,7 +43,7 @@ namespace Shell_WebP_Converter
                         }
                         else
                         {
-                            if (preset.Quality == 100 && preset.PresetMode == PresetMode.ToNQuality)
+                            if (preset.Quality == 100 && preset.PresetMode == LossyPresetModes.ToNQuality)
                             {
                                 qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.Quality} {Shell_WebP_Converter.Resources.Resources.Lossless}");
                             }
@@ -55,14 +55,14 @@ namespace Shell_WebP_Converter
                             {
                                 qualityKey.SetValue("MUIVerb", $"{Shell_WebP_Converter.Resources.Resources.CustomizableQuality}");
                             }
-                            else if (preset.Quality == 100 && preset.PresetMode == PresetMode.ToN_SSIM)
+                            else if (preset.Quality == 100 && preset.PresetMode == LossyPresetModes.ToN_SSIM)
                             {
                                 qualityKey.SetValue("MUIVerb", $"ToSameQuality");
                             }
                         }
                         using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
                         {
-                            string command = $"\"{converterPath}\" --direction {ConverterCommon.ConversionDirection.AnyToWebP} -i \"%1\" -q {preset.Quality} -c {preset.Compression} -m {(int)preset.PresetMode} {((preset.DeleteOriginal == true) ? "-d" : "")} -p {preset.Postfix}" +
+                            string command = $"\"{converterPath}\" --direction {ConverterCommon.ConversionDirection.AnyToWebP} -i \"%1\" -q {preset.Quality} -c {preset.Compression} -m {(int)preset.PresetMode} {((preset.DeleteOriginal == true) ? "-d" : "")} {((preset.Postfix.Length>0) ? ($"-p {preset.Postfix} ") : " ")}" +
                                 $"{((notifyWhenFolderProcessingEnds == true) ? " -n" : "")}" +
                                 $"{((overwiteFiles == true) ? " --overwrite" : "")}";
                             commandKey.SetValue("", command);
@@ -72,38 +72,71 @@ namespace Shell_WebP_Converter
                     i++;
                 }
             }
-            if (addConversionToJPG_PNG_Option == true)
+
+            if (addConversionToJPG_PNG_Option == true && ((jpgPresets != null && jpgPresets.Count > 0) || (pngPresets != null && pngPresets.Count>0)))
             {
                 using (RegistryKey shellKey = Registry.CurrentUser.CreateSubKey($"{CentralJPG_PNG_KeyPath}\\shell"))
                 {
-                    foreach (ConverterCommon.JPG_PNG_ComboConversionPreset preset in ConverterCommon.JPG_PNG_ComboConversionPreset.Presets)
-                    {
-                        using (RegistryKey qualityKey = shellKey.CreateSubKey(preset.Codename))
-                        {
-                            if (preset.Direction == ConverterCommon.ConversionDirection.AnyToJPG)
-                            {
-                                qualityKey.SetValue("MUIVerb", $"JPG, {preset.DisplayName}");
-                            }
-                            else if (preset.Direction == ConverterCommon.ConversionDirection.AnyToPNG)
-                            {
-                                qualityKey.SetValue("MUIVerb", $"{preset.DisplayName}");
-                            }
-                            using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
-                            {
-                                string command = "";
-                                if (preset.Direction == ConverterCommon.ConversionDirection.AnyToJPG)
-                                {
-                                    command = $"\"{converterPath}\" --direction {ConverterCommon.ConversionDirection.AnyToJPG} -i \"%1\" -q {preset.JpgQuality} {((overwiteFiles == true) ? " --overwrite" : "")}";
-                                }
-                                else if (preset.Direction == ConverterCommon.ConversionDirection.AnyToPNG)
-                                {
-                                    command = $"\"{converterPath}\" --direction {ConverterCommon.ConversionDirection.AnyToPNG} -i \"%1\" -c {preset.PNG_CompressionLevel} -f {preset.PNG_Filter} {((overwiteFiles == true) ? " --overwrite" : "")}";
-                                }
-                                commandKey.SetValue("", command);
-                            }
-                            qualityKey.SetValue("Icon", IconPath);
-                        }
+                    int jpgIndex = 0;
+                    int pngIndex = 0;
 
+                    if (jpgPresets != null)
+                    {
+                        foreach (JPG_Preset preset in jpgPresets)
+                        {
+                            string presetKeyName = $"{jpgIndex:D2}_JPG_{preset.Quality}";
+                            using (RegistryKey qualityKey = shellKey.CreateSubKey(presetKeyName))
+                            {
+                                if (preset.Name.Length > 0)
+                                {
+                                    qualityKey.SetValue("MUIVerb", $"JPG, {preset.Name}");
+                                }
+                                else
+                                {
+                                    if (preset.Quality >= 0 && preset.Quality <= 100)
+                                    {
+                                        qualityKey.SetValue("MUIVerb", $"JPG, {Shell_WebP_Converter.Resources.Resources.Quality} {preset.Quality}%");
+                                    }
+                                    else if (preset.Quality == -1)
+                                    {
+                                        qualityKey.SetValue("MUIVerb", $"JPG, {Shell_WebP_Converter.Resources.Resources.CustomizableQuality}");
+                                    }
+                                }
+                                using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
+                                {
+                                    string command = $"\"{converterPath}\" --direction {ConverterCommon.ConversionDirection.AnyToJPG} -i \"%1\" -q {preset.Quality} -m {preset.PresetMode} {((overwiteFiles == true) ? " --overwrite" : "")} {((preset.Postfix.Length > 0) ? ($"-p {preset.Postfix} ") : " ")}";
+                                    commandKey.SetValue("", command);
+                                }
+                                qualityKey.SetValue("Icon", IconPath);
+                            }
+                            jpgIndex++;
+                        }
+                        pngIndex = jpgIndex;
+                    }
+                    if (pngPresets != null)
+                    {
+                        foreach (PNG_Preset preset in pngPresets)
+                        {
+                            string presetKeyName = $"{pngIndex:D2}_PNG_{preset.Compression}";
+                            using (RegistryKey qualityKey = shellKey.CreateSubKey(presetKeyName))
+                            {
+                                if (preset.Name.Length > 0)
+                                {
+                                    qualityKey.SetValue("MUIVerb", $"PNG, {preset.Name}");
+                                }
+                                else
+                                {
+                                    qualityKey.SetValue("MUIVerb", $"PNG, {Shell_WebP_Converter.Resources.Resources.CompressionLevelColon} {preset.Compression}");
+                                }
+                                using (RegistryKey commandKey = qualityKey.CreateSubKey("command"))
+                                {
+                                    string command = $"\"{converterPath}\" --direction {ConverterCommon.ConversionDirection.AnyToPNG} -i \"%1\" -c {preset.Compression} -f {preset.Filter} -m {preset.PresetMode} {((overwiteFiles == true) ? " --overwrite" : "")} {((preset.Postfix.Length > 0) ? ($"-p {preset.Postfix} ") : " ")}";
+                                    commandKey.SetValue("", command);
+                                }
+                                qualityKey.SetValue("Icon", IconPath);
+                            }
+                            pngIndex++;
+                        }
                     }
                 }
             }

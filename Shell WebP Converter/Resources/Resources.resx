@@ -141,7 +141,7 @@
   <data name="DeleteOriginalFile" xml:space="preserve">
     <value>Delete original file</value>
   </data>
-  <data name="CompressionLevel" xml:space="preserve">
+  <data name="CompressionLevelColon" xml:space="preserve">
     <value>Compression level:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
@@ -226,7 +226,7 @@
     <value>To N% quality</value>
   </data>
   <data name="ToNSize" xml:space="preserve">
-    <value>To N size</value>
+    <value>To size N</value>
   </data>
   <data name="Mode" xml:space="preserve">
     <value>Mode</value>
@@ -244,7 +244,7 @@ Delete ╳</value>
   <data name="QualityTooltip" xml:space="preserve">
     <value>Quality as a percentage</value>
   </data>
-  <data name="CompressionTooltip" xml:space="preserve">
+  <data name="CompressionTooltipForWebP" xml:space="preserve">
     <value>Compression, from 0 to 6, a higher value leads to a reduction in size or an increase in quality at the same size, also leads to a decrease in the conversion rate</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
@@ -331,5 +331,47 @@ Delete ╳</value>
   </data>
   <data name="PNG_SmallerFileSize" xml:space="preserve">
     <value>PNG, smaller file size</value>
+  </data>
+  <data name="VisuallyIdenticalQuality" xml:space="preserve">
+    <value>Visually identical quality</value>
+  </data>
+  <data name="ToCompressionN" xml:space="preserve">
+    <value>To compression N</value>
+  </data>
+  <data name="CompressionTooltipForPNG" xml:space="preserve">
+    <value>Compression, from 0 to 9, a higher value leads to reduced size and slower conversion speed.</value>
+  </data>
+  <data name="FilterTooltipForPNG" xml:space="preserve">
+    <value>Filter, from 0 to 5, a higher value leads to reduced size and slower conversion speed.</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>No compression</value>
+  </data>
+  <data name="MediumCompression" xml:space="preserve">
+    <value>Medium compression</value>
+  </data>
+  <data name="MaximumCompression" xml:space="preserve">
+    <value>Maximum compression</value>
+  </data>
+  <data name="HoverOverTheSettingToSeeATooltip" xml:space="preserve">
+    <value>Hover over the setting to see a tooltip</value>
+  </data>
+  <data name="NoCompressionLargeFileSize" xml:space="preserve">
+    <value>No compression, large file size</value>
+  </data>
+  <data name="MediumCompressionMediumFileSize" xml:space="preserve">
+    <value>Medium compression, medium file size</value>
+  </data>
+  <data name="MaximumCompressionSmallestFileSize" xml:space="preserve">
+    <value>Maximum compression, smallest file size</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="FilterColon" xml:space="preserve">
+    <value>Filter:</value>
+  </data>
+  <data name="AnyToWebp" xml:space="preserve">
+    <value>Any ➔ WebP</value>
   </data>
 </root>

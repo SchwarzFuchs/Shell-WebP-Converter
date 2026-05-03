@@ -141,7 +141,7 @@
   <data name="DeleteOriginalFile" xml:space="preserve">
     <value>Удалять оригинал файла</value>
   </data>
-  <data name="CompressionLevel" xml:space="preserve">
+  <data name="CompressionLevelColon" xml:space="preserve">
     <value>Уровень сжатия:</value>
   </data>
   <data name="CLI_InputTooltip" xml:space="preserve">
@@ -244,7 +244,7 @@
   <data name="QualityTooltip" xml:space="preserve">
     <value>Качество в процентах</value>
   </data>
-  <data name="CompressionTooltip" xml:space="preserve">
+  <data name="CompressionTooltipForWebP" xml:space="preserve">
     <value>Сжатие, от 0 до 6, более высокое значение ведёт к снижению размера или повышению качества при том же размере, также ведёт к понижению скорости конвертации.</value>
   </data>
   <data name="DesiredFileSize" xml:space="preserve">
@@ -331,5 +331,47 @@
   </data>
   <data name="PNG_SmallerFileSize" xml:space="preserve">
     <value>PNG, меньший размер файла</value>
+  </data>
+  <data name="VisuallyIdenticalQuality" xml:space="preserve">
+    <value>Визуально идентичное качество</value>
+  </data>
+  <data name="ToCompressionN" xml:space="preserve">
+    <value>До сжатия в N</value>
+  </data>
+  <data name="CompressionTooltipForPNG" xml:space="preserve">
+    <value>Сжатие, от 0 до 9, более высокое значение ведёт к снижению размера и понижению скорости конвертации.</value>
+  </data>
+  <data name="FilterTooltipForPNG" xml:space="preserve">
+    <value>Фильтр, от 0 до 5, более высокое значение ведёт к снижению размера и понижению скорости конвертации.</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Без сжатия</value>
+  </data>
+  <data name="MediumCompression" xml:space="preserve">
+    <value>Среднее сжатие</value>
+  </data>
+  <data name="MaximumCompression" xml:space="preserve">
+    <value>Максимальное сжатие</value>
+  </data>
+  <data name="HoverOverTheSettingToSeeATooltip" xml:space="preserve">
+    <value>Наведите курсор на настройку, чтобы увидеть подсказку</value>
+  </data>
+  <data name="NoCompressionLargeFileSize" xml:space="preserve">
+    <value>Без сжатия, большой размер файла</value>
+  </data>
+  <data name="MediumCompressionMediumFileSize" xml:space="preserve">
+    <value>Среднее сжатие, средний размер файла</value>
+  </data>
+  <data name="MaximumCompressionSmallestFileSize" xml:space="preserve">
+    <value>Максимальное сжатие, наименьший размер файла</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Фильтр</value>
+  </data>
+  <data name="FilterColon" xml:space="preserve">
+    <value>Фильтр:</value>
+  </data>
+  <data name="AnyToWebp" xml:space="preserve">
+    <value>Любой ➔ WebP</value>
   </data>
 </root>
