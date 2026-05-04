@@ -4,13 +4,13 @@
 Shell WEBP Converter application designed to simplify the conversion of image files to/from the WebP format. It integrates with the Windows Explorer context menu for quick access and supports custom conversion settings.
 
 ### Presets example: 
-<img width="923" height="752" alt="image" src="https://github.com/user-attachments/assets/e1ab2a31-0fd3-4219-89e1-02af2f3621a6" />
+<img width="928" height="788" alt="image" src="https://github.com/user-attachments/assets/bd1056a5-f3bf-4f93-a2ae-5ce9249c3e08" />
 
 ### Supports the following languages:
 English, Russian, Arabic, German, Spanish, French, Hindi, Hungarian, Italian, Japanese, Korean, Portuguese, Slovak, Turkish, Chinese.
 ## Features
 - **GUI Mode**: Provides graphical interface for managing presets, file extensions, and conversion settings.
-- **Context Menu Integration**: Adds "Convert to WebP" options to the Windows Explorer context menu.
+- **Context Menu Integration**: Adds "Convert to WebP" and "Convert to JPG/PNG" (for WebP files) options to the Windows Explorer context menu.
 - **Size trheshold compresison mode**: Allows to compress images to a certain file size.
 - **Thread Management**: Optimized for multi-threaded processing.
 
@@ -46,7 +46,7 @@ Conversion module can be used from CLI. Type ***"Shell WebP Converter.exe" --hel
 -  **Huge processing batches**: If task waits its queue for 8 hours, it automatically gets cancelled.
 -  **Compression level for large images (>15 megapixels)**: Depending on the amount of pixels, application may ignore the compresion level you set and automatically increase it to prevent "partition 0 overflow" error (WebP format limitation).
 -  **Animated files**: Supported only by "To N Quality" and "To N Size" modes. Also they have mediocre quality because of the file format limitations, use only if audioless video GIF isn't an option.
--  **Conversion from WebP to PNG/JPG**:  Doesn't support custom presets, only built-in ones (however, you can use custom conversion settings from the CLI). Works only for single files, not folders.
+-  **Conversion from WebP to PNG/JPG**:  Works only for single files, not folders.
 
 ## Error Handling
 - Errors are logged to `ExceptionLog [date].txt` in the application directory.
