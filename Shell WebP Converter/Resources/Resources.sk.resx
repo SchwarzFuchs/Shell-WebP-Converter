@@ -312,7 +312,7 @@ Odstrániť ╳</value>
     <value>Prepísať súbory s rovnakými názvami</value>
   </data>
   <data name="SSIM_Tooltip" xml:space="preserve">
-    <value>SSIM je stupeň podobnosti v percentách. 100 znamená úplne identický obrázok, 95 znamená odchýlku najviac 5 %.</value>
+    <value>SSIM — stupeň podobnosti od 0 do 1. ~0,97 zabezpečuje vizuálnu identitu</value>
   </data>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>Do hodnoty SSIM N</value>

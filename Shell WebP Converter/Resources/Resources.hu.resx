@@ -312,7 +312,7 @@ Törlés ╳</value>
     <value>Azonos nevű fájlok felülírása</value>
   </data>
   <data name="SSIM_Tooltip" xml:space="preserve">
-    <value> Az SSIM a hasonlóság mértéke százalékban. A 100 teljesen azonos képet jelent, a 95 legfeljebb 5%-os eltérést.</value>
+    <value>SSIM — hasonlósági szint 0 és 1 között. ~0,97 vizuális azonosságot ad</value>
   </data>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>SSIM értéke N-ig</value>

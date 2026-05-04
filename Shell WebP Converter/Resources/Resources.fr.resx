@@ -312,7 +312,7 @@ Supprimer ╳</value>
     <value>Écraser les fichiers portant le même nom</value>
   </data>
   <data name="SSIM_Tooltip" xml:space="preserve">
-    <value>Le SSIM est le degré de similarité, en pourcentage. 100 signifie une image absolument identique, 95 signifie qu’elle diffère de moins de 5 %.</value>
+    <value> SSIM — degré de similarité de 0 à 1. ~0,97 assure une identité visuelle</value>
   </data>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>Jusqu’à un SSIM de N</value>

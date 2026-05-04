@@ -312,7 +312,7 @@ Excluir ╳</value>
     <value>Substituir arquivos com o mesmo nome</value>
   </data>
   <data name="SSIM_Tooltip" xml:space="preserve">
-    <value>SSIM é o grau de similaridade, em porcentagem. 100 significa uma imagem absolutamente idêntica, 95 significa que difere em no máximo 5%.</value>
+    <value>SSIM — nível de similaridade de 0 a 1. ~0.97 garante identidade visual</value>
   </data>
   <data name="ToSSIM_OfN" xml:space="preserve">
     <value>Até um SSIM de N</value>
