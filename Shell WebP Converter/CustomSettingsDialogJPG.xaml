@@ -26,7 +26,7 @@
                 <StackPanel x:Name="CompressionThresholdPanel" Orientation="Vertical" Visibility="Visible" Margin="0,2,0,2">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="{x:Static properties:Resources.CompressTo}" Margin="0,-2,0,-3"></Label>
-                        <TextBox x:Name="CompressionSizeThresholdTextBox" VerticalContentAlignment="Center" Margin="0,0,3,0" Width="48" Text="{Binding CompressionSizeThreshold, UpdateSourceTrigger=PropertyChanged}" MaxLength="7" PreviewTextInput="CompressionThresholdTextBox_PreviewTextInput" PreviewKeyDown="CompressionThresholdTextBox_PreviewKeyDown"/>
+                        <TextBox x:Name="CompressionSizeThresholdTextBox" VerticalContentAlignment="Center" Margin="0,0,3,0" Width="48" Text="{Binding CompressionSizeThreshold, UpdateSourceTrigger=LostFocus}" MaxLength="7" PreviewTextInput="CompressionThresholdTextBox_PreviewTextInput" PreviewKeyDown="CompressionThresholdTextBox_PreviewKeyDown"/>
                         <ComboBox x:Name="SizeMeasurmentUnitComboBox" Margin="0,0,0,0" HorizontalAlignment="Left" Width="Auto" SelectedIndex="{Binding SizeMeasurementUnit}">
                             <ComboBoxItem Content="{x:Static properties:Resources.KiB}"/>
                             <ComboBoxItem Content="{x:Static properties:Resources.MiB}" />
